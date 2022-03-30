@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('laporan_keuangan', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id')->unsigned();
-            $table->integer('kategori_laporan_keuangan_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('kategori_laporan_keuangan_id')->unsigned();
             $table->string('nama_laporan_keuangan');
             $table->string('deskripsi')->nullable();
             $table->float('total_pemasukan');
@@ -25,10 +25,13 @@ return new class extends Migration
             $table->float('total_hutang');
             $table->float('total_piutang');
             $table->float('total_balance');
-            $table->integer('currency_id')->unsigned();
+            $table->bigInteger('currency_id')->unsigned();
             $table->boolean('is_deleted');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('currency_id')->references('id')->on('currency')->onDelete('cascade');;
+            $table->foreign('kategori_laporan_keuangan_id')->references('id')->on('kategori_laporan_keuangan')->onDelete('cascade');
         });
     }
 

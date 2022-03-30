@@ -14,7 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('settings', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->integer('user_id')->unsigned();
+            $table->boolean('bahasa');
+            $table->boolean('currency');
+            $table->boolean('settings_component_1');
             $table->timestamps();
         });
     }

@@ -14,16 +14,22 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tujuan_keuangan', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned();
             $table->string('nama_tujuan_keuangan');
             $table->boolean('status_fleksibel');
             $table->float('nominal');
-            $table->integer('kategori_tujuan_keuangan')->unsigned();
+            $table->bigInteger('kategori_tujuan_keuangan_id')->unsigned();
             $table->timestamp('tanggal')->nullable();
             $table->boolean('status_tujuan_keuangan');
+            $table->bigInteger('hutang_id')->unsigned()->nullable();
             $table->boolean('is_delete');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('kategori_tujuan_keuangan_id')->references('id')->on('kategori_tujuan_keuangan')->onDelete('cascade');
+            $table->foreign('hutang_id')->references('id')->on('hutang')->onDelete('set null');
+
         });
     }
 

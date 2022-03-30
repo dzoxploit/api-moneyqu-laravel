@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kategori_tagihan', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('nama_tagihan');
             $table->string('deskripsi_tagihan');
             $table->boolean('is_active');

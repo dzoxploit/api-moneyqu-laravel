@@ -14,8 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kategori_tujuan_keuangan', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('nama_tujuan_keuangan');
+            $table->string('deskripsi_tujuan_keuangan');
+            $table->boolean('is_active');
+            $table->boolean('is_delete');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

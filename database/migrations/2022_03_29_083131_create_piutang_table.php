@@ -14,8 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('piutang', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->integer('user_id')->unsigned();
+            $table->string('nama_piutang');
+            $table->string('no_telepon')->nullable();
+            $table->string('deksripsi')->nullable();
+            $table->float('jumlah_hutang');
+            $table->boolean('status_piutang');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

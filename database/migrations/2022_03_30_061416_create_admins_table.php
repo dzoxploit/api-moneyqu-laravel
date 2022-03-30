@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kategori_pengeluaran', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_pengeluaran');
-            $table->string('deskripsi_pengeluaran');
-            $table->boolean('is_active');
-            $table->boolean('is_delete');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->timestamps();
-            $table->timestamp('deleted_at')->nullable();
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kategori_pengeluaran');
+        Schema::dropIfExists('admins');
     }
 };

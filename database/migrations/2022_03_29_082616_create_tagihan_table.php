@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tagihan', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned();
             $table->string('nama_tagihan');
             $table->string('no_rekening')->nullable();
             $table->integer('no_tagihan')->nullable();
@@ -25,6 +25,7 @@ return new class extends Migration
             $table->boolean('is_delete');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

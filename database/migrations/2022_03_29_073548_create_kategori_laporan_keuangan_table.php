@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kategori_laporan_keuangan', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('nama_laporan_keuangan');
             $table->string('deskripsi_laporan_keuangan');
             $table->boolean('is_active');
