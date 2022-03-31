@@ -15,14 +15,18 @@ return new class extends Migration
     {
         Schema::create('hutang', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->string('nama_hutang');
             $table->string('no_telepon')->nullable();
             $table->string('deksripsi')->nullable();
             $table->float('jumlah_hutang');
+            $table->bigInteger('currency_id')->unsigned();
             $table->boolean('status_hutang');
+            $table->boolean('is_delete');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('currency_id')->references('id')->on('currency')->onDelete('cascade');
         });
     }
 

@@ -15,21 +15,21 @@ class PengeluaranController extends Controller
 {
     public function index(Request $request){
         try{
+            $term = $request->get('search');
             $settings = Settings::where('user_id',Auth::id())->first();
 
-            $calculatepemasukan = Pemasukan::Where(
+            $calculatepengeluaran = Pengeluaran::Where(
                                     [
                                         ['is_delete', '=', 0],
                                         ['user_id', '=', Auth::id()],
                                         ['currency_id', '=', $settings->currency_id]
-                                    ])-sum('jumlah_pemasukan');
+                                    ])-sum('jumlah_pengeluaran');
             
-
-            $pemasukan = Project::where([
-                ['name', '!=', NULL],
+            $pengeluaran = Pengeluaran::where([
+                ['nama_pengeluaran', '!=', NULL],
                 [function ($query) use ($request){
                     if (($term = $request->term)){
-                        $query->orWhere('name', 'LIKE', '%' . $term .'%')->get();
+                        $query->orWhere('nama_pengeluaran', 'LIKE', '%' . $term .'%')->get();
                     }
                 }]
             ])    
@@ -38,10 +38,10 @@ class PengeluaranController extends Controller
 
             return response()->json([
                 "status" => 201,
-                "message" => "Kategori Pemasukan Berhasil Ditampilkan",
+                "message" => "Pengeluaran Berhasil Ditampilkan",
                 "data" => [
-                    "total_pemasukan" => $calculatepemasukan,
-                    "data_pemasukan" => $pemasukan
+                    "total_pengeluaran" => $calculatepengeluaran,
+                    "data_pengeluaran" => $pengeluaran
                 ]
             
             ]);
@@ -59,12 +59,12 @@ class PengeluaranController extends Controller
         
         try{
             $validator = Validator::make($input, [
-                'nama_pemasukan' => 'required',
-                'kategori_pemasukan_id' => 'required',
-                'nama_pemasukan' => 'required',
+                'nama_penegluaran' => 'required',
+                'kategori_pengeluaran_id' => 'required',
+                'nama_pengeluaran' => 'required',
                 'currency_id' => 'required',
-                'jumlah_pemasukan' => 'required', 
-                'tanggal_pemasukan' => 'required', 
+                'jumlah_pengeluaran' => 'required', 
+                'tanggal_pengeluaran' => 'required', 
                 'keterangan' => "text",
                 'status_transaksi_berulang' => 'required',
             ]);
@@ -76,21 +76,21 @@ class PengeluaranController extends Controller
                     "data" => null
                 ]);          
             }
-            $pemasukan = new Pemasukan;
-            $pemasukan->user_id = Auth::id();
-            $pemasukan->kategori_pemasukan_id = $input['kategori_pemasukan_id'];
-            $pemasukan->nama_pemasukan = $input['nama_pemasukan'];
-            $pemasukan->currency_id = $input['currency_id'];
-            $pemasukan->jumlah_pemasukan = $input['jumlah_pemasukan'];
-            $pemasukan->tanggal_pemasukan = $input['tanggal_pemasukan'];
-            $pemasukan->keterangan = $input['keterangan'];
-            $pemasukan->status_transaksi_berulang = $input['status_transaksi_berulang'];
-            $pemasukan->is_delete = 0;
-            $pemasukan->save();
+            $pengeluaran = new Pengeluaran;
+            $pengeluaran->user_id = Auth::id();
+            $pengeluaran->kategori_pengeluaran_id = $input['kategori_pengeluaran_id'];
+            $pengeluaran->nama_pengeluaran = $input['nama_pengeluaran'];
+            $pengeluaran->currency_id = $input['currency_id'];
+            $pengeluaran->jumlah_pengeluaran = $input['jumlah_pengeluaran'];
+            $pengeluaran->tanggal_pengeluaran = $input['tanggal_pengeluaran'];
+            $pengeluaran->keterangan = $input['keterangan'];
+            $pengeluaran->status_transaksi_berulang = $input['status_transaksi_berulang'];
+            $pengeluaran->is_delete = 0;
+            $pengeluaran->save();
             
             return response()->json([
                 "status" => 201,
-                "message" => "Pemasukan created successfully.",
+                "message" => "Pengeluaran created successfully.",
                 "data" => $pemasukan
             ]);
         }catch(\Exception $e){
@@ -102,21 +102,71 @@ class PengeluaranController extends Controller
         } 
     }
 
+    public function create_bayar_hutang(Request $request, $hutang_id){
+        $input = $request->all();
+        
+        try{
+            $validator = Validator::make($input, [
+                'nama_pengeluaran' => 'required',
+                'kategori_pengeluaran_id' => 'required',
+                'nama_pengeluaran' => 'required',
+                'currency_id' => 'required',
+                'jumlah_pengeluaran' => 'required', 
+                'tanggal_pengeluaran' => 'required', 
+                'keterangan' => "text",
+                'status_transaksi_berulang' => 'required',
+            ]);
+
+            if($validator->fails()){
+                return response()->json([
+                    "status" => 400,
+                    "errors" => $validator->errors(),
+                    "data" => null
+                ]);          
+            }
+            $pengeluaran = new Pengeluaran;
+            $pengeluaran->user_id = Auth::id();
+            $pengeluaran->kategori_pengeluaran_id = $input['kategori_pengeluaran_id'];
+            $pengeluaran->nama_pengeluaran = $input['nama_pengeluaran'];
+            $pengeluaran->currency_id = $input['currency_id'];
+            $pengeluaran->hutang_id = $hutang_id;
+            $pengeluaran->jumlah_pengeluaran = $input['jumlah_pengeluaran'];
+            $pengeluaran->tanggal_pengeluaran = $input['tanggal_pengeluaran'];
+            $pengeluaran->keterangan = $input['keterangan'];
+            $pengeluaran->status_transaksi_berulang = $input['status_transaksi_berulang'];
+            $pengeluaran->is_delete = 0;
+            $pengeluaran->save();
+            
+            return response()->json([
+                "status" => 201,
+                "message" => "Pengeluaran created successfully.",
+                "data" => $pemasukan
+            ]);
+        }catch(\Exception $e){
+            return response()->json([
+                "status" => 401,
+                "message" => 'Error'.$e->getMessage(),
+                "data" => null
+            ]);
+        } 
+
+    }
+
 
     public function update(Request $request, $id){
         if ($request->isMethod('get')){
             try{
-                $kategoripemasukan = KategoriPemasukan::where('id',$id)->where('is_delete','=',0)->first();
-                if($kategoripemasukan != null){
+                $pengeluaran = Pengeluaran::where('id',$id)->where('is_delete','=',0)->first();
+                if($pengeluaran != null){
                     return response()->json([
                         "status" => 201,
-                        "message" => "Pemasukan Berhasil Ditampilkan",
-                        "data" => $pemasukan
+                        "message" => "Pengeluaran Berhasil Ditampilkan",
+                        "data" => $pengeluaran
                     ]);
                 }else{
                     return response()->json([
                         "status" => 404,
-                        "message" => "Pemasukan Tidak ada",
+                        "message" => "Pengeluaran Tidak ada",
                         "data" => null
                     ]);
                 }
@@ -131,55 +181,55 @@ class PengeluaranController extends Controller
         }else{
         
                 $input = $request->all();
-                
                 try{
-                    $validator = Validator::make($input, [
-                        'nama_pemasukan' => 'required',
-                        'kategori_pemasukan_id' => 'required',
-                        'nama_pemasukan' => 'required',
-                        'currency_id' => 'required',
-                        'jumlah_pemasukan' => 'required', 
-                        'tanggal_pemasukan' => 'required', 
-                        'keterangan' => "text",
-                        'status_transaksi_berulang' => 'required',
-                    ]);
+                $validator = Validator::make($input, [
+                    'nama_pengeluaran' => 'required',
+                    'kategori_pengeluaran_id' => 'required',
+                    'nama_pengeluaran' => 'required',
+                    'currency_id' => 'required',
+                    'jumlah_pengeluaran' => 'required', 
+                    'tanggal_pengeluaran' => 'required', 
+                    'keterangan' => "text",
+                    'status_transaksi_berulang' => 'required',
+                ]);
 
                     if($validator->fails()){
-                        $pemasukan = Pemasukan::where('id', $id)->where('is_delete',0)->first();
-                        $pemasukan->user_id = Auth::id();
-                        $pemasukan->kategori_pemasukan_id = $input['kategori_pemasukan_id'];
-                        $pemasukan->nama_pemasukan = $input['nama_pemasukan'];
-                        $pemasukan->currency_id = $input['currency_id'];
-                        $pemasukan->jumlah_pemasukan = $input['jumlah_pemasukan'];
-                        $pemasukan->tanggal_pemasukan = $input['tanggal_pemasukan'];
-                        $pemasukan->keterangan = $input['keterangan'];
-                        $pemasukan->status_transaksi_berulang = $input['status_transaksi_berulang'];
-                        $pemasukan->is_delete = 0;
-                        $pemasukan->save();
+                        $pengeluaran = Pengeluaran::where('id', $id)->where('is_delete',0)->first();
+                        $pengeluaran->user_id = Auth::id();
+                        $pengeluaran->kategori_pengeluaran_id = $input['kategori_pengeluaran_id'];
+                        $pengeluaran->nama_pengeluaran = $input['nama_pengeluaran'];
+                        $pengeluaran->currency_id = $input['currency_id'];
+                        $pengeluaran->jumlah_pengeluaran = $input['jumlah_pengeluaran'];
+                        $pengeluaran->tanggal_pengeluaran = $input['tanggal_pengeluaran'];
+                        $pengeluaran->keterangan = $input['keterangan'];
+                        $pengeluaran->status_transaksi_berulang = $input['status_transaksi_berulang'];
+                        $pengeluaran->is_delete = 0;
+                        $pengeluaran->save();
 
                         return response()->json([
                             "status" => 201,
                             "message" => "Pemasukan created successfully.",
-                            "data" => $pemasukan
+                            "data" => $pengeluaran
                         ]);
                     }
-                    $pemasukan = Pemasukan::where('id', $id)->where('is_delete',0)->first();
-                    $pemasukan->user_id = Auth::id();
-                    $pemasukan->kategori_pemasukan_id = $input['kategori_pemasukan_id'];
-                    $pemasukan->nama_pemasukan = $input['nama_pemasukan'];
-                    $pemasukan->currency_id = $input['currency_id'];
-                    $pemasukan->jumlah_pemasukan = $input['jumlah_pemasukan'];
-                    $pemasukan->tanggal_pemasukan = $input['tanggal_pemasukan'];
-                    $pemasukan->keterangan = $input['keterangan'];
-                    $pemasukan->status_transaksi_berulang = $input['status_transaksi_berulang'];
-                    $pemasukan->is_delete = 0;
-                    $pemasukan->save();
-                    
+                    $pengeluaran = Pengeluaran::where('id', $id)->where('is_delete',0)->first();
+                    $pengeluaran->user_id = Auth::id();
+                    $pengeluaran->kategori_pengeluaran_id = $input['kategori_pengeluaran_id'];
+                    $pengeluaran->nama_pengeluaran = $input['nama_pengeluaran'];
+                    $pengeluaran->currency_id = $input['currency_id'];
+                    $pengeluaran->jumlah_pengeluaran = $input['jumlah_pengeluaran'];
+                    $pengeluaran->tanggal_pengeluaran = $input['tanggal_pengeluaran'];
+                    $pengeluaran->keterangan = $input['keterangan'];
+                    $pengeluaran->status_transaksi_berulang = $input['status_transaksi_berulang'];
+                    $pengeluaran->is_delete = 0;
+                    $pengeluaran->save();
+
                     return response()->json([
                         "status" => 201,
                         "message" => "Pemasukan created successfully.",
-                        "data" => $pemasukan
+                        "data" => $pengeluaran
                     ]);
+
                 }catch(\Exception $e){
                     return response()->json([
                         "status" => 401,
@@ -190,15 +240,15 @@ class PengeluaranController extends Controller
         } 
     }
 
-    public function destroy_pemasukan($id){
-         $pemasukan = Pemasukan::where('id',$id)->where('is_delete','=',0)->firstOrFail();
-         $pemasukan->is_delete = 1;
-         $pemasukan->save();
+    public function destroy_pengeluaran($id){
+         $pengeluaran = Pengeluaran::where('id',$id)->where('is_delete','=',0)->firstOrFail();
+         $pengeluaran->is_delete = 1;
+         $pengeluaran->save();
 
           return response()->json([
                         "status" => 201,
-                        "message" => 'delete pemasukan succesfully',
-                        "data" => $kategoripemasukan
+                        "message" => 'delete pengeluaran succesfully',
+                        "data" => $pengeluaran
           ]);
     }
 

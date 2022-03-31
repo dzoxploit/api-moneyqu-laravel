@@ -16,8 +16,8 @@ class PemasukanController extends Controller
 
     public function index(Request $request){
         try{
+            $term = $request->get('search');
             $settings = Settings::where('user_id',Auth::id())->first();
-
             $calculatepemasukan = Pemasukan::Where(
                                     [
                                         ['is_delete', '=', 0],
@@ -26,11 +26,11 @@ class PemasukanController extends Controller
                                     ])-sum('jumlah_pemasukan');
             
 
-            $pemasukan = Project::where([
-                ['name', '!=', NULL],
+            $pemasukan = Pemasukan::where([
+                ['nama_pemasukan', '!=', NULL],
                 [function ($query) use ($request){
                     if (($term = $request->term)){
-                        $query->orWhere('name', 'LIKE', '%' . $term .'%')->get();
+                        $query->orWhere('nama_pemasukan', 'LIKE', '%' . $term .'%')->get();
                     }
                 }]
             ])    
@@ -107,7 +107,7 @@ class PemasukanController extends Controller
     public function update(Request $request, $id){
         if ($request->isMethod('get')){
             try{
-                $kategoripemasukan = KategoriPemasukan::where('id',$id)->where('is_delete','=',0)->first();
+                $pemasukan = KategoriPemasukan::where('id',$id)->where('is_delete','=',0)->first();
                 if($kategoripemasukan != null){
                     return response()->json([
                         "status" => 201,
@@ -199,7 +199,7 @@ class PemasukanController extends Controller
           return response()->json([
                         "status" => 201,
                         "message" => 'delete pemasukan succesfully',
-                        "data" => $kategoripemasukan
+                        "data" => $pemasukan
           ]);
     }
 
