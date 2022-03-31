@@ -9,20 +9,29 @@ class PiutangController extends Controller
     public function index(Request $request){
         try{
             $term = $request->get('search');
-            $settings = Settings::where('user_id',Auth::id())->first();
+            $settings = Piutang::where('user_id',Auth::id())->first();
 
-            $calculatepengeluaran = Pengeluaran::Where(
-                                    [
-                                        ['is_delete', '=', 0],
-                                        ['user_id', '=', Auth::id()],
-                                        ['currency_id', '=', $settings->currency_id]
-                                    ])-sum('jumlah_pengeluaran');
-            
-            $pengeluaran = Pengeluaran::where([
-                ['nama_pengeluaran', '!=', NULL],
+            $calculatepiutangbelumdibayar = Piutang::Where(
+                                            [
+                                                ['is_delete', '=', 0],
+                                                ['user_id', '=', Auth::id()],
+                                                ['currency_id', '=', $settings->currency_id],
+                                                ['status_piutang','=','0']
+                                            ])-sum('jumlah_hutang');
+
+            $calculatepiutangsudahibayar = Piutang::Where(
+                                            [
+                                                ['is_delete', '=', 0],
+                                                ['user_id', '=', Auth::id()],
+                                                ['currency_id', '=', $settings->currency_id],
+                                                ['status_piutang','=','0']
+                                            ])-sum('jumlah_hutang');
+                    
+            $piutang = Piutang::where([
+                ['nama_piutang', '!=', NULL],
                 [function ($query) use ($request){
                     if (($term = $request->term)){
-                        $query->orWhere('nama_pengeluaran', 'LIKE', '%' . $term .'%')->get();
+                        $query->orWhere('nama_piutang', 'LIKE', '%' . $term .'%')->get();
                     }
                 }]
             ])    
@@ -31,10 +40,11 @@ class PiutangController extends Controller
 
             return response()->json([
                 "status" => 201,
-                "message" => "Pengeluaran Berhasil Ditampilkan",
+                "message" => "Piutang Berhasil Ditampilkan",
                 "data" => [
-                    "total_pengeluaran" => $calculatepengeluaran,
-                    "data_pengeluaran" => $pengeluaran
+                    "total_piutang_sudah_dibayar" => $calculatepiutangsudahibayar,
+                    "total_piutang_belum_dibayar" => $calculatepiutangbelumdibayar,
+                    "data_piutang" => $pengeluaran
                 ]
             
             ]);
@@ -52,8 +62,8 @@ class PiutangController extends Controller
         
         try{
             $validator = Validator::make($input, [
-                'nama_penegluaran' => 'required',
-                'kategori_pengeluaran_id' => 'required',
+                'nama_piutang' => 'required',
+                'no_telepon' => 'required',
                 'nama_pengeluaran' => 'required',
                 'currency_id' => 'required',
                 'jumlah_pengeluaran' => 'required', 
