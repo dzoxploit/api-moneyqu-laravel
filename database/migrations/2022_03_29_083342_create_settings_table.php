@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('currency_id')->unsigned();
             $table->boolean('bahasa');
-            $table->boolean('currency');
             $table->boolean('settings_component_1');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('currency_id')->references('id')->on('currency')->onDelete('cascade');
         });
     }
 

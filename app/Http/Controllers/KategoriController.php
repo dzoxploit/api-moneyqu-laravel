@@ -168,17 +168,17 @@ class KategoriController extends Controller
     
     public function index_kategori_pengeluaran(){
         try{
-            $kategoripemasukan = KategoriPengeluaran::where('is_delete','=',0)->get();
-                if($kategoripemasukan != null){
+            $kategoripengeluaran = KategoriPengeluaran::where('is_delete','=',0)->get();
+                if($kategoripengeluaran != null){
                     return response()->json([
                         "status" => 201,
                         "message" => "Kategori Pengeluaran Berhasil Ditampilkan",
-                        "data" => $kategoripemasukan
+                        "data" => $kategoripengeluaran
                     ]);
                 }else{
                     return response()->json([
                         "status" => 404,
-                        "message" => "Kategori Pemasukan Tidak ada",
+                        "message" => "Kategori Pengeluaran Tidak ada",
                         "data" => null
                     ]);
                 }
@@ -198,8 +198,8 @@ class KategoriController extends Controller
         
         try{
             $validator = Validator::make($input, [
-                'nama_pemasukan' => 'required',
-                'deskripsi_pemasukan' => 'required',
+                'nama_pengeluaran' => 'required',
+                'deskripsi_pengeluaran' => 'required',
                 'is_active' => 'required',
                 'is_delete' => 'required'
             ]);
@@ -211,11 +211,11 @@ class KategoriController extends Controller
                     "data" => null
                 ]);          
             }
-            $kategoripemasukan = KategoriPemasukan::create($input);
+            $kategoripengeluaran = KategoriPengeluaran::create($input);
             return response()->json([
                 "status" => 201,
-                "message" => "Kategori Pemasukan created successfully.",
-                "data" => $kategoripemasukan
+                "message" => "Kategori Pengeluaran created successfully.",
+                "data" => $kategoripengeluaran
             ]);
         }catch(\Exception $e){
             return response()->json([
@@ -229,17 +229,17 @@ class KategoriController extends Controller
     public function update_kategori_pengeluaran(Request $request, $id){
         if ($request->isMethod('get')){
             try{
-                $kategoripemasukan = KategoriPemasukan::where('id',$id)->where('is_delete','=',0)->first();
-                if($kategoripemasukan != null){
+                $kategoripengeluaran = KategoriPengeluaran::where('id',$id)->where('is_delete','=',0)->first();
+                if($kategoripengeluaran != null){
                     return response()->json([
                         "status" => 201,
-                        "message" => "Kategori Pemasukan Berhasil Ditampilkan",
+                        "message" => "Kategori Pengeluaran Berhasil Ditampilkan",
                         "data" => $kategoripemasukan
                     ]);
                 }else{
                     return response()->json([
                         "status" => 404,
-                        "message" => "Kategori Pemasukan Tidak ada",
+                        "message" => "Kategori Pengeluaran Tidak ada",
                         "data" => null
                     ]);
                 }
@@ -255,35 +255,35 @@ class KategoriController extends Controller
         $input = $request->all();
             try{
                 $validator = Validator::make($input, [
-                    'nama_pemasukan' => 'required',
-                    'deskripsi_pemasukan' => 'required',
+                    'nama_pengeluaran' => 'required',
+                    'deskripsi_pengeluaran' => 'required',
                     'is_active' => 'required',
                     'is_delete' => 'required'
                 ]);
 
                 if($validator->fails()){
-                    $kategoripemasukan = KategoriPemasukan::where('id',$id)->where('is_delete','=',0)->firstOrFail();
-                    $kategoripemasukan->nama_pemasukan = $input['nama_pemasukan'];
-                    $kategoripemasukan->deskripsi_pemasukan = $input['deskripsi_pemasukan'];
-                    $kategoripemasukan->is_active = $input['is_active'];
-                    $kategoripemasukan->save();
+                    $kategoripengeluaran = KategoriPengeluaran::where('id',$id)->where('is_delete','=',0)->firstOrFail();
+                    $kategoripengeluaran->nama_pengeluaran = $input['nama_pengeluaran'];
+                    $kategoripengeluaran->deskripsi_pengeluaran = $input['deskripsi_pengeluaran'];
+                    $kategoripengeluaran->is_active = $input['is_active'];
+                    $kategoripengeluaran->save();
 
                     return response()->json([
                         "status" => 201,
-                        "message" => 'update data kategori pemasukan succesfully',
-                        "data" => $kategoripemasukan
+                        "message" => 'update data kategori pengeluaran succesfully',
+                        "data" => $kategoripengeluaran
                     ]);      
                 }
-                $kategoripemasukan = KategoriPemasukan::where('id',$id)->where('is_delete','=',0)->firstOrFail();
-                $kategoripemasukan->nama_pemasukan = $input['nama_pemasukan'];
-                $kategoripemasukan->deskripsi_pemasukan = $input['deskripsi_pemasukan'];
-                $kategoripemasukan->is_active = $input['is_active'];
-                $kategoripemasukan->save();
+                $kategoripengeluaran = KategoriPengeluaran::where('id',$id)->where('is_delete','=',0)->firstOrFail();
+                $kategoripengeluaran->nama_pengeluaran = $input['nama_pengeluaran'];
+                $kategoripengeluaran->deskripsi_pengeluaran = $input['deskripsi_pengeluaran'];
+                $kategoripengeluaran->is_active = $input['is_active'];
+                $kategoripengeluaran->save();
 
                  return response()->json([
                         "status" => 201,
-                        "message" => 'update data kategori pemasukan succesfully',
-                        "data" => $kategoripemasukan
+                        "message" => 'update data kategori pengeluaran succesfully',
+                        "data" => $kategoripengeluaran
                  ]);
 
             }catch(\Exception $e){
@@ -299,14 +299,14 @@ class KategoriController extends Controller
 
 
     public function destroy_kategori_pemngeluaran($id){
-         $kategoripemasukan = KategoriPemasukan::where('id',$id)->where('is_delete','=',0)->firstOrFail();
-         $kategoripemasukan->is_delete = 1;
-         $kategoripemasukan->save();
+         $kategoripengeluaran = KategoriPengeluaran::where('id',$id)->where('is_delete','=',0)->firstOrFail();
+         $kategoripengeluaran->is_delete = 1;
+         $kategoripengeluaran->save();
 
           return response()->json([
                         "status" => 201,
-                        "message" => 'delete data kategori pemasukan succesfully',
-                        "data" => $kategoripemasukan
+                        "message" => 'delete data kategori pengeluaran succesfully',
+                        "data" => $kategoripengeluaran
           ]);
     }
 
