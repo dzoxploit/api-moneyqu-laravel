@@ -33,7 +33,8 @@ class PengeluaranController extends Controller
                         $query->orWhere('nama_pengeluaran', 'LIKE', '%' . $term .'%')->get();
                     }
                 }]
-            ])    
+            ]) 
+            ->where('user_id',Auth::id())   
             ->orderBy('id','DESC')
             ->paginate(10);
 
@@ -157,7 +158,7 @@ class PengeluaranController extends Controller
     public function update(Request $request, $id){
         if ($request->isMethod('get')){
             try{
-                $pengeluaran = Pengeluaran::where('id',$id)->where('is_delete','=',0)->first();
+                $pengeluaran = Pengeluaran::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->first();
                 if($pengeluaran != null){
                     return response()->json([
                         "status" => 201,
@@ -195,7 +196,7 @@ class PengeluaranController extends Controller
                 ]);
 
                     if($validator->fails()){
-                        $pengeluaran = Pengeluaran::where('id', $id)->where('is_delete',0)->first();
+                        $pengeluaran = Pengeluaran::where('id', $id)->where('user_id',Auth::id())->where('is_delete',0)->first();
                         $pengeluaran->user_id = Auth::id();
                         $pengeluaran->kategori_pengeluaran_id = $input['kategori_pengeluaran_id'];
                         $pengeluaran->nama_pengeluaran = $input['nama_pengeluaran'];
@@ -213,7 +214,7 @@ class PengeluaranController extends Controller
                             "data" => $pengeluaran
                         ]);
                     }
-                    $pengeluaran = Pengeluaran::where('id', $id)->where('is_delete',0)->first();
+                    $pengeluaran = Pengeluaran::where('id', $id)->where('user_id',Auth::id())->where('is_delete',0)->first();
                     $pengeluaran->user_id = Auth::id();
                     $pengeluaran->kategori_pengeluaran_id = $input['kategori_pengeluaran_id'];
                     $pengeluaran->nama_pengeluaran = $input['nama_pengeluaran'];
@@ -242,7 +243,7 @@ class PengeluaranController extends Controller
     }
 
     public function destroy_pengeluaran($id){
-         $pengeluaran = Pengeluaran::where('id',$id)->where('is_delete','=',0)->firstOrFail();
+         $pengeluaran = Pengeluaran::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->firstOrFail();
          $pengeluaran->is_delete = 1;
          $pengeluaran->deleted_at = Carbon::now();
          $pengeluaran->save();

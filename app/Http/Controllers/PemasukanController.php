@@ -34,6 +34,7 @@ class PemasukanController extends Controller
                     }
                 }]
             ])    
+            ->where('user_id',Auth::id())
             ->orderBy('id','DESC')
             ->paginate(10);
 
@@ -107,8 +108,8 @@ class PemasukanController extends Controller
     public function update(Request $request, $id){
         if ($request->isMethod('get')){
             try{
-                $pemasukan = KategoriPemasukan::where('id',$id)->where('is_delete','=',0)->first();
-                if($kategoripemasukan != null){
+                $pemasukan = Pemasukan::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->first();
+                if($pemasukan != null){
                     return response()->json([
                         "status" => 201,
                         "message" => "Pemasukan Berhasil Ditampilkan",
@@ -146,7 +147,7 @@ class PemasukanController extends Controller
                     ]);
 
                     if($validator->fails()){
-                        $pemasukan = Pemasukan::where('id', $id)->where('is_delete',0)->first();
+                        $pemasukan = Pemasukan::where('id', $id)->where('user_id',Auth::id())->where('is_delete',0)->first();
                         $pemasukan->user_id = Auth::id();
                         $pemasukan->kategori_pemasukan_id = $input['kategori_pemasukan_id'];
                         $pemasukan->nama_pemasukan = $input['nama_pemasukan'];
@@ -164,7 +165,7 @@ class PemasukanController extends Controller
                             "data" => $pemasukan
                         ]);
                     }
-                    $pemasukan = Pemasukan::where('id', $id)->where('is_delete',0)->first();
+                    $pemasukan = Pemasukan::where('id', $id)->where('user_id',Auth::id())->where('is_delete',0)->first();
                     $pemasukan->user_id = Auth::id();
                     $pemasukan->kategori_pemasukan_id = $input['kategori_pemasukan_id'];
                     $pemasukan->nama_pemasukan = $input['nama_pemasukan'];
@@ -192,7 +193,7 @@ class PemasukanController extends Controller
     }
 
     public function destroy_pemasukan($id){
-         $pemasukan = Pemasukan::where('id',$id)->where('is_delete','=',0)->firstOrFail();
+         $pemasukan = Pemasukan::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->firstOrFail();
          $pemasukan->is_delete = 1;
          $pemasukan->deleted_at = Carbon::now();
          $pemasukan->save();

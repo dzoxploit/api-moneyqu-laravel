@@ -178,7 +178,7 @@ class PiutangController extends Controller
                     return response()->json([
                         "status" => 201,
                         "message" => "Piutang created successfully.",
-                        "data" => $pengeluaran
+                        "data" => $piutang
                     ]);
 
                 }catch(\Exception $e){
@@ -191,16 +191,22 @@ class PiutangController extends Controller
         } 
     }
 
+    
+    public function update_status_piutang($id){
+
+    }
+    
+
     public function destroy_piutang($id){
-         $pengeluaran = Piutang::where('id',$id)->where('is_delete','=',0)->firstOrFail();
-         $pengeluaran->is_delete = 1;
-         $pengeluaran->deleted_at = Carbon::now();
-         $pengeluaran->save();
+         $piutang = Piutang::where('id',$id)->where('is_delete','=',0)->firstOrFail();
+         $piutang->is_delete = 1;
+         $piutang->deleted_at = Carbon::now();
+         $piutang->save();
 
           return response()->json([
                         "status" => 201,
-                        "message" => 'delete pengeluaran succesfully',
-                        "data" => $pengeluaran
+                        "message" => 'delete piutang succesfully',
+                        "data" => $piutang 
           ]);
     }
 

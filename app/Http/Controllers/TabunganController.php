@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Tabungan;
+use App\Models\Settings;
+use Validator;
 class TabunganController extends Controller
 {
     
@@ -11,19 +13,19 @@ class TabunganController extends Controller
         try{
             $term = $request->get('search');
             $settings = Settings::where('user_id',Auth::id())->first();
-            $calculatepemasukan = Pemasukan::Where(
+            $calculatetabungan = Tabungan::Where(
                                     [
                                         ['is_delete', '=', 0],
                                         ['user_id', '=', Auth::id()],
                                         ['currency_id', '=', $settings->currency_id]
-                                    ])-sum('jumlah_pemasukan');
+                                    ])-sum('jumlah_tabungan');
             
 
-            $pemasukan = Pemasukan::where([
-                ['nama_pemasukan', '!=', NULL],
+            $tabungan = Tabungan::where([
+                ['deskripsi', '!=', NULL],
                 [function ($query) use ($request){
                     if (($term = $request->term)){
-                        $query->orWhere('nama_pemasukan', 'LIKE', '%' . $term .'%')->get();
+                        $query->orWhere('deskripsi', 'LIKE', '%' . $term .'%')->get();
                     }
                 }]
             ])    
@@ -32,10 +34,10 @@ class TabunganController extends Controller
 
             return response()->json([
                 "status" => 201,
-                "message" => "Kategori Pemasukan Berhasil Ditampilkan",
+                "message" => "Tabungan Berhasil Ditampilkan",
                 "data" => [
-                    "total_pemasukan" => $calculatepemasukan,
-                    "data_pemasukan" => $pemasukan
+                    "total_tabungan" => $calculatetabungan,
+                    "data_tabungan" => $tabungan
                 ]
             
             ]);
@@ -53,14 +55,11 @@ class TabunganController extends Controller
         
         try{
             $validator = Validator::make($input, [
-                'nama_pemasukan' => 'required',
-                'kategori_pemasukan_id' => 'required',
-                'nama_pemasukan' => 'required',
-                'currency_id' => 'required',
-                'jumlah_pemasukan' => 'required', 
-                'tanggal_pemasukan' => 'required', 
-                'keterangan' => "text",
-                'status_transaksi_berulang' => 'required',
+                'tujuan_tabungan_id' => 'required',
+                'jumlah_tabungan' => 'required',
+                'deskripsi' => 'required',
+                'jenis_tabungan_id' => 'required',
+                'currency_id' => 'required', 
             ]);
 
             if($validator->fails()){
@@ -70,22 +69,20 @@ class TabunganController extends Controller
                     "data" => null
                 ]);          
             }
-            $pemasukan = new Pemasukan;
-            $pemasukan->user_id = Auth::id();
-            $pemasukan->kategori_pemasukan_id = $input['kategori_pemasukan_id'];
-            $pemasukan->nama_pemasukan = $input['nama_pemasukan'];
-            $pemasukan->currency_id = $input['currency_id'];
-            $pemasukan->jumlah_pemasukan = $input['jumlah_pemasukan'];
-            $pemasukan->tanggal_pemasukan = $input['tanggal_pemasukan'];
-            $pemasukan->keterangan = $input['keterangan'];
-            $pemasukan->status_transaksi_berulang = $input['status_transaksi_berulang'];
-            $pemasukan->is_delete = 0;
-            $pemasukan->save();
+            $tabungan = new Tabungan;
+            $tabungan->user_id = Auth::id();
+            $tabungan->jumlah_tabungan = $input['jumlah_tabungan'];
+            $tabungan->tujuan_tabungan_id = $input['tujuan_tabungan_id'];
+            $tabungan->currency_id = $input['currency_id'];
+            $tabungan->deskripsi = $input['deskripsi'];
+            $tabungan->jenis_tabungan_id = $input['jenis_tabungan_id'];
+            $tabungan->is_delete = 0;
+            $tabungan->save();
             
             return response()->json([
                 "status" => 201,
-                "message" => "Pemasukan created successfully.",
-                "data" => $pemasukan
+                "message" => "Tabungan created successfully.",
+                "data" => $tabungan
             ]);
         }catch(\Exception $e){
             return response()->json([
@@ -100,17 +97,17 @@ class TabunganController extends Controller
     public function update(Request $request, $id){
         if ($request->isMethod('get')){
             try{
-                $pemasukan = KategoriPemasukan::where('id',$id)->where('is_delete','=',0)->first();
-                if($kategoripemasukan != null){
+                $tabungan = Tabungan::where('id',$id)->where('is_delete','=',0)->first();
+                if($tabungan != null){
                     return response()->json([
                         "status" => 201,
-                        "message" => "Pemasukan Berhasil Ditampilkan",
+                        "message" => "Tabungan Berhasil Ditampilkan",
                         "data" => $pemasukan
                     ]);
                 }else{
                     return response()->json([
                         "status" => 404,
-                        "message" => "Pemasukan Tidak ada",
+                        "message" => "Tabungan Tidak ada",
                         "data" => null
                     ]);
                 }
@@ -128,51 +125,45 @@ class TabunganController extends Controller
                 
                 try{
                     $validator = Validator::make($input, [
-                        'nama_pemasukan' => 'required',
-                        'kategori_pemasukan_id' => 'required',
-                        'nama_pemasukan' => 'required',
-                        'currency_id' => 'required',
-                        'jumlah_pemasukan' => 'required', 
-                        'tanggal_pemasukan' => 'required', 
-                        'keterangan' => "text",
-                        'status_transaksi_berulang' => 'required',
+                        'tujuan_tabungan_id' => 'required',
+                        'jumlah_tabungan' => 'required',
+                        'deskripsi' => 'required',
+                        'jenis_tabungan_id' => 'required',
+                        'currency_id' => 'required', 
                     ]);
 
                     if($validator->fails()){
-                        $pemasukan = Pemasukan::where('id', $id)->where('is_delete',0)->first();
-                        $pemasukan->user_id = Auth::id();
-                        $pemasukan->kategori_pemasukan_id = $input['kategori_pemasukan_id'];
-                        $pemasukan->nama_pemasukan = $input['nama_pemasukan'];
-                        $pemasukan->currency_id = $input['currency_id'];
-                        $pemasukan->jumlah_pemasukan = $input['jumlah_pemasukan'];
-                        $pemasukan->tanggal_pemasukan = $input['tanggal_pemasukan'];
-                        $pemasukan->keterangan = $input['keterangan'];
-                        $pemasukan->status_transaksi_berulang = $input['status_transaksi_berulang'];
-                        $pemasukan->is_delete = 0;
-                        $pemasukan->save();
+                        $tabungan = Tabungan::where('id','=',$id)->first();
+                        $tabungan->user_id = Auth::id();
+                        $tabungan->jumlah_tabungan = $input['jumlah_tabungan'];
+                        $tabungan->tujuan_tabungan_id = $input['tujuan_tabungan_id'];
+                        $tabungan->currency_id = $input['currency_id'];
+                        $tabungan->deskripsi = $input['deskripsi'];
+                        $tabungan->jenis_tabungan_id = $input['jenis_tabungan_id'];
+                        $tabungan->is_delete = 0;
+                        $tabungan->save();
 
                         return response()->json([
                             "status" => 201,
-                            "message" => "Pemasukan created successfully.",
-                            "data" => $pemasukan
+                            "message" => "Tabungan created successfully.",
+                            "data" => $tabungan
                         ]);
                     }
-                    $pemasukan = Pemasukan::where('id', $id)->where('is_delete',0)->first();
-                    $pemasukan->user_id = Auth::id();
-                    $pemasukan->kategori_pemasukan_id = $input['kategori_pemasukan_id'];
-                    $pemasukan->nama_pemasukan = $input['nama_pemasukan'];
-                    $pemasukan->currency_id = $input['currency_id'];
-                    $pemasukan->jumlah_pemasukan = $input['jumlah_pemasukan'];
-                    $pemasukan->tanggal_pemasukan = $input['tanggal_pemasukan'];
-                    $pemasukan->keterangan = $input['keterangan'];
-                    $pemasukan->status_transaksi_berulang = $input['status_transaksi_berulang'];
-                    $pemasukan->is_delete = 0;
-                    $pemasukan->save();
+                   $tabungan = Tabungan::where('id','=',$id)->first();
+                        $tabungan->user_id = Auth::id();
+                        $tabungan->jumlah_tabungan = $input['jumlah_tabungan'];
+                        $tabungan->tujuan_tabungan_id = $input['tujuan_tabungan_id'];
+                        $tabungan->currency_id = $input['currency_id'];
+                        $tabungan->deskripsi = $input['deskripsi'];
+                        $tabungan->jenis_tabungan_id = $input['jenis_tabungan_id'];
+                        $tabungan->is_delete = 0;
+                        $tabungan->save();
+
                     
                     return response()->json([
                         "status" => 201,
-                        "message" => "Pemasukan created successfully.",
-                        "data" => $pemasukan
+                        "message" => "Tabungan created successfully.",
+                        "data" => $tabungan
                     ]);
                 }catch(\Exception $e){
                     return response()->json([
@@ -185,15 +176,15 @@ class TabunganController extends Controller
     }
 
     public function destroy_pemasukan($id){
-         $pemasukan = Pemasukan::where('id',$id)->where('is_delete','=',0)->firstOrFail();
-         $pemasukan->is_delete = 1;
+         $tabungan = Tabungan::where('id',$id)->where('is_delete','=',0)->firstOrFail();
+         $tabungan->is_delete = 1;
          $pemasukan->deleted_at = Carbon::now();
          $pemasukan->save();
 
           return response()->json([
                         "status" => 201,
-                        "message" => 'delete pemasukan succesfully',
-                        "data" => $pemasukan
+                        "message" => 'delete tabungan succesfully',
+                        "data" => $tabungan
           ]);
     }    
 }
