@@ -194,6 +194,7 @@ class PemasukanController extends Controller
     public function destroy_pemasukan($id){
          $pemasukan = Pemasukan::where('id',$id)->where('is_delete','=',0)->firstOrFail();
          $pemasukan->is_delete = 1;
+         $pemasukan->deleted_at = Carbon::now();
          $pemasukan->save();
 
           return response()->json([

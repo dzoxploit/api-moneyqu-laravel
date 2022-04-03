@@ -10,6 +10,7 @@ use App\Models\Settings;
 use AmrShawky\LaravelCurrency\Facade\Currency;
 use Auth;
 use DB;
+use Carbon\Carbon;
 
 class PengeluaranController extends Controller
 {
@@ -243,6 +244,7 @@ class PengeluaranController extends Controller
     public function destroy_pengeluaran($id){
          $pengeluaran = Pengeluaran::where('id',$id)->where('is_delete','=',0)->firstOrFail();
          $pengeluaran->is_delete = 1;
+         $pengeluaran->deleted_at = Carbon::now();
          $pengeluaran->save();
 
           return response()->json([

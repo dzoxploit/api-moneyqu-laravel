@@ -3,6 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Piutang;
+use App\Models\CurrencyData;
+use App\Models\Settings;
+use AmrShawky\LaravelCurrency\Facade\Currency;
+use Auth;
+use DB;
+use Carbon\Carbon;
+
 
 class PiutangController extends Controller
 {
@@ -64,12 +72,9 @@ class PiutangController extends Controller
             $validator = Validator::make($input, [
                 'nama_piutang' => 'required',
                 'no_telepon' => 'required',
-                'nama_pengeluaran' => 'required',
-                'currency_id' => 'required',
-                'jumlah_pengeluaran' => 'required', 
-                'tanggal_pengeluaran' => 'required', 
-                'keterangan' => "text",
-                'status_transaksi_berulang' => 'required',
+                'deskripsi' => 'text',
+                'jumlah_hutang' => 'required',
+                'currency_id' => 'required', 
             ]);
 
             if($validator->fails()){
@@ -79,22 +84,20 @@ class PiutangController extends Controller
                     "data" => null
                 ]);          
             }
-            $pengeluaran = new Pengeluaran;
-            $pengeluaran->user_id = Auth::id();
-            $pengeluaran->kategori_pengeluaran_id = $input['kategori_pengeluaran_id'];
-            $pengeluaran->nama_pengeluaran = $input['nama_pengeluaran'];
-            $pengeluaran->currency_id = $input['currency_id'];
-            $pengeluaran->jumlah_pengeluaran = $input['jumlah_pengeluaran'];
-            $pengeluaran->tanggal_pengeluaran = $input['tanggal_pengeluaran'];
-            $pengeluaran->keterangan = $input['keterangan'];
-            $pengeluaran->status_transaksi_berulang = $input['status_transaksi_berulang'];
-            $pengeluaran->is_delete = 0;
-            $pengeluaran->save();
+            $piutang = new Piutang;
+            $piutang->user_id = Auth::id();
+            $piutang->nama_piutang = $input['nama_piutang'];
+            $piutang->no_telepon = $input['no_telepon'];
+            $piutang->deskripsi = $input['deskripsi'];
+            $piutang->jumlah_hutang = $input['jumlah_hutang'];
+            $piutang->status_piutang = 0;
+            $piutang->is_delete = 0;
+            $piutang->save();
             
             return response()->json([
                 "status" => 201,
-                "message" => "Pengeluaran created successfully.",
-                "data" => $pemasukan
+                "message" => "Piutang created successfully.",
+                "data" => $piutang
             ]);
         }catch(\Exception $e){
             return response()->json([
@@ -109,17 +112,17 @@ class PiutangController extends Controller
     public function update(Request $request, $id){
         if ($request->isMethod('get')){
             try{
-                $pengeluaran = Pengeluaran::where('id',$id)->where('is_delete','=',0)->first();
-                if($pengeluaran != null){
+                $piutang = Piutang::where('id',$id)->where('is_delete','=',0)->first();
+                if($piutang != null){
                     return response()->json([
                         "status" => 201,
-                        "message" => "Pengeluaran Berhasil Ditampilkan",
-                        "data" => $pengeluaran
+                        "message" => "Piutang Berhasil Ditampilkan",
+                        "data" => $piutang
                     ]);
                 }else{
                     return response()->json([
                         "status" => 404,
-                        "message" => "Pengeluaran Tidak ada",
+                        "message" => "Piutang Tidak ada",
                         "data" => null
                     ]);
                 }
@@ -135,51 +138,46 @@ class PiutangController extends Controller
         
                 $input = $request->all();
                 try{
+            
                 $validator = Validator::make($input, [
-                    'nama_pengeluaran' => 'required',
-                    'kategori_pengeluaran_id' => 'required',
-                    'nama_pengeluaran' => 'required',
-                    'currency_id' => 'required',
-                    'jumlah_pengeluaran' => 'required', 
-                    'tanggal_pengeluaran' => 'required', 
-                    'keterangan' => "text",
-                    'status_transaksi_berulang' => 'required',
+                    'nama_piutang' => 'required',
+                    'no_telepon' => 'required',
+                    'deskripsi' => 'text',
+                    'jumlah_hutang' => 'required',
+                    'currency_id' => 'required', 
+                    'status_piutang' => 'required'
                 ]);
 
                     if($validator->fails()){
-                        $pengeluaran = Pengeluaran::where('id', $id)->where('is_delete',0)->first();
-                        $pengeluaran->user_id = Auth::id();
-                        $pengeluaran->kategori_pengeluaran_id = $input['kategori_pengeluaran_id'];
-                        $pengeluaran->nama_pengeluaran = $input['nama_pengeluaran'];
-                        $pengeluaran->currency_id = $input['currency_id'];
-                        $pengeluaran->jumlah_pengeluaran = $input['jumlah_pengeluaran'];
-                        $pengeluaran->tanggal_pengeluaran = $input['tanggal_pengeluaran'];
-                        $pengeluaran->keterangan = $input['keterangan'];
-                        $pengeluaran->status_transaksi_berulang = $input['status_transaksi_berulang'];
-                        $pengeluaran->is_delete = 0;
-                        $pengeluaran->save();
+                        $piutang = Piutang::where('id',$id)->where('is_delete','=',0)->firstOrFail();
+                        $piutang->user_id = Auth::id();
+                        $piutang->nama_piutang = $input['nama_piutang'];
+                        $piutang->no_telepon = $input['no_telepon'];
+                        $piutang->deskripsi = $input['deskripsi'];
+                        $piutang->jumlah_hutang = $input['jumlah_hutang'];
+                        $piutang->status_piutang = $input['status_piutang'] ;
+                        $piutang->is_delete = 0;
+                        $piutang->save();
 
                         return response()->json([
                             "status" => 201,
-                            "message" => "Pemasukan created successfully.",
+                            "message" => "Piutang created successfully.",
                             "data" => $pengeluaran
                         ]);
                     }
-                    $pengeluaran = Pengeluaran::where('id', $id)->where('is_delete',0)->first();
-                    $pengeluaran->user_id = Auth::id();
-                    $pengeluaran->kategori_pengeluaran_id = $input['kategori_pengeluaran_id'];
-                    $pengeluaran->nama_pengeluaran = $input['nama_pengeluaran'];
-                    $pengeluaran->currency_id = $input['currency_id'];
-                    $pengeluaran->jumlah_pengeluaran = $input['jumlah_pengeluaran'];
-                    $pengeluaran->tanggal_pengeluaran = $input['tanggal_pengeluaran'];
-                    $pengeluaran->keterangan = $input['keterangan'];
-                    $pengeluaran->status_transaksi_berulang = $input['status_transaksi_berulang'];
-                    $pengeluaran->is_delete = 0;
-                    $pengeluaran->save();
+                    $piutang = Piutang::where('id',$id)->where('is_delete','=',0)->firstOrFail();
+                    $piutang->user_id = Auth::id();
+                    $piutang->nama_piutang = $input['nama_piutang'];
+                    $piutang->no_telepon = $input['no_telepon'];
+                    $piutang->deskripsi = $input['deskripsi'];
+                    $piutang->jumlah_hutang = $input['jumlah_hutang'];
+                    $piutang->status_piutang = $input['status_piutang'] ;
+                    $piutang->is_delete = 0;
+                    $piutang->save();
 
                     return response()->json([
                         "status" => 201,
-                        "message" => "Pemasukan created successfully.",
+                        "message" => "Piutang created successfully.",
                         "data" => $pengeluaran
                     ]);
 
@@ -193,9 +191,10 @@ class PiutangController extends Controller
         } 
     }
 
-    public function destroy_pengeluaran($id){
-         $pengeluaran = Pengeluaran::where('id',$id)->where('is_delete','=',0)->firstOrFail();
+    public function destroy_piutang($id){
+         $pengeluaran = Piutang::where('id',$id)->where('is_delete','=',0)->firstOrFail();
          $pengeluaran->is_delete = 1;
+         $pengeluaran->deleted_at = Carbon::now();
          $pengeluaran->save();
 
           return response()->json([
