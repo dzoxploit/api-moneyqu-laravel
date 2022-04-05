@@ -251,19 +251,67 @@ class TujuanKeuanganController extends Controller
     }
 
     public function destroy($id){
-         $pemasukan = Pemasukan::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->firstOrFail();
-         $pemasukan->is_delete = 1;
-         $pemasukan->deleted_at = Carbon::now();
-         $pemasukan->save();
+          
+        try{
 
-          return response()->json([
-                        "status" => 201,
-                        "message" => 'delete pemasukan succesfully',
-                        "data" => $pemasukan
-          ]);
+            $goals = GoalsTujuanKeuangan::where('tujuan_keuangan_id',$id)->where('user_id',Auth::id())->where('is_delete','0')->get();
+            
+            if($goals != null){
+                    $tujuankeuangan = TujuanKeuangan::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->firstOrFail();
+                    $tujuankeuangan->is_delete = 1;
+                    $tujuankeuangan->deleted_at = Carbon::now();
+                    $tujuankeuangan->save();
+
+                    $goals->is_delete = 1;
+                    $goals->deleted_at = Carbon::now();
+                    $goals->save();
+
+
+                    return response()->json([
+                                    "status" => 201,
+                                    "message" => 'delete tujuan keuangan succesfully',
+                                    "data" => $tujuankeuangan
+                    ]);
+            }else{
+                $tujuankeuangan = TujuanKeuangan::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->firstOrFail();
+                    $tujuankeuangan->is_delete = 1;
+                    $tujuankeuangan->deleted_at = Carbon::now();
+                    $tujuankeuangan->save();
+
+                    return response()->json([
+                                    "status" => 201,
+                                    "message" => 'delete tujuan keuangan succesfully',
+                                    "data" => $tujuankeuangan
+                    ]);
+
+            }
+        }catch(\Exception $e){
+               return response()->json([
+                        "status" => 401,
+                        "message" => 'Error'.$e->getMessage(),
+                        "data" => null
+                    ]);   
+        }
+
     }
 
     public function destroy_goals_tujuan_keuangan($id){
+        try{
+        $goals = GoalsTujuanKeuangan::where('tujuan_keuangan_id',$id)->where('user_id',Auth::id())->where('is_delete','0')->get();
+        $goals->is_delete = 1;
+        $goals->deleted_at = Carbon::now();
+        $goals->save();
 
+        $tujuankeuangan = TujuanKeuangan::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->firstOrFail();
+        $tujuankeuangan->nominal_goals = $tujuankeuangan->nominal_goals - $goals->nominal;
+        $tujuankeuangan->save();
+        
+    } catch(\Exception $e){
+        return response()->json([
+                        "status" => 401,
+                        "message" => 'Error'.$e->getMessage(),
+                        "data" => null
+                    ]);   
     }
+}
 }
