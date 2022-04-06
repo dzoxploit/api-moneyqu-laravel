@@ -27,7 +27,6 @@ class PengeluaranController extends Controller
                                     ])-sum('jumlah_pengeluaran');
             
             $pengeluaran = Pengeluaran::where([
-                ['nama_pengeluaran', '!=', NULL],
                 [function ($query) use ($request){
                     if (($term = $request->term)){
                         $query->orWhere('nama_pengeluaran', 'LIKE', '%' . $term .'%')->get();
@@ -35,6 +34,7 @@ class PengeluaranController extends Controller
                 }]
             ]) 
             ->where('user_id',Auth::id())   
+            ->where('is_delete','=',0)
             ->orderBy('id','DESC')
             ->paginate(10);
 

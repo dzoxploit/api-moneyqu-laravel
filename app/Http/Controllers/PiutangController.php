@@ -36,13 +36,14 @@ class PiutangController extends Controller
                                             ])-sum('jumlah_hutang');
                     
             $piutang = Piutang::where([
-                ['nama_piutang', '!=', NULL],
                 [function ($query) use ($request){
                     if (($term = $request->term)){
                         $query->orWhere('nama_piutang', 'LIKE', '%' . $term .'%')->get();
                     }
                 }]
             ])    
+            ->where('user_id',Auth::id())   
+            ->where('is_delete','=',0)
             ->orderBy('id','DESC')
             ->paginate(10);
 
@@ -112,7 +113,7 @@ class PiutangController extends Controller
     public function update(Request $request, $id){
         if ($request->isMethod('get')){
             try{
-                $piutang = Piutang::where('id',$id)->where('is_delete','=',0)->first();
+                $piutang = Piutang::where('id',$id)->where('is_delete','=',0)->where('user_id',Auth::id())->first();
                 if($piutang != null){
                     return response()->json([
                         "status" => 201,

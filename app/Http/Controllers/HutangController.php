@@ -29,7 +29,6 @@ class HutangController extends Controller
                                             ])-sum('jumlah_hutang');
                     
             $hutang = Hutang::where([
-                ['nama_hutang', '!=', NULL],
                 [function ($query) use ($request){
                     if (($term = $request->term)){
                         $query->orWhere('nama_hutang', 'LIKE', '%' . $term .'%')
@@ -40,6 +39,8 @@ class HutangController extends Controller
                     }
                 }]
             ])    
+            ->where('user_id',Auth::id())   
+            ->where('is_delete','=',0)
             ->orderBy('id','DESC')
             ->paginate(10);
 

@@ -27,7 +27,6 @@ class PemasukanController extends Controller
             
 
             $pemasukan = Pemasukan::where([
-                ['nama_pemasukan', '!=', NULL],
                 [function ($query) use ($request){
                     if (($term = $request->term)){
                         $query->orWhere('nama_pemasukan', 'LIKE', '%' . $term .'%')->get();

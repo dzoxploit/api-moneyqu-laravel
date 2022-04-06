@@ -22,13 +22,14 @@ class TabunganController extends Controller
             
 
             $tabungan = Tabungan::where([
-                ['deskripsi', '!=', NULL],
                 [function ($query) use ($request){
                     if (($term = $request->term)){
                         $query->orWhere('deskripsi', 'LIKE', '%' . $term .'%')->get();
                     }
                 }]
             ])    
+           ->where('user_id',Auth::id())   
+            ->where('is_delete','=',0)
             ->orderBy('id','DESC')
             ->paginate(10);
 
@@ -97,12 +98,12 @@ class TabunganController extends Controller
     public function update(Request $request, $id){
         if ($request->isMethod('get')){
             try{
-                $tabungan = Tabungan::where('id',$id)->where('is_delete','=',0)->first();
+                $tabungan = Tabungan::where('id',$id)->where('is_delete','=',0)->where('user_id',Auth::id())->first();
                 if($tabungan != null){
                     return response()->json([
                         "status" => 201,
                         "message" => "Tabungan Berhasil Ditampilkan",
-                        "data" => $pemasukan
+                        "data" => $tabungan
                     ]);
                 }else{
                     return response()->json([
@@ -178,8 +179,8 @@ class TabunganController extends Controller
     public function destroy_pemasukan($id){
          $tabungan = Tabungan::where('id',$id)->where('is_delete','=',0)->firstOrFail();
          $tabungan->is_delete = 1;
-         $pemasukan->deleted_at = Carbon::now();
-         $pemasukan->save();
+         $tabungan->deleted_at = Carbon::now();
+         $tabungan->save();
 
           return response()->json([
                         "status" => 201,
