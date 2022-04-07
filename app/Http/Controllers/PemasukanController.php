@@ -23,7 +23,7 @@ class PemasukanController extends Controller
                                         ['is_delete', '=', 0],
                                         ['user_id', '=', Auth::id()],
                                         ['currency_id', '=', $settings->currency_id]
-                                    ])-sum('jumlah_pemasukan');
+                                    ])->sum('jumlah_pemasukan');
             
 
             $pemasukan = Pemasukan::where([

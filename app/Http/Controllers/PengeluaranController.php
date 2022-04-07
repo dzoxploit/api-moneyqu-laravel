@@ -24,7 +24,7 @@ class PengeluaranController extends Controller
                                         ['is_delete', '=', 0],
                                         ['user_id', '=', Auth::id()],
                                         ['currency_id', '=', $settings->currency_id]
-                                    ])-sum('jumlah_pengeluaran');
+                                    ])->sum('jumlah_pengeluaran');
             
             $pengeluaran = Pengeluaran::where([
                 [function ($query) use ($request){

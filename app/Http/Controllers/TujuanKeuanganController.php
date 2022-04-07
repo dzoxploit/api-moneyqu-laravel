@@ -262,9 +262,11 @@ class TujuanKeuanganController extends Controller
                     $tujuankeuangan->deleted_at = Carbon::now();
                     $tujuankeuangan->save();
 
-                    $goals->is_delete = 1;
-                    $goals->deleted_at = Carbon::now();
-                    $goals->save();
+                    foreach($goals as $siuuu){
+                        $siuuu->is_delete = 1;
+                        $siuuu->deleted_at = Carbon::now();
+                        $siuuu->save();
+                    }
 
 
                     return response()->json([
@@ -297,7 +299,7 @@ class TujuanKeuanganController extends Controller
 
     public function destroy_goals_tujuan_keuangan($id){
         try{
-        $goals = GoalsTujuanKeuangan::where('tujuan_keuangan_id',$id)->where('user_id',Auth::id())->where('is_delete','0')->get();
+        $goals = GoalsTujuanKeuangan::where('tujuan_keuangan_id',$id)->where('user_id',Auth::id())->where('is_delete','0')->firstOrFail();
         $goals->is_delete = 1;
         $goals->deleted_at = Carbon::now();
         $goals->save();

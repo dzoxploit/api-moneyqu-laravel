@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tabungan extends Model
+class Simpanan extends Model
 {
     use HasFactory;
 
     
      use HasFactory;
-    protected $table = 'tabungan';
+    protected $table = 'simpanan';
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'user_id', 'tujuan_tabungan_id','jumlah_tabyngan','deskripsi', 'status_tabungan', 'jenis_tabungan_id','currency_id','is_delete', 'deleted_at'
+        'user_id', 'tujuan_simpanan_id','jumlah_simpanan','deskripsi', 'status_simpanan', 'jenis_simpanan_id','currency_id','is_delete', 'deleted_at'
     ];
 
     public function CurrencyData()
@@ -23,14 +23,14 @@ class Tabungan extends Model
         return $this->hasOne(CurrencyData::class);
     }
 
-    public function TujuanTabungan()
+    public function TujuanSimpanan()
     {
-        return $this->hasOne(TujuanKeuangan::class);
+        return $this->hasOne(TujuanSimpanan::class);
     }
 
-    public function JenisTabungan()
+    public function JenisSimpanan()
     {
-        return $this->hasOne(JenisTabungan::class);
+        return $this->hasOne(JenisSimpanan::class);
     }
 
     public function User()

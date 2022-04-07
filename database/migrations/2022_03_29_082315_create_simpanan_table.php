@@ -13,22 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tabungan', function (Blueprint $table) {
+        Schema::create('simpanan', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('tujuan_tabungan_id')->unsigned();
-            $table->float('jumlah_tabungan');
+            $table->bigInteger('tujuan_simpanan_id')->unsigned();
+            $table->float('jumlah_simpanan');
             $table->string('deskripsi');
-            $table->boolean('status_tabungan');
-            $table->bigInteger('jenis_tabungan_id')->unsigned();
+            $table->boolean('status_simpanan');
+            $table->bigInteger('jenis_simpanan_id')->unsigned();
             $table->bigInteger('currency_id')->unsigned();
             $table->boolean('is_delete');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('currency_id')->references('id')->on('currency')->onDelete('cascade');
-            $table->foreign('tujuan_tabungan_id')->references('id')->on('tujuan_tabungan')->onDelete('cascade');
-            $table->foreign('jenis_tabungan_id')->references('id')->on('jenis_tabungan')->onDelete('cascade');
+            $table->foreign('tujuan_simpanan_id')->references('id')->on('tujuan_simpanan')->onDelete('cascade');
+            $table->foreign('jenis_simpanan_id')->references('id')->on('jenis_simpanan')->onDelete('cascade');
         });
     }
 
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tabungan');
+        Schema::dropIfExists('simpanan');
     }
 };

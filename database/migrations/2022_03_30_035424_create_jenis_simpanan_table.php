@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jenis_tabungan', function (Blueprint $table) {
+        Schema::create('jenis_simpanan', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_jenis_tabungan');
-            $table->string('deskripsi_jenis_tabungan');
+            $table->string('nama_jenis_simpanan');
+            $table->string('deskripsi_jenis_simpanan');
             $table->boolean('is_active');
             $table->boolean('is_delete');
             $table->timestamps();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jenis_tabungan');
+        Schema::dropIfExists('jenis_simpanan');
     }
 };

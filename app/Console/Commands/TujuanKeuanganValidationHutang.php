@@ -3,6 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Models\TujuanKeuangan;
+use App\Models\Hutang;
+use Auth;
+use DB;
 
 class TujuanKeuanganValidationHutang extends Command
 {
@@ -11,14 +15,14 @@ class TujuanKeuanganValidationHutang extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'tujuankeuangan:hutang';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Validation hutang in tujuan keuangan {--id=}';
 
     /**
      * Execute the console command.

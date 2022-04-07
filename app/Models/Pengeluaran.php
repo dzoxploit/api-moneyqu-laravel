@@ -10,11 +10,11 @@ class Pengeluaran extends Model
     use HasFactory;
 
      use HasFactory;
-     protected $table = 'pemasukan';
+     protected $table = 'pengeluaran';
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'user_id', 'kategori_pemasukan_id','nama_pemasukan','currency_id', 'jumlah_pemasukan', 'tanggal_pemasukan','keterangan','status_transaksi_berulang','is_delete', 'deleted_at'
+        'user_id', 'kategori_pengeluaran_id','', 'nama_pengeluaran','currency_id', 'jumlah_pengeluaran', 'tanggal_pengeluaran','keterangan','is_delete', 'deleted_at'
     ];
 
     public function CurrencyData()
@@ -22,9 +22,9 @@ class Pengeluaran extends Model
         return $this->hasOne(CurrencyData::class);
     }
 
-    public function KategoriPemasukan()
+    public function KategoriPengeluaran()
     {
-        return $this->hasOne(KategoriPemasukan::class);
+        return $this->hasOne(KategoriPengeluaran::class);
     }
 
     public function User()

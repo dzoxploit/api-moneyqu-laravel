@@ -3,25 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Tabungan;
+use App\Models\Simpanan;
 use App\Models\Settings;
 use Validator;
-class TabunganController extends Controller
+class SimpananController extends Controller
 {
     
     public function index(Request $request){
         try{
             $term = $request->get('search');
             $settings = Settings::where('user_id',Auth::id())->first();
-            $calculatetabungan = Tabungan::Where(
+            $calculatesimpanan = Simpanan::Where(
                                     [
                                         ['is_delete', '=', 0],
                                         ['user_id', '=', Auth::id()],
                                         ['currency_id', '=', $settings->currency_id]
-                                    ])-sum('jumlah_tabungan');
+                                    ])->sum('jumlah_simpanan');
             
 
-            $tabungan = Tabungan::where([
+            $simpanan = Simpanan::where([
                 [function ($query) use ($request){
                     if (($term = $request->term)){
                         $query->orWhere('deskripsi', 'LIKE', '%' . $term .'%')->get();
@@ -35,10 +35,10 @@ class TabunganController extends Controller
 
             return response()->json([
                 "status" => 201,
-                "message" => "Tabungan Berhasil Ditampilkan",
+                "message" => "Simpanan Berhasil Ditampilkan",
                 "data" => [
-                    "total_tabungan" => $calculatetabungan,
-                    "data_tabungan" => $tabungan
+                    "total_simpanan" => $calculatesimpanan,
+                    "data_simpanan" => $simpanan
                 ]
             
             ]);
@@ -56,10 +56,10 @@ class TabunganController extends Controller
         
         try{
             $validator = Validator::make($input, [
-                'tujuan_tabungan_id' => 'required',
-                'jumlah_tabungan' => 'required',
+                'tujuan_simpanan_id' => 'required',
+                'jumlah_simpanan' => 'required',
                 'deskripsi' => 'required',
-                'jenis_tabungan_id' => 'required',
+                'jenis_simpanan_id' => 'required',
                 'currency_id' => 'required', 
             ]);
 
@@ -70,20 +70,20 @@ class TabunganController extends Controller
                     "data" => null
                 ]);          
             }
-            $tabungan = new Tabungan;
-            $tabungan->user_id = Auth::id();
-            $tabungan->jumlah_tabungan = $input['jumlah_tabungan'];
-            $tabungan->tujuan_tabungan_id = $input['tujuan_tabungan_id'];
-            $tabungan->currency_id = $input['currency_id'];
-            $tabungan->deskripsi = $input['deskripsi'];
-            $tabungan->jenis_tabungan_id = $input['jenis_tabungan_id'];
-            $tabungan->is_delete = 0;
-            $tabungan->save();
+            $simpanan = new Simpanan;
+            $simpanan->user_id = Auth::id();
+            $simpanan->jumlah_simpanan = $input['jumlah_simpanan'];
+            $simpanan->tujuan_simpanan_id = $input['tujuan_simpanan_id'];
+            $simpanan->currency_id = $input['currency_id'];
+            $simpanan->deskripsi = $input['deskripsi'];
+            $simpanan->jenis_simpanan_id = $input['jenis_simpanan_id'];
+            $simpanan->is_delete = 0;
+            $simpanan->save();
             
             return response()->json([
                 "status" => 201,
-                "message" => "Tabungan created successfully.",
-                "data" => $tabungan
+                "message" => "Simpanan created successfully.",
+                "data" => $simpanan
             ]);
         }catch(\Exception $e){
             return response()->json([
@@ -98,17 +98,17 @@ class TabunganController extends Controller
     public function update(Request $request, $id){
         if ($request->isMethod('get')){
             try{
-                $tabungan = Tabungan::where('id',$id)->where('is_delete','=',0)->where('user_id',Auth::id())->first();
+                $simpanan = Simpanan::where('id',$id)->where('is_delete','=',0)->where('user_id',Auth::id())->first();
                 if($tabungan != null){
                     return response()->json([
                         "status" => 201,
-                        "message" => "Tabungan Berhasil Ditampilkan",
-                        "data" => $tabungan
+                        "message" => "Simpanan Berhasil Ditampilkan",
+                        "data" => $simpanan
                     ]);
                 }else{
                     return response()->json([
                         "status" => 404,
-                        "message" => "Tabungan Tidak ada",
+                        "message" => "simpanan Tidak ada",
                         "data" => null
                     ]);
                 }
@@ -126,45 +126,45 @@ class TabunganController extends Controller
                 
                 try{
                     $validator = Validator::make($input, [
-                        'tujuan_tabungan_id' => 'required',
-                        'jumlah_tabungan' => 'required',
+                        'tujuan_simpanan_id' => 'required',
+                        'jumlah_simpanan' => 'required',
                         'deskripsi' => 'required',
-                        'jenis_tabungan_id' => 'required',
+                        'jenis_simpanan_id' => 'required',
                         'currency_id' => 'required', 
                     ]);
 
                     if($validator->fails()){
-                        $tabungan = Tabungan::where('id','=',$id)->first();
-                        $tabungan->user_id = Auth::id();
-                        $tabungan->jumlah_tabungan = $input['jumlah_tabungan'];
-                        $tabungan->tujuan_tabungan_id = $input['tujuan_tabungan_id'];
-                        $tabungan->currency_id = $input['currency_id'];
-                        $tabungan->deskripsi = $input['deskripsi'];
-                        $tabungan->jenis_tabungan_id = $input['jenis_tabungan_id'];
-                        $tabungan->is_delete = 0;
-                        $tabungan->save();
+                        $simpanan = Simpanan::where('id',$id)->where('is_delete','=',0)->where('user_id',Auth::id())->firstOrFail();
+                        $simpanan->user_id = Auth::id();
+                        $simpanan->jumlah_simpanan = $input['jumlah_simpanan'];
+                        $simpanan->tujuan_simpanan_id = $input['tujuan_simpanan_id'];
+                        $simpanan->currency_id = $input['currency_id'];
+                        $simpanan->deskripsi = $input['deskripsi'];
+                        $simpanan->jenis_simpanan_id = $input['jenis_simpanan_id'];
+                        $simpanan->is_delete = 0;
+                        $simpanan->save();
 
                         return response()->json([
                             "status" => 201,
-                            "message" => "Tabungan created successfully.",
-                            "data" => $tabungan
+                            "message" => "Simpanan created successfully.",
+                            "data" => $simpanan
                         ]);
                     }
-                   $tabungan = Tabungan::where('id','=',$id)->first();
-                        $tabungan->user_id = Auth::id();
-                        $tabungan->jumlah_tabungan = $input['jumlah_tabungan'];
-                        $tabungan->tujuan_tabungan_id = $input['tujuan_tabungan_id'];
-                        $tabungan->currency_id = $input['currency_id'];
-                        $tabungan->deskripsi = $input['deskripsi'];
-                        $tabungan->jenis_tabungan_id = $input['jenis_tabungan_id'];
-                        $tabungan->is_delete = 0;
-                        $tabungan->save();
+                     $simpanan = Simpanan::where('id',$id)->where('is_delete','=',0)->where('user_id',Auth::id())->firstOrFail();
+                        $simpanan->user_id = Auth::id();
+                        $simpanan->jumlah_simpanan = $input['jumlah_simpanan'];
+                        $simpanan->tujuan_simpanan_id = $input['tujuan_simpanan_id'];
+                        $simpanan->currency_id = $input['currency_id'];
+                        $simpanan->deskripsi = $input['deskripsi'];
+                        $simpanan->jenis_simpanan_id = $input['jenis_simpanan_id'];
+                        $simpanan->is_delete = 0;
+                        $simpanan->save();
 
                     
                     return response()->json([
                         "status" => 201,
-                        "message" => "Tabungan created successfully.",
-                        "data" => $tabungan
+                        "message" => "Simpanan created successfully.",
+                        "data" => $simpanan
                     ]);
                 }catch(\Exception $e){
                     return response()->json([
@@ -177,15 +177,15 @@ class TabunganController extends Controller
     }
 
     public function destroy_pemasukan($id){
-         $tabungan = Tabungan::where('id',$id)->where('is_delete','=',0)->firstOrFail();
-         $tabungan->is_delete = 1;
-         $tabungan->deleted_at = Carbon::now();
-         $tabungan->save();
+         $simpanan = Simpanan::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->firstOrFail();
+         $simpanan->is_delete = 1;
+         $simpanan->deleted_at = Carbon::now();
+         $simpanan->save();
 
           return response()->json([
                         "status" => 201,
-                        "message" => 'delete tabungan succesfully',
-                        "data" => $tabungan
+                        "message" => 'delete simpanan succesfully',
+                        "data" => $simpanan
           ]);
     }    
 }

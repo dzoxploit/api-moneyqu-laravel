@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\User;
+use App\Models\Settings;
 use Auth;
 
 class UsersController extends Controller
@@ -40,10 +41,17 @@ class UsersController extends Controller
                     'message' => $validator->errors(),
                 ], 401);
             }
-           
             $input = $request->all();
             $input['password'] = bcrypt($input['password']);
             $user = User::create($input);
+
+            $settings = new Settings;
+            $settings->user_id = $user->id;
+            $settings->currency_id = 1;
+            $settings->bahasa = 1;
+            $settings->settings_component_1 = 1;
+            $settings->save();
+            
             $success['token'] = $user->createToken('appToken')->accessToken;
             return response()->json([
                 'success' => true,
