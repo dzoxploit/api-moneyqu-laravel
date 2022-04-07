@@ -13,7 +13,7 @@ class Hutang extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'user_id', 'nama_hutang','no_telepon','deskripsi', 'jumlah_hutang', 'currency_id','status_hutang'
+        'user_id', 'nama_hutang','no_telepon','deskripsi', 'jumlah_hutang', 'currency_id','status_hutang','is_delete','deleted_at'
     ];
 
     public function CurrencyData()

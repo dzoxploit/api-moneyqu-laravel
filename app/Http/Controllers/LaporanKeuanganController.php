@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 class LaporanKeuanganController extends Controller
 {
     public function index(Request $request){
-        try{  
+        try{
+            
+            
             return response()->json([
                 "status" => 201,
                 "message" => "Kategori Pemasukan Berhasil Ditampilkan",
