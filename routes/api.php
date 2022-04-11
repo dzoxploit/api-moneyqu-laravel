@@ -7,6 +7,9 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LaporanKeuanganController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
+use App\Http\Controllers\HutangController;
+use App\Http\Controllers\PiutangController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -41,7 +44,21 @@ Route::group(['prefix' => 'v1'], function(){
         Route::get('pengeluaran', [PengeluaranController::class, 'index'])->middleware('auth:api');
         Route::post('pengeluaran/create', [PengeluaranController::class, 'create'])->middleware('auth:api');
         Route::match(array('GET','POST'),'pengeluaran/update/{id}', [PengeluaranController::class, 'update'])->middleware('auth:api');
-        Route::post('pengeluaran/destroy/{id}', [PengeluaranController::class, 'destroy'])->middleware('auth:api');
+        Route::post('pengeluaran/destroy/{id}', [PengeluaranController::class, 'destroy_pengeluaran'])->middleware('auth:api');
+
+        
+        Route::get('hutang', [HutangController::class, 'index'])->middleware('auth:api');
+        Route::post('hutang/create', [HutangController::class, 'create'])->middleware('auth:api');
+        Route::match(array('GET','POST'),'hutang/update/{id}', [HutangController::class, 'update'])->middleware('auth:api');
+        Route::post('hutang/destroy/{id}', [HutangController::class, 'destroy_hutang'])->middleware('auth:api');
+
+
+        Route::get('piutang', [PiutangController::class, 'index'])->middleware('auth:api');
+        Route::post('piutang/create', [PiutangController::class, 'create'])->middleware('auth:api');
+        Route::match(array('GET','POST'),'piutang/update/{id}', [PiutangController::class, 'update'])->middleware('auth:api');
+        Route::post('piutang/destroy/{id}', [PiutangController::class, 'destroy_hutang'])->middleware('auth:api');
+
+
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -12,6 +12,7 @@ use Auth;
 use DB;
 use Carbon\Carbon;
 use Validator;
+use App\Models\Hutang;
 
 class PengeluaranController extends Controller
 {
@@ -236,9 +237,8 @@ class PengeluaranController extends Controller
     }
 
     public function destroy_pengeluaran($id){
-         $pengeluaran = Pengeluaran::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->firstOrFail();
-         
-         if($pengeluaran->hutang_id != null){
+         $pengeluaran = Pengeluaran::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->first();
+         if($pengeluaran->hutang_id == null){
             $pengeluaran->is_delete = 1;
             $pengeluaran->deleted_at = Carbon::now();
             $pengeluaran->save();
@@ -247,11 +247,10 @@ class PengeluaranController extends Controller
             $pengeluaran->deleted_at = Carbon::now();
             $pengeluaran->save();
 
-
-            $pengeluaran->is_delete = 1;
-            $pengeluaran->deleted_at = Carbon::now();
-            $pengeluaran->save();
-         }
+            $hutang = Hutang::where('id',$pengeluaran->hutang_id)->where('is_delete','=',0)->where('status_hutang','=','0')->firstOrFail();
+            $hutang->status_hutang = 0;
+            $hutang->save();
+        }
 
           return response()->json([
                         "status" => 201,

@@ -54,10 +54,11 @@ class LaporanKeuanganController extends Controller
                                     [
                                         ['is_delete', '=', 0],
                                         ['user_id', '=', Auth::id()],
-                                        ['simpanan_id','=',null]
-                                    ])->sum('nominal_goals');
+                                    ])->orWhere('simpanan_id','=',null)
+                                    ->orWhere('hutang_id','=',null)
+                                    ->sum('nominal_goals');
 
-            $piutangbelumdibayar = Piutang::Where(
+            $piutang = Piutang::Where(
                                             [
                                                 ['is_delete', '=', 0],
                                                 ['user_id', '=', Auth::id()],
@@ -65,13 +66,30 @@ class LaporanKeuanganController extends Controller
                                                 ['status_piutang','=','0']
                                             ])->sum('jumlah_hutang');
            
-            $piutang = Piutang::Where(
+            $piutanglunas = Piutang::Where(
                                             [
                                                 ['is_delete', '=', 0],
                                                 ['user_id', '=', Auth::id()],
                                                 ['currency_id', '=', $settings->currency_id],
                                                 ['status_piutang','=','1']
                                             ])->sum('jumlah_hutang');
+
+            $hutang = Hutang::Where(
+                                            [
+                                                ['is_delete', '=', 0],
+                                                ['user_id', '=', Auth::id()],
+                                                ['currency_id', '=', $settings->currency_id],
+                                                ['status_hutang','=','0']
+                                            ])->sum('jumlah_hutang');
+           
+            $hutanglunas = Hutang::Where(
+                                            [
+                                                ['is_delete', '=', 0],
+                                                ['user_id', '=', Auth::id()],
+                                                ['currency_id', '=', $settings->currency_id],
+                                                ['status_hutang','=','1']
+                                            ])->sum('jumlah_hutang');
+
             $tagihan = Tagihan::Where(
                                     [
                                         ['is_delete', '=', 0],
@@ -79,7 +97,7 @@ class LaporanKeuanganController extends Controller
                                         ['status_tagihan_lunas','=',1]
                                     ])->sum('jumlah_tagihan');
               
-            $calculation = (int)$pemasukan + (int)$piutang - (int)$piutangbelumdibayar - (int)$simpanan - (int)$pengeluaran - (int)$tujuankeuangan - (int)$tagihan;
+            $calculation = (int)$pemasukan + (int)$piutanglunas - (int)$piutang + (int)$hutang - (int)$hutanglunas - (int)$simpanan - (int)$pengeluaran - (int)$tujuankeuangan - (int)$tagihan;
             
             return response()->json([
                 "status" => 201,
