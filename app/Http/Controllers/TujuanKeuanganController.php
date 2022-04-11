@@ -85,6 +85,7 @@ class TujuanKeuanganController extends Controller
                 'tanggal' => 'required',
                 'status_tujuan_keuangan' => 'required', 
                 'hutang_id' => 'nullable', 
+                'simpanan_id' => 'nullable'
             ]);
 
             if($validator->fails()){
@@ -103,10 +104,15 @@ class TujuanKeuanganController extends Controller
             $tujuankeuangan->tanggal = $input['tanggal'];
             $tujuankeuangan->nominal = $input['nominal'];
             $tujuankeuangan->nominal_goals = 0;
+            $tujuankeuangan->simpanan_id = $input['simpanan_id'];
             $tujuankeuangan->status_tujuan_keuangan = 0;
             if($request->get('id') != null){
                 $tujuankeuangan->hutang_id = $request->get('id');
             }
+            else if($request->get('simpanan_id') != null){
+                $tujuankeuangan->simpanan_id = $request->get('simpanan_id');
+            }
+
             $tujuankeuangan->is_delete = 0;
             $tujuankeuangan->save();
             
@@ -140,13 +146,83 @@ class TujuanKeuanganController extends Controller
                     "data" => null
                 ]);          
             }
-            $goalstujuankeuangan = new GoalsTujuanKeuangan;
-            $goalstujuankeuangan->user_id = Auth::id();
-            $goalstujuankeuangan->tujuan_keuangan_id = $id;
-            $goalstujuankeuangan->nama_goals_tujuan_keuangan = $input['nama_goals_tujuan_keuangan'];
-            $goalstujuankeuangan->currency_id = $input['currency_id'];
-            $goalstujuankeuangan->is_delete = 0;
-            $goalstujuankeuangan->save();
+
+            $tujuankeuanganvalidation = TujuanKeuangan::where('id',$id)->where('is_delete',0)
+                                                       ->where('user_id',Auth::id())
+                                                       ->where('simpanan_id','!=',null)
+                                                       ->where('is_delete','=',0)
+                                                       ->first();
+            
+            if($tujuankeuanganvalidation != null){
+                $goalstujuankeuangan = new GoalsTujuanKeuangan;
+                $goalstujuankeuangan->user_id = Auth::id();
+                $goalstujuankeuangan->tujuan_keuangan_id = $id;
+                $goalstujuankeuangan->nama_goals_tujuan_keuangan = $input['nama_goals_tujuan_keuangan'];
+                $goalstujuankeuangan->nominal = $input['nominal'];
+                $goalstujuankeuangan->is_delete = 0;
+                $goalstujuankeuangan->save();
+
+                $tujuankeuangan = TujuanKeuangan::where('id',$id)->where('is_delete',0)
+                                                       ->where('user_id',Auth::id())
+                                                       ->where('simpanan_id','!=',null)
+                                                       ->where('is_delete','=',0)
+                                                       ->firstOrFail();
+
+                $tujuankeuangan->nominal_goals = $tujuankeuangan->nominal_goals + $input['nominal'];
+                $tujuankeuangan->save();
+
+                $simpanan = Simpanan::where('user_id',Auth::id())->where('is_delete','=',0)->where('id','=',$tujuankeuanganvalidation->simpanan_id)->firstOrFail();
+                $simpanan->jumlah_simpanan = $simpanan->jumlah_simpanan + $input['nominal'];
+                $simpaanan->save();
+            } else {
+                
+                 $tujuankeuanganvalidationhutang  = TujuanKeuangan::where('id',$id)->where('is_delete',0)
+                                                            ->where('user_id',Auth::id())
+                                                            ->where('hutang_id','!=',null)
+                                                            ->where('is_delete','=',0)
+                                                            ->first();
+                if($tujuankeuanganvalidationhutang != null){
+                    $goalstujuankeuangan = new GoalsTujuanKeuangan;
+                    $goalstujuankeuangan->user_id = Auth::id();
+                    $goalstujuankeuangan->tujuan_keuangan_id = $id;
+                    $goalstujuankeuangan->nama_goals_tujuan_keuangan = $input['nama_goals_tujuan_keuangan'];
+                    $goalstujuankeuangan->currency_id = $input['currency_id'];
+                    $goalstujuankeuangan->is_delete = 0;
+                    $goalstujuankeuangan->save();
+
+                    $tujuankeuangan = TujuanKeuangan::where('id',$id)->where('is_delete',0)
+                                                        ->where('user_id',Auth::id())
+                                                        ->where('simpanan_id','!=',null)
+                                                        ->where('is_delete','=',0)
+                                                        ->firstOrFail();
+
+                    $tujuankeuangan->nominal_goals = $tujuankeuangan->nominal_goals + $input['nominal'];
+                    $tujuankeuangan->save();
+                    
+
+                    $hutang = Hutang::where('id',$request->get('id'))->where('is_delete',0)
+                                                       ->where('user_id',Auth::id())
+                                                       ->where('is_delete','=',0)
+                                                       ->firstOrFail();
+                }else{
+                    $goalstujuankeuangan = new GoalsTujuanKeuangan;
+                    $goalstujuankeuangan->user_id = Auth::id();
+                    $goalstujuankeuangan->tujuan_keuangan_id = $id;
+                    $goalstujuankeuangan->nama_goals_tujuan_keuangan = $input['nama_goals_tujuan_keuangan'];
+                    $goalstujuankeuangan->currency_id = $input['currency_id'];
+                    $goalstujuankeuangan->is_delete = 0;
+                    $goalstujuankeuangan->save();
+
+                    $tujuankeuangan = TujuanKeuangan::where('id',$id)->where('is_delete',0)
+                                                        ->where('user_id',Auth::id())
+                                                        ->where('simpanan_id','!=',null)
+                                                        ->where('is_delete','=',0)
+                                                        ->firstOrFail();
+
+                    $tujuankeuangan->nominal_goals = $tujuankeuangan->nominal_goals + $input['nominal'];
+                    $tujuankeuangan->save();
+                }
+            }
             
             return response()->json([
                 "status" => 201,
@@ -201,6 +277,7 @@ class TujuanKeuanganController extends Controller
                         'tanggal' => 'required',
                         'status_tujuan_keuangan' => 'required', 
                         'hutang_id' => 'nullable', 
+                        'simpanan_id' => 'nullable', 
                     ]);
                     if($validator->fails()){
                         $tujuankeuangan = TujuanKeuangan::where('id',$id)->where('user_id', Auth::id())->where('is_delete', 0)->where('status_tujuan_keuangan',0);
@@ -210,9 +287,14 @@ class TujuanKeuanganController extends Controller
                         $tujuankeuangan->currency_id = $input['currency_id'];
                         $tujuankeuangan->kategori_tujuan_keuangan = $input['kategori_tujuan_keuangan'];
                         $tujuankeuangan->tanggal = $input['tanggal'];
-                        if($request->get('id') != null){
-                            $tujuankeuangan->hutang_id = $request->get('id');
+
+                        if($request->get('hutang_id') != null){
+                            $tujuankeuangan->hutang_id = $request->get('hutang_id');
                         }
+                        else if($request->get('simpanan_id') != null){
+                            $tujuankeuangan->simpanan_id = $request->get('simpanan_id');
+                        }
+
                         $tujuankeuangan->is_delete = 0;
                         $tujuankeuangan->save();
 
@@ -229,9 +311,15 @@ class TujuanKeuanganController extends Controller
                         $tujuankeuangan->currency_id = $input['currency_id'];
                         $tujuankeuangan->kategori_tujuan_keuangan = $input['kategori_tujuan_keuangan'];
                         $tujuankeuangan->tanggal = $input['tanggal'];
-                        if($request->get('id') != null){
-                            $tujuankeuangan->hutang_id = $request->get('id');
+                        
+                        if($request->get('hutang_id') != null){
+                            $tujuankeuangan->hutang_id = $request->get('hutang_id');
                         }
+                        
+                        else if($request->get('simpanan_id') != null){
+                            $tujuankeuangan->simpanan_id = $request->get('simpanan_id');
+                        }
+                        
                         $tujuankeuangan->is_delete = 0;
                         $tujuankeuangan->save();
                     
@@ -267,7 +355,6 @@ class TujuanKeuanganController extends Controller
                         $siuuu->deleted_at = Carbon::now();
                         $siuuu->save();
                     }
-
 
                     return response()->json([
                                     "status" => 201,

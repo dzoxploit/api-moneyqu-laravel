@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class KategoriLaporanKeuangan extends Model
 {
     use HasFactory;
+
+    protected $table = 'kategori_laporan_keuangan';
+    protected $primaryKey = 'id';
 }

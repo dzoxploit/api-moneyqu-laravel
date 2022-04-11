@@ -11,6 +11,7 @@ use AmrShawky\LaravelCurrency\Facade\Currency;
 use Auth;
 use DB;
 use Carbon\Carbon;
+use Validator;
 
 class PengeluaranController extends Controller
 {
@@ -61,14 +62,12 @@ class PengeluaranController extends Controller
         
         try{
             $validator = Validator::make($input, [
-                'nama_penegluaran' => 'required',
-                'kategori_pengeluaran_id' => 'required',
                 'nama_pengeluaran' => 'required',
+                'kategori_pengeluaran_id' => 'required',
                 'currency_id' => 'required',
                 'jumlah_pengeluaran' => 'required', 
                 'tanggal_pengeluaran' => 'required', 
-                'keterangan' => "text",
-                'status_transaksi_berulang' => 'required',
+                'keterangan' => "nullable",
             ]);
 
             if($validator->fails()){
@@ -86,14 +85,13 @@ class PengeluaranController extends Controller
             $pengeluaran->jumlah_pengeluaran = $input['jumlah_pengeluaran'];
             $pengeluaran->tanggal_pengeluaran = $input['tanggal_pengeluaran'];
             $pengeluaran->keterangan = $input['keterangan'];
-            $pengeluaran->status_transaksi_berulang = $input['status_transaksi_berulang'];
             $pengeluaran->is_delete = 0;
             $pengeluaran->save();
             
             return response()->json([
                 "status" => 201,
                 "message" => "Pengeluaran created successfully.",
-                "data" => $pemasukan
+                "data" => $pengeluaran
             ]);
         }catch(\Exception $e){
             return response()->json([
@@ -115,8 +113,7 @@ class PengeluaranController extends Controller
                 'currency_id' => 'required',
                 'jumlah_pengeluaran' => 'required', 
                 'tanggal_pengeluaran' => 'required', 
-                'keterangan' => "text",
-                'status_transaksi_berulang' => 'required',
+                'keterangan' => "nullable",
             ]);
 
             if($validator->fails()){
@@ -135,7 +132,6 @@ class PengeluaranController extends Controller
             $pengeluaran->jumlah_pengeluaran = $input['jumlah_pengeluaran'];
             $pengeluaran->tanggal_pengeluaran = $input['tanggal_pengeluaran'];
             $pengeluaran->keterangan = $input['keterangan'];
-            $pengeluaran->status_transaksi_berulang = $input['status_transaksi_berulang'];
             $pengeluaran->is_delete = 0;
             $pengeluaran->save();
             
@@ -191,8 +187,7 @@ class PengeluaranController extends Controller
                     'currency_id' => 'required',
                     'jumlah_pengeluaran' => 'required', 
                     'tanggal_pengeluaran' => 'required', 
-                    'keterangan' => "text",
-                    'status_transaksi_berulang' => 'required',
+                    'keterangan' => "nullable",
                 ]);
 
                     if($validator->fails()){
@@ -204,13 +199,12 @@ class PengeluaranController extends Controller
                         $pengeluaran->jumlah_pengeluaran = $input['jumlah_pengeluaran'];
                         $pengeluaran->tanggal_pengeluaran = $input['tanggal_pengeluaran'];
                         $pengeluaran->keterangan = $input['keterangan'];
-                        $pengeluaran->status_transaksi_berulang = $input['status_transaksi_berulang'];
                         $pengeluaran->is_delete = 0;
                         $pengeluaran->save();
 
                         return response()->json([
                             "status" => 201,
-                            "message" => "Pemasukan created successfully.",
+                            "message" => "Pengeluaran created successfully.",
                             "data" => $pengeluaran
                         ]);
                     }
@@ -222,13 +216,12 @@ class PengeluaranController extends Controller
                     $pengeluaran->jumlah_pengeluaran = $input['jumlah_pengeluaran'];
                     $pengeluaran->tanggal_pengeluaran = $input['tanggal_pengeluaran'];
                     $pengeluaran->keterangan = $input['keterangan'];
-                    $pengeluaran->status_transaksi_berulang = $input['status_transaksi_berulang'];
                     $pengeluaran->is_delete = 0;
                     $pengeluaran->save();
 
                     return response()->json([
                         "status" => 201,
-                        "message" => "Pemasukan created successfully.",
+                        "message" => "Pengeluarancreated successfully.",
                         "data" => $pengeluaran
                     ]);
 
@@ -244,9 +237,21 @@ class PengeluaranController extends Controller
 
     public function destroy_pengeluaran($id){
          $pengeluaran = Pengeluaran::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->firstOrFail();
-         $pengeluaran->is_delete = 1;
-         $pengeluaran->deleted_at = Carbon::now();
-         $pengeluaran->save();
+         
+         if($pengeluaran->hutang_id != null){
+            $pengeluaran->is_delete = 1;
+            $pengeluaran->deleted_at = Carbon::now();
+            $pengeluaran->save();
+         } else {
+            $pengeluaran->is_delete = 1;
+            $pengeluaran->deleted_at = Carbon::now();
+            $pengeluaran->save();
+
+
+            $pengeluaran->is_delete = 1;
+            $pengeluaran->deleted_at = Carbon::now();
+            $pengeluaran->save();
+         }
 
           return response()->json([
                         "status" => 201,

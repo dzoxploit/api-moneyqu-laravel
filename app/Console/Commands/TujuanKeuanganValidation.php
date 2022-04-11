@@ -11,7 +11,7 @@ class TujuanKeuanganValidation extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'command:n';
 
     /**
      * The console command description.

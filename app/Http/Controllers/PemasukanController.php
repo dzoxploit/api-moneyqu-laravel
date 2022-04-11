@@ -8,7 +8,9 @@ use App\Models\Pemasukan;
 use App\Models\CurrencyData;
 use App\Models\Settings;
 use AmrShawky\LaravelCurrency\Facade\Currency;
+use Carbon\Carbon;
 use Auth;
+use Validator;
 use DB;
 
 class PemasukanController extends Controller
@@ -39,7 +41,7 @@ class PemasukanController extends Controller
 
             return response()->json([
                 "status" => 201,
-                "message" => "Kategori Pemasukan Berhasil Ditampilkan",
+                "message" => "Pemasukan Berhasil Ditampilkan",
                 "data" => [
                     "total_pemasukan" => $calculatepemasukan,
                     "data_pemasukan" => $pemasukan
@@ -62,11 +64,10 @@ class PemasukanController extends Controller
             $validator = Validator::make($input, [
                 'nama_pemasukan' => 'required',
                 'kategori_pemasukan_id' => 'required',
-                'nama_pemasukan' => 'required',
                 'currency_id' => 'required',
                 'jumlah_pemasukan' => 'required', 
                 'tanggal_pemasukan' => 'required', 
-                'keterangan' => "text",
+                'keterangan' => "nullable",
                 'status_transaksi_berulang' => 'required',
             ]);
 
@@ -141,7 +142,7 @@ class PemasukanController extends Controller
                         'currency_id' => 'required',
                         'jumlah_pemasukan' => 'required', 
                         'tanggal_pemasukan' => 'required', 
-                        'keterangan' => "text",
+                        'keterangan' => "nullable",
                         'status_transaksi_berulang' => 'required',
                     ]);
 
@@ -178,7 +179,7 @@ class PemasukanController extends Controller
                     
                     return response()->json([
                         "status" => 201,
-                        "message" => "Pemasukan created successfully.",
+                        "message" => "Pemasukan Updated successfully.",
                         "data" => $pemasukan
                     ]);
                 }catch(\Exception $e){

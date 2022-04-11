@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CurrencyData extends Model
 {
     use HasFactory;
+
+    
+    protected $table = 'currency';
 }

@@ -5,12 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pemasukan;
 use App\Models\Pengeluaran;
-use App\Models\Tabungan;
+use App\Models\TujuanKeuangan;
 use App\Models\GoalsTujuanKeuangan;
 use App\Models\Hutang;
 use App\Models\Piutang;
 use App\Models\Tagihan;
 use App\Models\Settings;
+use App\Models\Simpanan;
+use App\Models\KategoriPemasukan;
+use App\Models\KategoriPengeluaran;
+use App\Models\KategoriLaporanKeuangan;
+use App\Models\KategoriTagihan;
+use App\Models\KategoriTujuanKeuangan;
+use App\Models\JenisSimpanan;
+use App\Models\TujuanSimpanan;
+use App\Models\CurrencyData;
+
 use Auth;
 use Validator;
 
@@ -33,25 +43,26 @@ class LaporanKeuanganController extends Controller
                                         ['currency_id', '=', $settings->currency_id]
                                     ])->sum('jumlah_pengeluaran');
 
-            $tabungan = Tabungan::Where(
+            $simpanan = Simpanan::Where(
                                     [
                                         ['is_delete', '=', 0],
                                         ['user_id', '=', Auth::id()],
                                         ['currency_id', '=', $settings->currency_id]
-                                    ])->sum('jumlah_tabungan');
+                                    ])->sum('jumlah_simpanan');
                                     
-            $goalstujuankeuangan = GoalsTujuanKeuangan::Where(
+            $tujuankeuangan = TujuanKeuangan::Where(
                                     [
                                         ['is_delete', '=', 0],
-                                        ['user_id', '=', Auth::id()]
-                                    ])->sum('nominal');
+                                        ['user_id', '=', Auth::id()],
+                                        ['simpanan_id','=',null]
+                                    ])->sum('nominal_goals');
 
-            $hutang = Hutang::Where(
+            $piutangbelumdibayar = Piutang::Where(
                                             [
                                                 ['is_delete', '=', 0],
                                                 ['user_id', '=', Auth::id()],
                                                 ['currency_id', '=', $settings->currency_id],
-                                                ['status_hutang','=','0']
+                                                ['status_piutang','=','0']
                                             ])->sum('jumlah_hutang');
            
             $piutang = Piutang::Where(
@@ -68,7 +79,7 @@ class LaporanKeuanganController extends Controller
                                         ['status_tagihan_lunas','=',1]
                                     ])->sum('jumlah_tagihan');
               
-            $calculation = (int)$pemasukan + (int)$piutang - (int)$hutang - (int)$tabungan - (int)$pengeluaran - (int)$goalstujuankeuangan - (int)$goalstujuankeuangan - (int)$tagihan;
+            $calculation = (int)$pemasukan + (int)$piutang - (int)$piutangbelumdibayar - (int)$simpanan - (int)$pengeluaran - (int)$tujuankeuangan - (int)$tagihan;
             
             return response()->json([
                 "status" => 201,
@@ -85,6 +96,207 @@ class LaporanKeuanganController extends Controller
                 "data" => null
             ]);
         }
+    }
+
+     public function currencydata(){
+          try{
+            $currency = CurrencyData::where('is_delete','=',0)->where('is_active','=',1)->get();
+                if($currency != null){
+                    return response()->json([
+                        "status" => 201,
+                        "message" => "currency Berhasil Ditampilkan",
+                        "data" => $currency
+                    ]);
+                }else{
+                    return response()->json([
+                        "status" => 404,
+                        "message" => "currency Tidak ada",
+                        "data" => null
+                    ]);
+                }
+            }catch(\Exception $e){
+                return response()->json([
+                    "status" => 400,
+                    "message" => 'Error'.$e->getMessage(),
+                    "data" => null
+                ]);   
+            }
+    }   
+
+
+    public function kategori_laporan_keuangan(){
+          try{
+            $kategorilaporankeuangan = KategoriLaporanKeuangan::where('is_delete','=',0)->where('is_active','=',1)->get();
+                if($kategorilaporankeuangan != null){
+                    return response()->json([
+                        "status" => 201,
+                        "message" => "kategorilaporankeuangan Berhasil Ditampilkan",
+                        "data" => $kategorilaporankeuangan
+                    ]);
+                }else{
+                    return response()->json([
+                        "status" => 404,
+                        "message" => "kategorilaporankeuangan Tidak ada",
+                        "data" => null
+                    ]);
+                }
+            }catch(\Exception $e){
+                return response()->json([
+                    "status" => 400,
+                    "message" => 'Error'.$e->getMessage(),
+                    "data" => null
+                ]);   
+            }
+    }   
+
+    public function kategori_pemasukan(){
+          try{
+            $kategoripemasukan = KategoriPemasukan::where('is_delete','=',0)->where('is_active','=',1)->get();
+                if($kategoripemasukan != null){
+                    return response()->json([
+                        "status" => 201,
+                        "message" => "Kategori Pemasukan Berhasil Ditampilkan",
+                        "data" => $kategoripemasukan
+                    ]);
+                }else{
+                    return response()->json([
+                        "status" => 404,
+                        "message" => "Kategori Pemasukan Tidak ada",
+                        "data" => null
+                    ]);
+                }
+            }catch(\Exception $e){
+                return response()->json([
+                    "status" => 400,
+                    "message" => 'Error'.$e->getMessage(),
+                    "data" => null
+                ]);   
+            }
+    }   
+
+    public function kategori_pengeluaran(){
+           try{
+            $kategoripengeluaran = KategoriPengeluaran::where('is_delete','=',0)->where('is_active','=',1)->get();
+                if($kategoripengeluaran != null){
+                    return response()->json([
+                        "status" => 201,
+                        "message" => "Kategori Pengeluaran Berhasil Ditampilkan",
+                        "data" => $kategoripengeluaran
+                    ]);
+                }else{
+                    return response()->json([
+                        "status" => 404,
+                        "message" => "Kategori Pengeluaran Tidak ada",
+                        "data" => null
+                    ]);
+                }
+            }catch(\Exception $e){
+                return response()->json([
+                    "status" => 400,
+                    "message" => 'Error'.$e->getMessage(),
+                    "data" => null
+                ]);   
+            }
+    }
+
+    public function kategori_tagihan(){
+           try{
+            $kategoritagihan = KategoriTagihan::where('is_delete','=',0)->where('is_active','=',1)->get();
+                if($kategoritagihan != null){
+                    return response()->json([
+                        "status" => 201,
+                        "message" => "kategoritagihan Berhasil Ditampilkan",
+                        "data" => $kategoritagihan
+                    ]);
+                }else{
+                    return response()->json([
+                        "status" => 404,
+                        "message" => "kategoritagihan Tidak ada",
+                        "data" => null
+                    ]);
+                }
+            }catch(\Exception $e){
+                return response()->json([
+                    "status" => 400,
+                    "message" => 'Error'.$e->getMessage(),
+                    "data" => null
+                ]);   
+            }
+    }
+
+    public function jenis_simpanan(){
+        try{
+            $jenissimpanan = JenisSimpanan::where('is_delete','=',0)->where('is_active','=',1)->get();
+                if($jenissimpanan != null){
+                    return response()->json([
+                        "status" => 201,
+                        "message" => "Jenis Simpanan Berhasil Ditampilkan",
+                        "data" => $jenissimpanan
+                    ]);
+                }else{
+                    return response()->json([
+                        "status" => 404,
+                        "message" => "Jenis Simpanan Tidak ada",
+                        "data" => null
+                    ]);
+                }
+            }catch(\Exception $e){
+                return response()->json([
+                    "status" => 400,
+                    "message" => 'Error'.$e->getMessage(),
+                    "data" => null
+                ]);   
+            }
+    }
+
+    public function tujuan_simpanan(){
+        try{
+            $tujuansimpanan = JenisSimpanan::where('is_delete','=',0)->where('is_active','=',1)->get();
+                if($tujuansimpanan != null){
+                    return response()->json([
+                        "status" => 201,
+                        "message" => "tujuan simpanan Berhasil Ditampilkan",
+                        "data" => $tujuansimpanan
+                    ]);
+                }else{
+                    return response()->json([
+                        "status" => 404,
+                        "message" => "tujuan simpanan Tidak ada",
+                        "data" => null
+                    ]);
+                }
+            }catch(\Exception $e){
+                return response()->json([
+                    "status" => 400,
+                    "message" => 'Error'.$e->getMessage(),
+                    "data" => null
+                ]);   
+            }
+    }
+
+    public function kategori_tujuan_keuangan(){
+          try{
+            $kategoritujuankeuangan = KategoriTujuanKeuangan::where('is_delete','=',0)->where('is_active','=',1)->get();
+                if($kategoritujuankeuangan != null){
+                    return response()->json([
+                        "status" => 201,
+                        "message" => "kategoritujuankeuangan Berhasil Ditampilkan",
+                        "data" => $kategoritujuankeuangan
+                    ]);
+                }else{
+                    return response()->json([
+                        "status" => 404,
+                        "message" => "kategoritujuankeuangan Tidak ada",
+                        "data" => null
+                    ]);
+                }
+            }catch(\Exception $e){
+                return response()->json([
+                    "status" => 400,
+                    "message" => 'Error'.$e->getMessage(),
+                    "data" => null
+                ]);   
+            }
     }
 
     public function create(Request $request){
