@@ -34,13 +34,21 @@ class HutangController extends Controller
             $datedata = $request->get('date');
             $settings = Settings::where('user_id',Auth::id())->first();
 
-            $calculatehutangbelumdibayar = Hutang::Where(
+            $calculatehutangbelumdibayarsamsek = Hutang::Where(
                                             [
                                                 ['is_delete', '=', 0],
                                                 ['user_id', '=', Auth::id()],
                                                 ['currency_id', '=', $settings->currency_id],
                                                 ['status_hutang','=','0']
                                             ])->sum('jumlah_hutang');
+            
+            $calculatehutangbelumdibayarsebagian = Hutang::Where(
+                                            [
+                                                ['is_delete', '=', 0],
+                                                ['user_id', '=', Auth::id()],
+                                                ['currency_id', '=', $settings->currency_id],
+                                                ['status_hutang','=','0']
+                                            ])->sum('jumlah_hutang_dibayar');
 
             $calculatehutangsudahdibayar = Hutang::Where(
                                             [
@@ -95,6 +103,7 @@ class HutangController extends Controller
                 'jumlah_hutang' => 'required',
                 'deksripsi' => 'nullable',
                 'currency_id' => 'required', 
+                'tanggal_hutang' => 'required'
             ]);
 
             if($validator->fails()){
@@ -111,6 +120,8 @@ class HutangController extends Controller
             $hutang->nama_hutang = $input['nama_hutang'];
             $hutang->no_telepon = $input['no_telepon'];
             $hutang->jumlah_hutang = $input['jumlah_hutang'];
+            $hutang->jumlah_hutang_dibayar = 0;
+            $hutang->tanggal_hutang = $input['tanggal_hutang'];
             $hutang->currency_id = $input['currency_id'];
             $hutang->deksripsi = $input['deksripsi'];
             $hutang->status_hutang = 0;
@@ -167,6 +178,7 @@ class HutangController extends Controller
                     'no_telepon' => 'required',
                     'deksripsi' => 'nullable',
                     'jumlah_hutang' => 'required',
+                    'tanggal_hutang' => 'required',
                     'currency_id' => 'required', 
                 ]);
 
@@ -176,14 +188,15 @@ class HutangController extends Controller
                     $hutang->nama_hutang = $input['nama_hutang'];
                     $hutang->no_telepon = $input['no_telepon'];
                     $hutang->deksripsi = $input['deksripsi'];
+                    $hutang->tanggal_hutang = $input['tanggal_hutang'];
                     $hutang->jumlah_hutang = $input['jumlah_hutang'];
                     $hutang->status_hutang = 0;
                     $hutang->is_delete = 0;
                     $hutang->save();
                         return response()->json([
                             "status" => 201,
-                            "message" => "Piutang created successfully.",
-                            "data" => $pengeluaran
+                            "message" => "Hutang created successfully.",
+                            "data" => $hutang
                         ]);
                     }
                     
@@ -192,6 +205,7 @@ class HutangController extends Controller
                     $hutang->nama_hutang = $input['nama_hutang'];
                     $hutang->no_telepon = $input['no_telepon'];
                     $hutang->deksripsi = $input['deksripsi'];
+                    $hutang->tanggal_hutang = $input['tanggal_hutang'];
                     $hutang->jumlah_hutang = $input['jumlah_hutang'];
                     $hutang->status_hutang = 0;
                     $hutang->is_delete = 0;
@@ -199,7 +213,7 @@ class HutangController extends Controller
                     
                     return response()->json([
                         "status" => 201,
-                        "message" => "hutang created successfully.",
+                        "message" => "hutang updated successfully.",
                         "data" => $hutang
                     ]);
 
@@ -220,7 +234,33 @@ class HutangController extends Controller
          $hutang->deleted_at = Carbon::now();
          $hutang->save();
 
-          return response()->json([
+        $tujuankeuangan = TujuanKeuangan::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->where('hutang_id','=',$id)->first();
+        
+        if($tujuankeuangan != null){
+        
+            $tujuankeuangan->is_delete = 1;
+            $tujuankeuangan->deleted_at = Carbon::now();
+            $tujuankeuangan->save();
+
+            $goals = GoalsTujuanKeuangan::where('tujuan_keuangan_id',$tujuankeuangan->id)->where('user_id',Auth::id())->where('is_delete','0')->get();
+
+            foreach($goals as $siuuu){
+                $siuuu->is_delete = 1;
+                $siuuu->deleted_at = Carbon::now();
+                 $siuuu->save();
+             }
+        }
+
+        $pengeluaran = Pengeluaran::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->where('hutang_id','=',$id)->first();
+
+        if($pengeluaran != null){
+            $pengeluaran->is_delete = 1;
+            $pengeluaran->deleted_at = Carbon::now();
+            $pengeluaran->save();
+        }
+
+
+        return response()->json([
                         "status" => 201,
                         "message" => 'delete hutang succesfully',
                         "data" => $hutang

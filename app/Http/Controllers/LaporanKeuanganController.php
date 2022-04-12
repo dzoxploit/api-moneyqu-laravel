@@ -79,8 +79,19 @@ class LaporanKeuanganController extends Controller
                                                 ['is_delete', '=', 0],
                                                 ['user_id', '=', Auth::id()],
                                                 ['currency_id', '=', $settings->currency_id],
-                                                ['status_hutang','=','0']
+                                                ['status_hutang','=','0'],
+                                                ['jumlah_hutang_dibayar','=','0']
                                             ])->sum('jumlah_hutang');
+
+            $hutang = Hutang::Where(
+                                            [
+                                                ['is_delete', '=', 0],
+                                                ['user_id', '=', Auth::id()],
+                                                ['currency_id', '=', $settings->currency_id],
+                                                ['status_hutang','=','0'],
+                                                ['jumlah_hutang_dibayar','!=','0']
+                                            ])->sum('jumlah_hutang');
+                                            
            
             $hutanglunas = Hutang::Where(
                                             [

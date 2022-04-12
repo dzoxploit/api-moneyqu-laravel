@@ -9,6 +9,7 @@ use App\Models\Settings;
 use AmrShawky\LaravelCurrency\Facade\Currency;
 use Auth;
 use DB;
+use Validator;
 use Carbon\Carbon;
 
 
@@ -17,23 +18,45 @@ class PiutangController extends Controller
     public function index(Request $request){
         try{
             $term = $request->get('search');
-            $settings = Piutang::where('user_id',Auth::id())->first();
+            $settings = Settings::where('user_id',Auth::id())->first();
 
-            $calculatepiutangbelumdibayar = Piutang::Where(
-                                            [
-                                                ['is_delete', '=', 0],
-                                                ['user_id', '=', Auth::id()],
-                                                ['currency_id', '=', $settings->currency_id],
-                                                ['status_piutang','=','0']
-                                            ])-sum('jumlah_hutang');
+            $calculatepiutangbelumdibayarsamsek = Piutang::Where(
+                                                    [
+                                                        ['is_delete', '=', 0],
+                                                        ['user_id', '=', Auth::id()],
+                                                        ['currency_id', '=', $settings->currency_id],
+                                                        ['status_piutang','=','0'],
+                                                        ['jumlah_piutang_dibayar','=',0]
+                                                    ])->sum('jumlah_hutang');
+
+            $calculatepiutangbelumdibayarsebagian= Piutang::Where(
+                                                    [
+                                                        ['is_delete', '=', 0],
+                                                        ['user_id', '=', Auth::id()],
+                                                        ['currency_id', '=', $settings->currency_id],
+                                                        ['status_piutang','=','0'],
+                                                        ['jumlah_piutang_dibayar','!=',0]
+                                                    ])->sum('jumlah_piutang_dibayar');
+ 
+            $calculatepiutangbelumdibayarsebagiansisa = Piutang::Where(
+                                                    [
+                                                        ['is_delete', '=', 0],
+                                                        ['user_id', '=', Auth::id()],
+                                                        ['currency_id', '=', $settings->currency_id],
+                                                        ['status_piutang','=','0'],
+                                                        ['jumlah_piutang_dibayar','!=',0]
+                                                    ])->sum('jumlah_hutang');
+
 
             $calculatepiutangsudahibayar = Piutang::Where(
                                             [
                                                 ['is_delete', '=', 0],
                                                 ['user_id', '=', Auth::id()],
                                                 ['currency_id', '=', $settings->currency_id],
-                                                ['status_piutang','=','0']
-                                            ])-sum('jumlah_hutang');
+                                                ['status_piutang','=','1']
+                                            ])->sum('jumlah_hutang');
+
+            $calculatepiutangdibayar = $calculatepiutangsudahibayar + $calculatepiutangbelumdibayarsebagian - $calculatepiutangbelumdibayarsebagiansisa;
                     
             $piutang = Piutang::where([
                 [function ($query) use ($request){
@@ -51,9 +74,9 @@ class PiutangController extends Controller
                 "status" => 201,
                 "message" => "Piutang Berhasil Ditampilkan",
                 "data" => [
-                    "total_piutang_sudah_dibayar" => $calculatepiutangsudahibayar,
-                    "total_piutang_belum_dibayar" => $calculatepiutangbelumdibayar,
-                    "data_piutang" => $pengeluaran
+                    "total_piutang_sudah_dibayar" => $calculatepiutangdibayar,
+                    "total_piutang_belum_dibayar" => $calculatepiutangbelumdibayarsamsek,
+                    "data_piutang" => $piutang
                 ]
             
             ]);
@@ -73,9 +96,10 @@ class PiutangController extends Controller
             $validator = Validator::make($input, [
                 'nama_piutang' => 'required',
                 'no_telepon' => 'required',
-                'deskripsi' => 'text',
+                'deksripsi' => 'nullable',
                 'jumlah_hutang' => 'required',
                 'currency_id' => 'required', 
+                'tanggal_piutang' => 'required'
             ]);
 
             if($validator->fails()){
@@ -89,8 +113,11 @@ class PiutangController extends Controller
             $piutang->user_id = Auth::id();
             $piutang->nama_piutang = $input['nama_piutang'];
             $piutang->no_telepon = $input['no_telepon'];
-            $piutang->deskripsi = $input['deskripsi'];
+            $piutang->deksripsi = $input['deksripsi'];
             $piutang->jumlah_hutang = $input['jumlah_hutang'];
+            $piutang->currency_id = $input['currency_id'];
+            $piutang->jumlah_piutang_dibayar = 0;
+            $piutang->tanggal_piutang = $input['tanggal_piutang'];
             $piutang->status_piutang = 0;
             $piutang->is_delete = 0;
             $piutang->save();
@@ -143,10 +170,10 @@ class PiutangController extends Controller
                 $validator = Validator::make($input, [
                     'nama_piutang' => 'required',
                     'no_telepon' => 'required',
-                    'deskripsi' => 'text',
+                    'deksripsi' => 'nullable',
                     'jumlah_hutang' => 'required',
                     'currency_id' => 'required', 
-                    'status_piutang' => 'required'
+                    'tanggal_piutang' => 'required',
                 ]);
 
                     if($validator->fails()){
@@ -154,9 +181,10 @@ class PiutangController extends Controller
                         $piutang->user_id = Auth::id();
                         $piutang->nama_piutang = $input['nama_piutang'];
                         $piutang->no_telepon = $input['no_telepon'];
-                        $piutang->deskripsi = $input['deskripsi'];
+                        $piutang->deksripsi = $input['deksripsi'];
                         $piutang->jumlah_hutang = $input['jumlah_hutang'];
-                        $piutang->status_piutang = $input['status_piutang'] ;
+                        $piutang->tanggal_piutang = $input['tanggal_piutang'];
+                        $piutang->currency_id = $input['currency_id'];
                         $piutang->is_delete = 0;
                         $piutang->save();
 
@@ -170,9 +198,9 @@ class PiutangController extends Controller
                     $piutang->user_id = Auth::id();
                     $piutang->nama_piutang = $input['nama_piutang'];
                     $piutang->no_telepon = $input['no_telepon'];
-                    $piutang->deskripsi = $input['deskripsi'];
+                    $piutang->deksripsi = $input['deksripsi'];
+                    $piutang->currency_id = $input['currency_id'];
                     $piutang->jumlah_hutang = $input['jumlah_hutang'];
-                    $piutang->status_piutang = $input['status_piutang'] ;
                     $piutang->is_delete = 0;
                     $piutang->save();
 
@@ -193,7 +221,7 @@ class PiutangController extends Controller
     }
 
     
-    public function update_status_piutang($id){
+    public function update_bayaran_piutang($id){
 
     }
     
