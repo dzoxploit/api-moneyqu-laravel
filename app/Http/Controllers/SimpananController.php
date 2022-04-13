@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Simpanan;
 use App\Models\Settings;
 use Validator;
+use Auth;
+use DB;
+use Carbon\Carbon;
+
 class SimpananController extends Controller
 {
     
@@ -78,6 +82,7 @@ class SimpananController extends Controller
             $simpanan->deskripsi = $input['deskripsi'];
             $simpanan->jenis_simpanan_id = $input['jenis_simpanan_id'];
             $simpanan->is_delete = 0;
+            $simpanan->status_simpanan = 0;
             $simpanan->save();
             
             return response()->json([
@@ -99,7 +104,7 @@ class SimpananController extends Controller
         if ($request->isMethod('get')){
             try{
                 $simpanan = Simpanan::where('id',$id)->where('is_delete','=',0)->where('user_id',Auth::id())->first();
-                if($tabungan != null){
+                if($simpanan != null){
                     return response()->json([
                         "status" => 201,
                         "message" => "Simpanan Berhasil Ditampilkan",
@@ -176,7 +181,7 @@ class SimpananController extends Controller
         } 
     }
 
-    public function destroy_pemasukan($id){
+    public function destroy_simpanan($id){
          $simpanan = Simpanan::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->firstOrFail();
          $simpanan->is_delete = 1;
          $simpanan->deleted_at = Carbon::now();

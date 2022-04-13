@@ -12,4 +12,5 @@ class TujuanKeuangan extends Model
     protected $table = 'tujuan_keuangan';
 
     protected $primaryKey = 'id';
+    
 }

@@ -27,7 +27,7 @@ return new class extends Migration
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('hutang_id')->references('id')->on('hutang')->onDelete('set null');
+            $table->foreign('hutang_id')->references('id')->on('hutang')->onDelete('cascade');
             $table->foreign('currency_id')->references('id')->on('currency')->onDelete('cascade');
             $table->foreign('kategori_pengeluaran_id')->references('id')->on('kategori_pengeluaran');
         });

@@ -39,7 +39,8 @@ class HutangController extends Controller
                                                 ['is_delete', '=', 0],
                                                 ['user_id', '=', Auth::id()],
                                                 ['currency_id', '=', $settings->currency_id],
-                                                ['status_hutang','=','0']
+                                                ['status_hutang','=','0'],
+                                                ['jumlah_hutang_dibayar','=','0']
                                             ])->sum('jumlah_hutang');
             
             $calculatehutangbelumdibayarsebagian = Hutang::Where(
@@ -47,8 +48,19 @@ class HutangController extends Controller
                                                 ['is_delete', '=', 0],
                                                 ['user_id', '=', Auth::id()],
                                                 ['currency_id', '=', $settings->currency_id],
-                                                ['status_hutang','=','0']
+                                                ['status_hutang','=','0'],
+                                                ['jumlah_hutang_dibayar','!=','0']
                                             ])->sum('jumlah_hutang_dibayar');
+
+            $calculatehutangbelumdibayarsebagiansisa = Hutang::Where(
+                                            [
+                                                ['is_delete', '=', 0],
+                                                ['user_id', '=', Auth::id()],
+                                                ['currency_id', '=', $settings->currency_id],
+                                                ['status_hutang','=','0'],
+                                                ['jumlah_hutang_dibayar','!=','0']
+                                            ])->sum('jumlah_hutang_dibayar');
+
 
             $calculatehutangsudahdibayar = Hutang::Where(
                                             [
@@ -57,6 +69,9 @@ class HutangController extends Controller
                                                 ['currency_id', '=', $settings->currency_id],
                                                 ['status_hutang','=','1']
                                             ])->sum('jumlah_hutang');
+
+             $calculatehutangsudahdibayarlunas = $calculatehutangsudahdibayar + $calculatehutangbelumdibayarsebagiansisa;
+             $calculatehutangbelumdibayar =  $calculatehutangbelumdibayarsamsek +  $calculatehutangbelumdibayarsebagiansisa;
                     
             $hutang = Hutang::where([
                 [function ($query) use ($request){
@@ -78,7 +93,7 @@ class HutangController extends Controller
                 "status" => 201,
                 "message" => "Hutang Berhasil Ditampilkan",
                 "data" => [
-                    "total_hutang_sudah_dibayar" => $calculatehutangsudahdibayar,
+                    "total_hutang_sudah_dibayar" => $calculatehutangsudahdibayarlunas,
                     "total_hutang_belum_dibayar" => $calculatehutangbelumdibayar,
                     "data_hutang" => $hutang
                 ]

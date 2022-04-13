@@ -56,7 +56,8 @@ class PiutangController extends Controller
                                                 ['status_piutang','=','1']
                                             ])->sum('jumlah_hutang');
 
-            $calculatepiutangdibayar = $calculatepiutangsudahibayar + $calculatepiutangbelumdibayarsebagian - $calculatepiutangbelumdibayarsebagiansisa;
+            $calculatepiutangdibayar = $calculatepiutangsudahibayar + $calculatepiutangbelumdibayarsebagian;
+            $calculatepiutangbelumdibayar =$calculatepiutangbelumdibayarsamsek + $calculatepiutangbelumdibayarsebagiansisa;
                     
             $piutang = Piutang::where([
                 [function ($query) use ($request){
@@ -75,7 +76,7 @@ class PiutangController extends Controller
                 "message" => "Piutang Berhasil Ditampilkan",
                 "data" => [
                     "total_piutang_sudah_dibayar" => $calculatepiutangdibayar,
-                    "total_piutang_belum_dibayar" => $calculatepiutangbelumdibayarsamsek,
+                    "total_piutang_belum_dibayar" => $calculatepiutangbelumdibayar ,
                     "data_piutang" => $piutang
                 ]
             

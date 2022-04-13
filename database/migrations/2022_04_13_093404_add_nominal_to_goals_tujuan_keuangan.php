@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('tujuan_keuangan', function (Blueprint $table) {
-            $table->bigInteger('simpanan_id')->unsigned()->after('kategori_tujuan_keuangan_id')->nullable();
-             $table->foreign('simpanan_id')->references('id')->on('simpanan')->onDelete('cascade');
+        Schema::table('goals_tujuan_keuangan', function (Blueprint $table) {
+            $table->float('nominal_goals')->after('nominal');
         });
     }
 
@@ -26,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('tujuan_keuangan', function (Blueprint $table) {
-            $table->dropColumn('simpanan_id');
+        Schema::table('goals_tujuan_keuangan', function (Blueprint $table) {
+             $table->dropColumn('nominal_goals');
         });
     }
 };

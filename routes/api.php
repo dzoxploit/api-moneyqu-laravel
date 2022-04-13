@@ -9,6 +9,9 @@ use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\HutangController;
 use App\Http\Controllers\PiutangController;
+use App\Http\Controllers\SimpananController;
+use App\Http\Controllers\TujuanKeuanganController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +46,7 @@ Route::group(['prefix' => 'v1'], function(){
 
         Route::get('pengeluaran', [PengeluaranController::class, 'index'])->middleware('auth:api');
         Route::post('pengeluaran/create', [PengeluaranController::class, 'create'])->middleware('auth:api');
+        Route::post('pengeluaran/create/bayar-hutang/{id}', [PengeluaranController::class, 'create_bayar_hutang'])->middleware('auth:api');
         Route::match(array('GET','POST'),'pengeluaran/update/{id}', [PengeluaranController::class, 'update'])->middleware('auth:api');
         Route::post('pengeluaran/destroy/{id}', [PengeluaranController::class, 'destroy_pengeluaran'])->middleware('auth:api');
 
@@ -56,8 +60,23 @@ Route::group(['prefix' => 'v1'], function(){
         Route::get('piutang', [PiutangController::class, 'index'])->middleware('auth:api');
         Route::post('piutang/create', [PiutangController::class, 'create'])->middleware('auth:api');
         Route::match(array('GET','POST'),'piutang/update/{id}', [PiutangController::class, 'update'])->middleware('auth:api');
-        Route::post('piutang/destroy/{id}', [PiutangController::class, 'destroy_hutang'])->middleware('auth:api');
+        Route::post('piutang/destroy/{id}', [PiutangController::class, 'destroy_piutang'])->middleware('auth:api');
 
+        Route::get('simpanan', [SimpananController::class, 'index'])->middleware('auth:api');
+        Route::post('simpanan/create', [SimpananController::class, 'create'])->middleware('auth:api');
+        Route::match(array('GET','POST'),'simpanan/update/{id}', [SimpananController::class, 'update'])->middleware('auth:api');
+        Route::post('simpanan/destroy/{id}', [SimpananController::class, 'destroy_simpanan'])->middleware('auth:api');
+
+
+        Route::get('tujuan-keuangan', [TujuanKeuanganController::class, 'index'])->middleware('auth:api');
+        Route::post('tujuan-keuangan/create', [TujuanKeuanganController::class, 'create'])->middleware('auth:api');
+        Route::match(array('GET','POST'),'tujuan-keuangan/update/{id}', [TujuanKeuanganController::class, 'update'])->middleware('auth:api');
+        Route::post('tujuan-keuangan/destroy/{id}', [TujuanKeuanganController::class, 'destroy'])->middleware('auth:api');
+
+        //add goals tujuan keuangan
+        Route::get('detail-tujuan-keuangan/{id}', [TujuanKeuanganController::class, 'detail_tujuan_keuangan'])->middleware('auth:api');
+        Route::post('tujuan-keuangan/goals/create/{id}', [TujuanKeuanganController::class, 'add_goals_tujuan_keuangan'])->middleware('auth:api');
+        Route::post('tujuan-keuangan/goals/destroy/{id}', [TujuanKeuanganController::class, 'destroy_goals_tujuan_keuangan'])->middleware('auth:api');
 
 });
 

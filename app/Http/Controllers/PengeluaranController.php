@@ -103,7 +103,7 @@ class PengeluaranController extends Controller
         } 
     }
 
-    public function create_bayar_hutang(Request $request, $hutang_id){
+    public function create_bayar_hutang(Request $request, $id){
         $input = $request->all();
         
         try{
@@ -129,25 +129,49 @@ class PengeluaranController extends Controller
             $pengeluaran->kategori_pengeluaran_id = $input['kategori_pengeluaran_id'];
             $pengeluaran->nama_pengeluaran = $input['nama_pengeluaran'];
             $pengeluaran->currency_id = $input['currency_id'];
-            $pengeluaran->hutang_id = $hutang_id;
+            $pengeluaran->hutang_id = $id;
             $pengeluaran->jumlah_pengeluaran = $input['jumlah_pengeluaran'];
             $pengeluaran->tanggal_pengeluaran = $input['tanggal_pengeluaran'];
             $pengeluaran->keterangan = $input['keterangan'];
             $pengeluaran->is_delete = 0;
-            $pengeluaran->save();
+           
+
+            $hutang = Hutang::where('id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->first();
+            $hutang->jumlah_hutang_dibayar = $hutang->jumlah_hutang_dibayar + $input['jumlah_pengeluaran'];
             
-            return response()->json([
-                "status" => 201,
-                "message" => "Pengeluaran created successfully.",
-                "data" => $pemasukan
-            ]);
-        }catch(\Exception $e){
-            return response()->json([
-                "status" => 401,
-                "message" => 'Error'.$e->getMessage(),
-                "data" => null
-            ]);
-        } 
+            if($hutang->jumlah_hutang == $input['jumlah_pengeluaran']){
+
+                    if($hutang->jumlah_hutang_dibayar == $hutang->jumlah_hutang){
+                        $pengeluaran->save();
+
+                        $hutang->status_hutang = 1;
+                        $hutang->save();
+                    } 
+                    else{
+                        $pengeluaran->save();
+                        $hutang->save();
+                    }
+                    
+                    return response()->json([
+                        "status" => 201,
+                        "message" => "Pengeluaran hutang created successfully.",
+                        "data" => $pengeluaran
+                    ]);
+            } else {
+                 return response()->json([
+                        "status" => 402,
+                        "message" => 'Jumlah uang anda kurang atau kelebihan mohon membayar sebesar '.$hutang->jumlah_hutang,
+                        "data" => null
+                    ]);
+            }
+
+             }catch(\Exception $e){
+                    return response()->json([
+                        "status" => 401,
+                        "message" => 'Error'.$e->getMessage(),
+                        "data" => null
+                    ]);
+                } 
 
     }
 
