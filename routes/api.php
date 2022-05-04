@@ -30,6 +30,7 @@ Route::group(['prefix' => 'v1'], function(){
         Route::get('logout', [UsersController::class, 'logout'])->middleware('auth:api');
 
         Route::get('index', [LaporanKeuanganController::class, 'index'])->middleware('auth:api');
+        Route::get('detail', [LaporanKeuanganController::class, 'detail_laporan_keuangan'])->middleware('auth:api');
         Route::get('kategori-laporan-keuangan', [LaporanKeuanganController::class, 'kategori_laporan_keuangan'])->middleware('auth:api');
         Route::get('kategori-pemasukan', [LaporanKeuanganController::class, 'kategori_pemasukan'])->middleware('auth:api');
         Route::get('kategori-pengeluaran', [LaporanKeuanganController::class, 'kategori_pengeluaran'])->middleware('auth:api');
