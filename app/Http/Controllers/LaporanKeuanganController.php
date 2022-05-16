@@ -99,6 +99,7 @@ class LaporanKeuanganController extends Controller
                                                 ['status_piutang','=','1']
                                             ])->sum('jumlah_hutang');
 
+
             $piutangdibayar = $calculatepiutangsudahibayar + $calculatepiutangbelumdibayarsebagian;
             $piutangbelumdibayar = $calculatepiutangbelumdibayarsamsek + $calculatepiutangbelumdibayarsebagiansisa;
 
@@ -165,7 +166,9 @@ class LaporanKeuanganController extends Controller
                 "data" => [
                     "calculation" => $calculation,
                     'pemasukan' => $pemasukan,
-                    'pengeluaran' => $pengeluaran
+                    'pengeluaran' => $pengeluaran,
+                    'hutang' => $hutangbelumdibayar,
+                    'piutang' => $piutangbelumdibayar,
                 ]
             
             ]);
