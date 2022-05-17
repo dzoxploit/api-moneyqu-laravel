@@ -37,6 +37,13 @@ class LaporanKeuanganController extends Controller
                                         ['user_id', '=', Auth::id()],
                                         ['currency_id', '=', $settings->currency_id]
                                     ])->sum('jumlah_pemasukan');
+            
+              $pengeluarandenganhutang = Pengeluaran::Where(
+                                        [
+                                        ['is_delete', '=', 0],
+                                        ['user_id', '=', Auth::id()],
+                                        ['currency_id', '=', $settings->currency_id],
+                                        ])->sum('jumlah_pengeluaran');
 
              $pengeluaran = Pengeluaran::Where(
                                     [
@@ -45,6 +52,7 @@ class LaporanKeuanganController extends Controller
                                         ['currency_id', '=', $settings->currency_id],
                                         ['hutang_id', '=', null]
                                     ])->sum('jumlah_pengeluaran');
+            
 
             $simpanan = Simpanan::Where(
                                     [
@@ -156,19 +164,23 @@ class LaporanKeuanganController extends Controller
               
             $calculation = (int)$pemasukan + (int)$piutangdibayar - (int)$piutangbelumdibayar - (int)$hutangdibayar + (int)$hutangbelumdibayar - (int)$simpanan - (int)$pengeluaran - (int)$tujuankeuangan - (int)$tagihan;
             
-            $pemasukan = (int)$pemasukan + (int)$piutangdibayar + (int)$hutangbelumdibayar;
+            $pemasukan_total = (int)$pemasukan + (int)$piutangdibayar + (int)$hutangbelumdibayar;
 
-            $pengeluaran =  (int)$piutangbelumdibayar + (int)$hutangdibayar + (int)$simpanan + (int)$pengeluaran + (int)$tujuankeuangan + (int)$tagihan;
+            $pengeluaran_total =  (int)$piutangbelumdibayar + (int)$hutangdibayar + (int)$simpanan + (int)$pengeluaran + (int)$tujuankeuangan + (int)$tagihan;
             
             return response()->json([
                 "status" => 201,
                 "message" => "Kategori Pemasukan Berhasil Ditampilkan",
                 "data" => [
                     "calculation" => $calculation,
+                    'pemasukan_total' => $pemasukan_total,
+                    'pengeluaran_total' => $pengeluaran_total,
                     'pemasukan' => $pemasukan,
-                    'pengeluaran' => $pengeluaran,
+                    'pengeluaran' => $pengeluarandenganhutang,
                     'hutang' => $hutangbelumdibayar,
                     'piutang' => $piutangbelumdibayar,
+                    'simpanan' => $simpanan,
+                    'tujuankeuangan' => $tujuankeuangan,
                 ]
             
             ]);

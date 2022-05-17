@@ -26,24 +26,31 @@ class PemasukanController extends Controller
                                         ['user_id', '=', Auth::id()],
                                         ['currency_id', '=', $settings->currency_id]
                                     ])->sum('jumlah_pemasukan');
+            $calculatepemasukanhariini = Pemasukan::Where(
+                                    [
+                                        ['is_delete', '=', 0],
+                                        ['user_id', '=', Auth::id()],
+                                        ['currency_id', '=', $settings->currency_id],
+                                        ['created_at', '=', Carbon::now()]
+                                    ])->sum('jumlah_pemasukan');
             
 
-            $pemasukan = Pemasukan::where([
-                [function ($query) use ($request){
-                    if (($term = $request->term)){
-                        $query->orWhere('nama_pemasukan', 'LIKE', '%' . $term .'%')->get();
-                    }
-                }]
-            ])    
-            ->where('user_id',Auth::id())
-            ->orderBy('id','DESC')
-            ->paginate(10);
+            $pemasukan = DB::table('pemasukan')->join('kategori_pemasukan','kategori_pemasukan.id','=','pemasukan.kategori_pemasukan_id')
+                        ->select('pemasukan.id','pemasukan.nama_pemasukan as nama','kategori_pemasukan.nama_pemasukan as kategori','pemasukan.jumlah_pemasukan','pemasukan.tanggal_pemasukan','pemasukan.keterangan')
+                        ->where('pemasukan.user_id',Auth::id())->where(function ($query) use ($term) {
+                                $query->where('pemasukan.nama_pemasukan', "like", "%" . $term . "%");
+                                $query->orWhere('kategori_pemasukan.nama_pemasukan', "like", "%" . $term . "%");
+                                $query->orWhere('pemasukan.jumlah_pemasukan', "=", $term);
+                        })
+                        ->orderBy('pemasukan.id','DESC')
+                        ->get();
 
             return response()->json([
                 "status" => 201,
                 "message" => "Pemasukan Berhasil Ditampilkan",
                 "data" => [
-                    "total_pemasukan" => $calculatepemasukan,
+                    "pemasukan" => $calculatepemasukan,
+                    "pemasukan_hari_ini" => $calculatepemasukanhariini,
                     "data_pemasukan" => $pemasukan
                 ]
             
@@ -86,7 +93,7 @@ class PemasukanController extends Controller
             $pemasukan->jumlah_pemasukan = $input['jumlah_pemasukan'];
             $pemasukan->tanggal_pemasukan = $input['tanggal_pemasukan'];
             $pemasukan->keterangan = $input['keterangan'];
-            $pemasukan->status_transaksi_berulang = $input['status_transaksi_berulang'];
+            $pemasukan->status_transaksi_berulang = 0;
             $pemasukan->is_delete = 0;
             $pemasukan->save();
             
@@ -155,7 +162,7 @@ class PemasukanController extends Controller
                         $pemasukan->jumlah_pemasukan = $input['jumlah_pemasukan'];
                         $pemasukan->tanggal_pemasukan = $input['tanggal_pemasukan'];
                         $pemasukan->keterangan = $input['keterangan'];
-                        $pemasukan->status_transaksi_berulang = $input['status_transaksi_berulang'];
+                        $pemasukan->status_transaksi_berulang = 0;
                         $pemasukan->is_delete = 0;
                         $pemasukan->save();
 
@@ -173,7 +180,7 @@ class PemasukanController extends Controller
                     $pemasukan->jumlah_pemasukan = $input['jumlah_pemasukan'];
                     $pemasukan->tanggal_pemasukan = $input['tanggal_pemasukan'];
                     $pemasukan->keterangan = $input['keterangan'];
-                    $pemasukan->status_transaksi_berulang = $input['status_transaksi_berulang'];
+                    $pemasukan->status_transaksi_berulang = 0;
                     $pemasukan->is_delete = 0;
                     $pemasukan->save();
                     
