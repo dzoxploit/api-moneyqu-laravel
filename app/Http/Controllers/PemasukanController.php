@@ -19,6 +19,7 @@ class PemasukanController extends Controller
     public function index(Request $request){
         try{
             $term = $request->get('search');
+            $id = $request->get('id');
             $settings = Settings::where('user_id',Auth::id())->first();
             $calculatepemasukan = Pemasukan::Where(
                                     [
@@ -31,10 +32,21 @@ class PemasukanController extends Controller
                                         ['is_delete', '=', 0],
                                         ['user_id', '=', Auth::id()],
                                         ['currency_id', '=', $settings->currency_id],
-                                        ['created_at', '=', Carbon::now()]
-                                    ])->sum('jumlah_pemasukan');
+                                    ])->whereDay('created_at',date('d'))->sum('jumlah_pemasukan');
             
-
+            if($id != null) {
+                  $pemasukan = DB::table('pemasukan')->join('kategori_pemasukan','kategori_pemasukan.id','=','pemasukan.kategori_pemasukan_id')
+                        ->select('pemasukan.id','pemasukan.nama_pemasukan as nama','kategori_pemasukan.nama_pemasukan as kategori','pemasukan.jumlah_pemasukan','pemasukan.tanggal_pemasukan','pemasukan.keterangan')
+                        ->where('pemasukan.user_id',Auth::id())->where(function ($query) use ($term) {
+                                $query->where('pemasukan.nama_pemasukan', "like", "%" . $term . "%");
+                                $query->orWhere('kategori_pemasukan.nama_pemasukan', "like", "%" . $term . "%");
+                                $query->orWhere('pemasukan.jumlah_pemasukan', "=", $term);
+                        })
+                        ->where('pemasukan.id','=', $id)
+                        ->where('pemasukan.is_delete','=',0)
+                        ->orderBy('pemasukan.id','DESC')
+                        ->first();
+            }else{
             $pemasukan = DB::table('pemasukan')->join('kategori_pemasukan','kategori_pemasukan.id','=','pemasukan.kategori_pemasukan_id')
                         ->select('pemasukan.id','pemasukan.nama_pemasukan as nama','kategori_pemasukan.nama_pemasukan as kategori','pemasukan.jumlah_pemasukan','pemasukan.tanggal_pemasukan','pemasukan.keterangan')
                         ->where('pemasukan.user_id',Auth::id())->where(function ($query) use ($term) {
@@ -42,9 +54,10 @@ class PemasukanController extends Controller
                                 $query->orWhere('kategori_pemasukan.nama_pemasukan', "like", "%" . $term . "%");
                                 $query->orWhere('pemasukan.jumlah_pemasukan', "=", $term);
                         })
+                        ->where('pemasukan.is_delete','=',0)
                         ->orderBy('pemasukan.id','DESC')
                         ->get();
-
+            }
             return response()->json([
                 "status" => 201,
                 "message" => "Pemasukan Berhasil Ditampilkan",
@@ -75,7 +88,6 @@ class PemasukanController extends Controller
                 'jumlah_pemasukan' => 'required', 
                 'tanggal_pemasukan' => 'required', 
                 'keterangan' => "nullable",
-                'status_transaksi_berulang' => 'required',
             ]);
 
             if($validator->fails()){
@@ -150,7 +162,6 @@ class PemasukanController extends Controller
                         'jumlah_pemasukan' => 'required', 
                         'tanggal_pemasukan' => 'required', 
                         'keterangan' => "nullable",
-                        'status_transaksi_berulang' => 'required',
                     ]);
 
                     if($validator->fails()){
