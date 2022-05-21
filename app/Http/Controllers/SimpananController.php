@@ -17,31 +17,53 @@ class SimpananController extends Controller
         try{
             $term = $request->get('search');
             $settings = Settings::where('user_id',Auth::id())->first();
+            $id = $request->get('id');
+            
             $calculatesimpanan = Simpanan::Where(
                                     [
                                         ['is_delete', '=', 0],
                                         ['user_id', '=', Auth::id()],
                                         ['currency_id', '=', $settings->currency_id]
                                     ])->sum('jumlah_simpanan');
-            
-
-            $simpanan = Simpanan::where([
-                [function ($query) use ($request){
-                    if (($term = $request->term)){
-                        $query->orWhere('deskripsi', 'LIKE', '%' . $term .'%')->get();
-                    }
-                }]
-            ])    
-           ->where('user_id',Auth::id())   
-            ->where('is_delete','=',0)
-            ->orderBy('id','DESC')
-            ->paginate(10);
-
+            $calculatesimpananharian = Simpanan::Where(
+                                    [
+                                        ['is_delete', '=', 0],
+                                        ['user_id', '=', Auth::id()],
+                                        ['currency_id', '=', $settings->currency_id]
+                                    ])->whereDay('created_at',date('d'))->sum('jumlah_simpanan');
+            if($id != null){
+            $simpanan = DB::table('simpanan')->join('tujuan_simpanan','tujuan_simpanan.id','=','simpanan.tujuan_simpanan_id')
+                        ->join('jenis_simpanan','jenis_simpanan.id','=','simpanan.jenis_simpanan')
+                        ->select('simpanan.id','simpanan.deskripsi','simpanan.jumlah_simpanan','tujuan_simpanan.nama_tujuan_simpanan','jenis_simpanan.nama_jenis_simpanan','simpanan.status_simpanan')
+                        ->where('simpanan.user_id',Auth::id())->where(function ($query) use ($term) {
+                                $query->where('simpanan.deskripsi', "like", "%" . $term . "%");
+                                $query->orWhere('tujuan_simpanan.nama_tujuan_simpanan', "like", "%" . $term . "%");
+                                $query->orWhere('jenis_simpanan.nama_jenis_simpanan', "=", $term);
+                        })
+                        ->where('simpanan.id','=', $id)
+                        ->where('simpanan.is_delete','=',0)
+                        ->orderBy('simpanan.id','DESC')
+                        ->first();
+            }else{
+                  $simpanan = DB::table('simpanan')->join('tujuan_simpanan','tujuan_simpanan.id','=','simpanan.tujuan_simpanan_id')
+                        ->join('jenis_simpanan','jenis_simpanan.id','=','simpanan.jenis_simpanan_id')
+                        ->select('simpanan.id','simpanan.deskripsi','simpanan.jumlah_simpanan','tujuan_simpanan.nama_tujuan_simpanan','jenis_simpanan.nama_jenis_simpanan','simpanan.status_simpanan')
+                        ->where('simpanan.user_id',Auth::id())->where(function ($query) use ($term) {
+                                $query->where('simpanan.deskripsi', "like", "%" . $term . "%");
+                                $query->orWhere('tujuan_simpanan.nama_tujuan_simpanan', "like", "%" . $term . "%");
+                                $query->orWhere('jenis_simpanan.nama_jenis_simpanan', "=", $term);
+                        })
+                        ->where('simpanan.is_delete','=',0)
+                        ->orderBy('simpanan.id','DESC')
+                        ->get();
+            }
+        
             return response()->json([
                 "status" => 201,
                 "message" => "Simpanan Berhasil Ditampilkan",
                 "data" => [
                     "total_simpanan" => $calculatesimpanan,
+                    "total_simpanan_harian" => $calculatesimpananharian,
                     "data_simpanan" => $simpanan
                 ]
             
