@@ -143,7 +143,7 @@ class PengeluaranController extends Controller
 
                     if($hutang->jumlah_hutang_dibayar == $hutang->jumlah_hutang){
                         $pengeluaran->save();
-
+                        $hutang->tanggal_hutang_dibayar = Carbon::now();
                         $hutang->status_hutang = 1;
                         $hutang->save();
                     } 
