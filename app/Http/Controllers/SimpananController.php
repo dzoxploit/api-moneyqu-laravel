@@ -33,7 +33,7 @@ class SimpananController extends Controller
                                     ])->whereDay('created_at',date('d'))->sum('jumlah_simpanan');
             if($id != null){
             $simpanan = DB::table('simpanan')->join('tujuan_simpanan','tujuan_simpanan.id','=','simpanan.tujuan_simpanan_id')
-                        ->join('jenis_simpanan','jenis_simpanan.id','=','simpanan.jenis_simpanan')
+                        ->join('jenis_simpanan','jenis_simpanan.id','=','simpanan.jenis_simpanan_id')
                         ->select('simpanan.id','simpanan.deskripsi','simpanan.jumlah_simpanan','tujuan_simpanan.nama_tujuan_simpanan','jenis_simpanan.nama_jenis_simpanan','simpanan.status_simpanan')
                         ->where('simpanan.user_id',Auth::id())->where(function ($query) use ($term) {
                                 $query->where('simpanan.deskripsi', "like", "%" . $term . "%");

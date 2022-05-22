@@ -32,6 +32,7 @@ class HutangController extends Controller
         try{
             $term = $request->get('search');
             $datedata = $request->get('date');
+            $id = $request->get('id');
             $settings = Settings::where('user_id',Auth::id())->first();
 
             $calculatehutangbelumdibayarsamsek = Hutang::Where(
@@ -72,22 +73,27 @@ class HutangController extends Controller
 
              $calculatehutangsudahdibayarlunas = $calculatehutangsudahdibayar + $calculatehutangbelumdibayarsebagiansisa;
              $calculatehutangbelumdibayar =  $calculatehutangbelumdibayarsamsek +  $calculatehutangbelumdibayarsebagiansisa;
-                    
-            $hutang = Hutang::where([
-                [function ($query) use ($request){
-                    if (($term = $request->term)){
-                        $query->orWhere('nama_hutang', 'LIKE', '%' . $term .'%')
-                        ->orWhere('deskripsi', 'LIKE', '%' . $term .'%')
-                        ->orWhere('tanggal_hutang','=',$datedata)
-                        ->orWhere('tanggal_hutang_dibayar','=',$datedata)
-                        ->get();
-                    }
-                }]
-            ])    
-            ->where('user_id',Auth::id())   
-            ->where('is_delete','=',0)
-            ->orderBy('id','DESC')
-            ->paginate(10);
+            
+            if($id != null){
+            $hutang = Hutang::where(function ($query) use ($term) {
+                                $query->where('nama_hutang', "like", "%" . $term . "%");
+                                $query->orWhere('deksripsi', "like", "%" . $term . "%");
+                        })
+                        ->where('id',$id)
+                        ->where('user_id',Auth::id())   
+                        ->where('is_delete','=',0)
+                        ->orderBy('id','DESC')
+                        ->first();
+            }else{
+                 $hutang = Hutang::where(function ($query) use ($term) {
+                                $query->where('nama_hutang', "like", "%" . $term . "%");
+                                $query->orWhere('deksripsi', "like", "%" . $term . "%");
+                        })
+                        ->where('user_id',Auth::id())   
+                        ->where('is_delete','=',0)
+                        ->orderBy('id','DESC')
+                        ->paginate(10);
+            }
 
             return response()->json([
                 "status" => 201,
