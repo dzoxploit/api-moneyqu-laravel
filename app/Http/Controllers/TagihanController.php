@@ -18,24 +18,42 @@ class TagihanController extends Controller
             $status_tagihan = $request->get('status_tagihan_lunas');
 
             $settings = Settings::where('user_id',Auth::id())->first();
-            $calculategihannonlunas = Tagihan::Where(
+            $calculatetagihannonlunas = Tagihan::where(
                                     [
                                         ['is_delete', '=', 0],
                                         ['user_id', '=', Auth::id()],
-                                        ['currency_id', '=', $settings->currency_id].
                                         ['status_tagihan_lunas','=',0]
-                                    ])-sum('jumlah_tagihan');
-            
-           $calculategihanlunas = Tagihan::Where(
+                                    ])->sum('jumlah_tagihan');
+                                        
+           $calculatetagihanlunas = Tagihan::Where(
                                     [
                                         ['is_delete', '=', 0],
                                         ['user_id', '=', Auth::id()],
-                                        ['currency_id', '=', $settings->currency_id].
                                         ['status_tagihan_lunas','=',1]
-                                    ])-sum('jumlah_tagihan');
-            
-
-            
+                                    ])->sum('jumlah_tagihan');
+        
+            if($id != null){
+                  $tagihan =Tagihan::where('user_id',Auth::id())->where(function ($query) use ($term) {
+                                $query->where('nama_tagihan', "like", "%" . $term . "%");
+                                $query->orWhere('no_rekening', "like", "%" . $term . "%");
+                                $query->orWhere('no_tagihan', "like", "%" . $term . "%");
+                                $query->orWhere('kode_bank', "like", "%" . $term . "%");
+                        })
+                        ->where('id','=', $id)
+                        ->where('is_delete','=',0)
+                        ->orderBy('id','DESC')
+                        ->first();
+            }else{
+                  $tagihan = Tagihan::where('user_id',Auth::id())->where(function ($query) use ($term) {
+                                $query->where('nama_tagihan', "like", "%" . $term . "%");
+                                $query->orWhere('no_rekening', "like", "%" . $term . "%");
+                                $query->orWhere('no_tagihan', "like", "%" . $term . "%");
+                                $query->orWhere('kode_bank', "like", "%" . $term . "%");
+                        })
+                        ->where('is_delete','=',0)
+                        ->orderBy('id','DESC')
+                        ->get();
+            }
             
             return response()->json([
                 "status" => 201,
@@ -61,9 +79,9 @@ class TagihanController extends Controller
         try{
             $validator = Validator::make($input, [
                 'nama_tagihan' => 'required',
-                'no_rekening' => 'required',
-                'no_tagihan' => 'required',
-                'kode_bank' => 'required',
+                'no_rekening' => 'nullable',
+                'no_tagihan' => 'nullable',
+                'kode_bank' => 'nullable',
                 'deskripsi' => 'nullable',
                 'jumlah_tagihan' => 'required', 
                 'status_tagihan' => 'required',

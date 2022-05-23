@@ -19,6 +19,7 @@ class PiutangController extends Controller
         try{
             $term = $request->get('search');
             $settings = Settings::where('user_id',Auth::id())->first();
+            $id = $request->get('id');
 
             $calculatepiutangbelumdibayarsamsek = Piutang::Where(
                                                     [
@@ -58,18 +59,28 @@ class PiutangController extends Controller
 
             $calculatepiutangdibayar = $calculatepiutangsudahibayar + $calculatepiutangbelumdibayarsebagian;
             $calculatepiutangbelumdibayar =$calculatepiutangbelumdibayarsamsek + $calculatepiutangbelumdibayarsebagiansisa;
-                    
-            $piutang = Piutang::where([
-                [function ($query) use ($request){
-                    if (($term = $request->term)){
-                        $query->orWhere('nama_piutang', 'LIKE', '%' . $term .'%')->get();
-                    }
-                }]
-            ])    
+            
+            if($id != null){
+                $piutang = Piutang::where(function ($query) use ($term) {
+                                $query->where('nama_piutang', "like", "%" . $term . "%");
+                                $query->orWhere('deksripsi', "like", "%" . $term . "%");
+                        })
+            ->where('user_id',Auth::id())   
+            ->where('is_delete','=',0)
+            ->where('id',$id)
+            ->orderBy('id','DESC')
+            ->get();
+            }else{
+                $piutang = Piutang::where(function ($query) use ($term) {
+                                $query->where('nama_piutang', "like", "%" . $term . "%");
+                                $query->orWhere('deksripsi', "like", "%" . $term . "%");
+                        })
             ->where('user_id',Auth::id())   
             ->where('is_delete','=',0)
             ->orderBy('id','DESC')
-            ->paginate(10);
+            ->get();
+            }
+            
 
             return response()->json([
                 "status" => 201,
