@@ -92,7 +92,7 @@ class HutangController extends Controller
                         ->where('user_id',Auth::id())   
                         ->where('is_delete','=',0)
                         ->orderBy('id','DESC')
-                        ->paginate(10);
+                        ->get();
             }
 
             return response()->json([

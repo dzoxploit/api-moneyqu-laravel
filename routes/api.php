@@ -10,6 +10,7 @@ use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\HutangController;
 use App\Http\Controllers\PiutangController;
 use App\Http\Controllers\SimpananController;
+use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TujuanKeuanganController;
 
 
@@ -73,6 +74,12 @@ Route::group(['prefix' => 'v1'], function(){
         Route::post('tujuan-keuangan/create', [TujuanKeuanganController::class, 'create'])->middleware('auth:api');
         Route::match(array('GET','POST'),'tujuan-keuangan/update/{id}', [TujuanKeuanganController::class, 'update'])->middleware('auth:api');
         Route::post('tujuan-keuangan/destroy/{id}', [TujuanKeuanganController::class, 'destroy'])->middleware('auth:api');
+
+        
+        Route::get('tagihan', [TagihanController::class, 'index'])->middleware('auth:api');
+        Route::post('tagihan/create', [TujuanKeuanganController::class, 'create'])->middleware('auth:api');
+        Route::match(array('GET','POST'),'tagihan/update/{id}', [TujuanKeuanganController::class, 'update'])->middleware('auth:api');
+        Route::post('tagihan/destroy/{id}', [TujuanKeuanganController::class, 'destroy'])->middleware('auth:api');
 
         //add goals tujuan keuangan
         Route::get('detail-tujuan-keuangan/{id}', [TujuanKeuanganController::class, 'detail_tujuan_keuangan'])->middleware('auth:api');

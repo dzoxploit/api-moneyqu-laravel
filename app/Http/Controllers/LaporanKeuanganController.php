@@ -161,6 +161,11 @@ class LaporanKeuanganController extends Controller
                                         ['user_id', '=', Auth::id()],
                                         ['status_tagihan_lunas','=',1]
                                     ])->sum('jumlah_tagihan');
+            $tagihandata = Tagihan::Where(
+                                    [
+                                        ['is_delete', '=', 0],
+                                        ['user_id', '=', Auth::id()],
+                                    ])->sum('jumlah_tagihan');
               
             $calculation = (int)$pemasukan + (int)$piutangdibayar - (int)$piutangbelumdibayar - (int)$hutangdibayar + (int)$hutangbelumdibayar - (int)$simpanan - (int)$pengeluaran - (int)$tujuankeuangan - (int)$tagihan;
             
@@ -180,6 +185,7 @@ class LaporanKeuanganController extends Controller
                     'hutang' => $hutangbelumdibayar,
                     'piutang' => $piutangbelumdibayar,
                     'simpanan' => $simpanan,
+                    'tagihan' => $tagihandata,
                     'tujuankeuangan' => $tujuankeuangan,
                 ]
             

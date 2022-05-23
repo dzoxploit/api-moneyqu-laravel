@@ -14,6 +14,7 @@ class TagihanController extends Controller
         try{
             $term = $request->get('search');
             $date = $request->get('date');
+            $id = $request->get('id');
             $status_tagihan = $request->get('status_tagihan_lunas');
 
             $settings = Settings::where('user_id',Auth::id())->first();
@@ -34,22 +35,8 @@ class TagihanController extends Controller
                                     ])-sum('jumlah_tagihan');
             
 
-            $tagihan = Tagihan::where([
-                [function ($query) use ($request){
-                    if (($term = $request->term)){
-                        $query->orWhere('nama_tagihan', 'LIKE', '%' . $term .'%')
-                        ->orWhere('no_rekening', 'LIKE', '%' . $term .'%')
-                        ->orWhere('status_tagihan_lunas','=',$status_tagihan)
-                        ->orWhere('tanggal_tagihan_lunas', '=', $date)
-                        ->get();
-                    }
-                }]
-            ])    
-            ->where('user_id',Auth::id())   
-            ->where('is_delete','=',0)
-            ->orderBy('id','DESC')
-            ->paginate(10);
-
+            
+            
             return response()->json([
                 "status" => 201,
                 "message" => "Tagihan Berhasil Ditampilkan",
@@ -58,8 +45,7 @@ class TagihanController extends Controller
                     "total_tagihan_sudah_lunas" => $calculatetagihanlunas,
                     "data_tagihan" => $tagihan
                 ]
-            
-            ]);
+             ]);
         }catch(\Exception $e){
             return response()->json([
                 "status" => 400,
