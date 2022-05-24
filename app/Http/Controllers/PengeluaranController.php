@@ -19,6 +19,7 @@ class PengeluaranController extends Controller
     public function index(Request $request){
         try{
             $term = $request->get('search');
+            $id = $request->get('id');
             $settings = Settings::where('user_id',Auth::id())->first();
 
             $calculatepengeluaran = Pengeluaran::Where(
@@ -27,24 +28,44 @@ class PengeluaranController extends Controller
                                         ['user_id', '=', Auth::id()],
                                         ['currency_id', '=', $settings->currency_id]
                                     ])->sum('jumlah_pengeluaran');
-            
-            $pengeluaran = Pengeluaran::where([
-                [function ($query) use ($request){
-                    if (($term = $request->term)){
-                        $query->orWhere('nama_pengeluaran', 'LIKE', '%' . $term .'%')->get();
-                    }
-                }]
-            ]) 
-            ->where('user_id',Auth::id())   
-            ->where('is_delete','=',0)
-            ->orderBy('id','DESC')
-            ->paginate(10);
 
+             $calculatepengeluaranhariini = Pengeluaran::Where(
+                                    [
+                                        ['is_delete', '=', 0],
+                                        ['user_id', '=', Auth::id()],
+                                        ['currency_id', '=', $settings->currency_id],
+                                    ])->whereDay('created_at',date('d'))->sum('jumlah_pengeluaran');
+            
+            if($id != null) {
+                  $pengeluaran = DB::table('pengeluaran')->join('kategori_pengeluaran','kategori_pengeluaran.id','=','pengeluaran.kategori_pengeluaran_id')
+                        ->select('pengeluaran.id','pengeluaran.nama_pengeluaran as nama','kategori_pengeluaran.nama_pengeluaran as kategori','pengeluaran.jumlah_pengeluaran','pengeluaran.tanggal_pengeluaran','pengeluaran.keterangan')
+                        ->where('pengeluaran.user_id',Auth::id())->where(function ($query) use ($term) {
+                                $query->where('pengeluaran.nama_pengeluaran', "like", "%" . $term . "%");
+                                $query->orWhere('kategori_pengeluaran.nama_pengeluaran', "like", "%" . $term . "%");
+                                $query->orWhere('pengeluaran.jumlah_pengeluaran', "=", $term);
+                        })
+                        ->where('pengeluaran.id','=', $id)
+                        ->where('pengeluaran.is_delete','=',0)
+                        ->orderBy('pengeluaran.id','DESC')
+                        ->first();
+            }else{
+            $pengeluaran = DB::table('pengeluaran')->join('kategori_pengeluaran','kategori_pengeluaran.id','=','pengeluaran.kategori_pengeluaran_id')
+                        ->select('pengeluaran.id','pengeluaran.nama_pengeluaran as nama','kategori_pengeluaran.nama_pengeluaran as kategori','pengeluaran.jumlah_pengeluaran','pengeluaran.tanggal_pengeluaran','pengeluaran.keterangan')
+                        ->where('pengeluaran.user_id',Auth::id())->where(function ($query) use ($term) {
+                                $query->where('pengeluaran.nama_pengeluaran', "like", "%" . $term . "%");
+                                $query->orWhere('kategori_pengeluaran.nama_pengeluaran', "like", "%" . $term . "%");
+                                $query->orWhere('pengeluaran.jumlah_pengeluaran', "=", $term);
+                        })
+                        ->where('pengeluaran.is_delete','=',0)
+                        ->orderBy('pengeluaran.id','DESC')
+                        ->get();
+            }
             return response()->json([
                 "status" => 201,
                 "message" => "Pengeluaran Berhasil Ditampilkan",
                 "data" => [
                     "total_pengeluaran" => $calculatepengeluaran,
+                    "total_pengeluaran_hari_ini" => $calculatepengeluaranhariini,
                     "data_pengeluaran" => $pengeluaran
                 ]
             
