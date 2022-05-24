@@ -12,7 +12,7 @@ class Tagihan extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'user_id', 'nama_tagihan','no_rekening','','no_tagihan', 'kode_bank','deskripsi','jumlah_tagihan','status_tagihan','tanggal_tagihan','status_tagihan_lunas','tanggal_tagihan_lunas','is_delete', 'deleted_at'
+        'user_id', 'nama_tagihan','kategori_tagihan_id','no_rekening','no_tagihan', 'kode_bank','deksripsi','jumlah_tagihan','status_tagihan','tanggal_tagihan','status_tagihan_lunas','tanggal_tagihan_lunas','is_delete', 'deleted_at'
     ];
     
     public function User()

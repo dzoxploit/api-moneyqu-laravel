@@ -8,6 +8,7 @@ use App\Models\Settings;
 use App\Models\CurrencyData;
 use Illuminate\Support\Facades\Crypt;
 use Auth;
+use DB;
 class TagihanController extends Controller
 {
       public function index(Request $request){
@@ -33,25 +34,29 @@ class TagihanController extends Controller
                                     ])->sum('jumlah_tagihan');
         
             if($id != null){
-                  $tagihan =Tagihan::where('user_id',Auth::id())->where(function ($query) use ($term) {
-                                $query->where('nama_tagihan', "like", "%" . $term . "%");
-                                $query->orWhere('no_rekening', "like", "%" . $term . "%");
-                                $query->orWhere('no_tagihan', "like", "%" . $term . "%");
-                                $query->orWhere('kode_bank', "like", "%" . $term . "%");
+                  $tagihan = DB::table('tagihan')->join('kategori_tagihan','kategori_tagihan.id','=','tagihan.kategori_tagihan_id')
+                        ->select('tagihan.nama_tagihan','kategori_tagihan.nama_tagihan as kategori','tagihan.no_rekening','tagihan.no_tagihan', 'tagihan.kode_bank','tagihan.deksripsi','tagihan.jumlah_tagihan','tagihan.status_tagihan','tagihan.tanggal_tagihan','tagihan.status_tagihan_lunas','tagihan.tanggal_tagihan_lunas')
+                        ->where('tagihan.user_id',Auth::id())->where(function ($query) use ($term) {
+                                $query->where('tagihan.nama_tagihan', "like", "%" . $term . "%");
+                                $query->orWhere('tagihan.no_rekening', "like", "%" . $term . "%");
+                                $query->orWhere('tagihan.no_tagihan', "like", "%" . $term . "%");
+                                $query->orWhere('tagihan.kode_bank', "like", "%" . $term . "%");
                         })
-                        ->where('id','=', $id)
-                        ->where('is_delete','=',0)
-                        ->orderBy('id','DESC')
+                        ->where('tagihan.id','=', $id)
+                        ->where('tagihan.is_delete','=',0)
+                        ->orderBy('tagihan.id','DESC')
                         ->first();
             }else{
-                  $tagihan = Tagihan::where('user_id',Auth::id())->where(function ($query) use ($term) {
-                                $query->where('nama_tagihan', "like", "%" . $term . "%");
-                                $query->orWhere('no_rekening', "like", "%" . $term . "%");
-                                $query->orWhere('no_tagihan', "like", "%" . $term . "%");
-                                $query->orWhere('kode_bank', "like", "%" . $term . "%");
+                 $tagihan = DB::table('tagihan')->join('kategori_tagihan','kategori_tagihan.id','=','tagihan.kategori_tagihan_id')
+                        ->select('tagihan.nama_tagihan','kategori_tagihan.nama_tagihan as kategori','tagihan.no_rekening','tagihan.no_tagihan', 'tagihan.kode_bank','tagihan.deksripsi','tagihan.jumlah_tagihan','tagihan.status_tagihan','tagihan.tanggal_tagihan','tagihan.status_tagihan_lunas','tagihan.tanggal_tagihan_lunas')
+                        ->where('tagihan.user_id',Auth::id())->where(function ($query) use ($term) {
+                                $query->where('tagihan.nama_tagihan', "like", "%" . $term . "%");
+                                $query->orWhere('tagihan.no_rekening', "like", "%" . $term . "%");
+                                $query->orWhere('tagihan.no_tagihan', "like", "%" . $term . "%");
+                                $query->orWhere('tagihan.kode_bank', "like", "%" . $term . "%");
                         })
-                        ->where('is_delete','=',0)
-                        ->orderBy('id','DESC')
+                        ->where('tagihan.is_delete','=',0)
+                        ->orderBy('tagihan.id','DESC')
                         ->get();
             }
             
@@ -79,6 +84,7 @@ class TagihanController extends Controller
         try{
             $validator = Validator::make($input, [
                 'nama_tagihan' => 'required',
+                'kategori_tagihan_id' => 'required',
                 'no_rekening' => 'nullable',
                 'no_tagihan' => 'nullable',
                 'kode_bank' => 'nullable',
@@ -98,6 +104,7 @@ class TagihanController extends Controller
             $tagihan = new Tagihan;
             $tagihan->user_id = Auth::id();
             $tagihan->nama_tagihan = $input['nama_tagihan'];
+            $tagihan->kategori_tagihan_id = $input['kategori_tagihan_id'];
             $tagihan->no_rekening = Crypt::encryptString($input['no_rekening']);
             $tagihan->no_tagihan = $input['no_tagihan'];
             $tagihan->kode_bank = $input['kode_bank'];
@@ -155,6 +162,7 @@ class TagihanController extends Controller
             try{
                 $validator = Validator::make($input, [
                     'nama_tagihan' => 'required',
+                    'kategori_tagihan_id' => 'required',
                     'no_rekening' => 'required',
                     'no_tagihan' => 'required',
                     'kode_bank' => 'required',
@@ -168,6 +176,7 @@ class TagihanController extends Controller
                 $tagihan = Tagihan::where('id',$id)->where('is_delete','=',0)->where('user_id',Auth::id())->first();
                 $tagihan->user_id = Auth::id();
                 $tagihan->nama_tagihan = $input['nama_tagihan'];
+                $tagihan->kategori_tagihan_id = $input['kategori_tagihan_id'];
                 $tagihan->no_rekening = Crypt::encryptString($input['no_rekening']);
                 $tagihan->no_tagihan = $input['no_tagihan'];
                 $tagihan->kode_bank = $input['kode_bank'];
@@ -188,6 +197,7 @@ class TagihanController extends Controller
             $tagihan = Tagihan::where('id',$id)->where('is_delete','=',0)->where('user_id',Auth::id())->firstOrFail();
             $tagihan->user_id = Auth::id();
             $tagihan->nama_tagihan = $input['nama_tagihan'];
+            $tagihan->kategori_tagihan_id = $input['kategori_tagihan_id'];
             $tagihan->no_rekening = Crypt::encryptString($input['no_rekening']);
             $tagihan->no_tagihan = $input['no_tagihan'];
             $tagihan->kode_bank = $input['kode_bank'];
