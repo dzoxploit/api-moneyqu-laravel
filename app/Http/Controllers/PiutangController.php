@@ -69,7 +69,7 @@ class PiutangController extends Controller
             ->where('is_delete','=',0)
             ->where('id',$id)
             ->orderBy('id','DESC')
-            ->get();
+            ->first();
             }else{
                 $piutang = Piutang::where(function ($query) use ($term) {
                                 $query->where('nama_piutang', "like", "%" . $term . "%");
