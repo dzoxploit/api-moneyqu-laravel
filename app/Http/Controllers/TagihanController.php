@@ -9,6 +9,7 @@ use App\Models\CurrencyData;
 use Illuminate\Support\Facades\Crypt;
 use Auth;
 use DB;
+use Validator;
 class TagihanController extends Controller
 {
       public function index(Request $request){
@@ -35,7 +36,7 @@ class TagihanController extends Controller
         
             if($id != null){
                   $tagihan = DB::table('tagihan')->join('kategori_tagihan','kategori_tagihan.id','=','tagihan.kategori_tagihan_id')
-                        ->select('tagihan.nama_tagihan','kategori_tagihan.nama_tagihan as kategori','tagihan.no_rekening','tagihan.no_tagihan', 'tagihan.kode_bank','tagihan.deksripsi','tagihan.jumlah_tagihan','tagihan.status_tagihan','tagihan.tanggal_tagihan','tagihan.status_tagihan_lunas','tagihan.tanggal_tagihan_lunas')
+                        ->select('tagihan.id','tagihan.nama_tagihan','kategori_tagihan.nama_tagihan as kategori','tagihan.no_rekening','tagihan.no_tagihan', 'tagihan.kode_bank','tagihan.deksripsi','tagihan.jumlah_tagihan','tagihan.status_tagihan','tagihan.tanggal_tagihan','tagihan.status_tagihan_lunas','tagihan.tanggal_tagihan_lunas')
                         ->where('tagihan.user_id',Auth::id())->where(function ($query) use ($term) {
                                 $query->where('tagihan.nama_tagihan', "like", "%" . $term . "%");
                                 $query->orWhere('tagihan.no_rekening', "like", "%" . $term . "%");
@@ -48,7 +49,7 @@ class TagihanController extends Controller
                         ->first();
             }else{
                  $tagihan = DB::table('tagihan')->join('kategori_tagihan','kategori_tagihan.id','=','tagihan.kategori_tagihan_id')
-                        ->select('tagihan.nama_tagihan','kategori_tagihan.nama_tagihan as kategori','tagihan.no_rekening','tagihan.no_tagihan', 'tagihan.kode_bank','tagihan.deksripsi','tagihan.jumlah_tagihan','tagihan.status_tagihan','tagihan.tanggal_tagihan','tagihan.status_tagihan_lunas','tagihan.tanggal_tagihan_lunas')
+                        ->select('tagihan.id','tagihan.nama_tagihan','kategori_tagihan.nama_tagihan as kategori','tagihan.no_rekening','tagihan.no_tagihan', 'tagihan.kode_bank','tagihan.deksripsi','tagihan.jumlah_tagihan','tagihan.status_tagihan','tagihan.tanggal_tagihan','tagihan.status_tagihan_lunas','tagihan.tanggal_tagihan_lunas')
                         ->where('tagihan.user_id',Auth::id())->where(function ($query) use ($term) {
                                 $query->where('tagihan.nama_tagihan', "like", "%" . $term . "%");
                                 $query->orWhere('tagihan.no_rekening', "like", "%" . $term . "%");
@@ -105,10 +106,10 @@ class TagihanController extends Controller
             $tagihan->user_id = Auth::id();
             $tagihan->nama_tagihan = $input['nama_tagihan'];
             $tagihan->kategori_tagihan_id = $input['kategori_tagihan_id'];
-            $tagihan->no_rekening = Crypt::encryptString($input['no_rekening']);
+            $tagihan->no_rekening = $input['no_rekening'];
             $tagihan->no_tagihan = $input['no_tagihan'];
             $tagihan->kode_bank = $input['kode_bank'];
-            $tagihan->deskripsi = $input['deskripsi'];
+            $tagihan->deksripsi = $input['deskripsi'];
             $tagihan->jumlah_tagihan = $input['jumlah_tagihan'];
             $tagihan->status_tagihan = $input['status_tagihan'];
             $tagihan->tanggal_tagihan = $input['tanggal_tagihan'];
