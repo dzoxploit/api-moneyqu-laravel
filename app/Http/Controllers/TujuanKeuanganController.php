@@ -25,7 +25,7 @@ class TujuanKeuanganController extends Controller
             $tujuankeuangan = DB::table('tujuan_keuangan')->join('kategori_tujuan_keuangan','kategori_tujuan_keuangan.id','=','tujuan_keuangan.kategori_tujuan_keuangan_id')
                                 ->leftJoin('hutang','hutang.id','=','tujuan_keuangan.hutang_id')
                                 ->leftJoin('simpanan','simpanan.id','=','tujuan_keuangan.simpanan_id')
-                                ->select('tujuan_keuangan.id','.kategori_tujuan_keuangan.nama_tujuan_keuangan as kategori','tujuan_keuangan.nama_tujuan_keuangan as nama','hutang.nama_hutang','simpanan.deskripsi','tujuan_keuangan.nominal','tujuan_keuangan.nominal_goals',DB::raw('(tujuan_keuangan.nominal_goals / tujuan_keuangan.nominal) * 100 AS percentage_goals'),'tujuan_keuangan.tanggal','tujuan_keuangan.status_tujuan_keuangan')
+                                ->select('tujuan_keuangan.id','.kategori_tujuan_keuangan.nama_tujuan_keuangan as kategori','tujuan_keuangan.nama_tujuan_keuangan as nama','hutang.nama_hutang','simpanan.deskripsi as nama_simpanan','tujuan_keuangan.nominal','tujuan_keuangan.nominal_goals',DB::raw('(tujuan_keuangan.nominal_goals / tujuan_keuangan.nominal) * 100 AS percentage_goals'),'tujuan_keuangan.tanggal','tujuan_keuangan.status_tujuan_keuangan')
                                 ->where('tujuan_keuangan.user_id',Auth::id())
                                 ->where(function ($query) use ($term) {
                                         $query->where('tujuan_keuangan.nama_tujuan_keuangan', "like", "%" . $term . "%");
@@ -41,7 +41,7 @@ class TujuanKeuanganController extends Controller
                     $tujuankeuangan = DB::table('tujuan_keuangan')->join('kategori_tujuan_keuangan','kategori_tujuan_keuangan.id','=','tujuan_keuangan.kategori_tujuan_keuangan_id')
                                 ->leftJoin('hutang','hutang.id','=','tujuan_keuangan.hutang_id')
                                 ->leftJoin('simpanan','simpanan.id','=','tujuan_keuangan.simpanan_id')
-                                ->select('tujuan_keuangan.id','.kategori_tujuan_keuangan.nama_tujuan_keuangan as kategori','tujuan_keuangan.nama_tujuan_keuangan as nama','hutang.nama_hutang','simpanan.deskripsi','tujuan_keuangan.nominal','tujuan_keuangan.nominal_goals',DB::raw('(tujuan_keuangan.nominal_goals / tujuan_keuangan.nominal) * 100 AS percentage_goals'),'tujuan_keuangan.tanggal','tujuan_keuangan.status_tujuan_keuangan')
+                                ->select('tujuan_keuangan.id','.kategori_tujuan_keuangan.nama_tujuan_keuangan as kategori','tujuan_keuangan.nama_tujuan_keuangan as nama','hutang.nama_hutang','simpanan.deskripsi as nama_simpanan','tujuan_keuangan.nominal','tujuan_keuangan.nominal_goals',DB::raw('(tujuan_keuangan.nominal_goals / tujuan_keuangan.nominal) * 100 AS percentage_goals'),'tujuan_keuangan.tanggal','tujuan_keuangan.status_tujuan_keuangan')
                                 ->where('tujuan_keuangan.user_id',Auth::id())
                                 ->where(function ($query) use ($term) {
                                         $query->where('tujuan_keuangan.nama_tujuan_keuangan', "like", "%" . $term . "%");
