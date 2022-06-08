@@ -22,32 +22,32 @@ class TujuanKeuanganController extends Controller
             $id = $request->get('id');
             $settings = Settings::where('user_id',Auth::id())->first();
             if($id != null){
-            $tujuankeuangan = DB::table('tujuan_keuangan')->join('kategori_tujuan_keuangan','kategori_tujuan_keuangan.id','=','tujuan_pemasukan.kategori_tujuan_keuangan_id')
-                                ->join('hutang','hutang.id','=','tujuan_pemasukan.hutang_id')
-                                ->join('simpanan','simpanan.id','=','tujuan_pemasukan.simpanan_id')
-                                ->select('tujuan_keuangan.id','.kategori_tujuan_keuangan.nama_tujuan_keuangaan as kategori','tujuan_keuangan.nama_tujuan_keuangan as nama','hutang.nama_hutang','simpanan.nama_simpanan','tujuan_keuangan.nominal','tujuan_keuangan.nominal_goals','tujuan_keuangan.tanggal','tujuan_keuangan.status_tujuan_keuangan')
-                                ->where('tujuan_keuangan.user_id',Auth::id())->where(function ($query) use ($term) {
+            $tujuankeuangan = DB::table('tujuan_keuangan')->join('kategori_tujuan_keuangan','kategori_tujuan_keuangan.id','=','tujuan_keuangan.kategori_tujuan_keuangan_id')
+                                ->leftJoin('hutang','hutang.id','=','tujuan_keuangan.hutang_id')
+                                ->leftJoin('simpanan','simpanan.id','=','tujuan_keuangan.simpanan_id')
+                                ->select('tujuan_keuangan.id','.kategori_tujuan_keuangan.nama_tujuan_keuangan as kategori','tujuan_keuangan.nama_tujuan_keuangan as nama','hutang.nama_hutang','simpanan.deskripsi','tujuan_keuangan.nominal','tujuan_keuangan.nominal_goals',DB::raw('(tujuan_keuangan.nominal_goals / tujuan_keuangan.nominal) * 100 AS percentage_goals'),'tujuan_keuangan.tanggal','tujuan_keuangan.status_tujuan_keuangan')
+                                ->where('tujuan_keuangan.user_id',Auth::id())
+                                ->where(function ($query) use ($term) {
                                         $query->where('tujuan_keuangan.nama_tujuan_keuangan', "like", "%" . $term . "%");
-                                        $query->orWhere('kategori_tujuan_keuangan.nama_tujuan_keuangaan', "like", "%" . $term . "%");
+                                        $query->orWhere('kategori_tujuan_keuangan.nama_tujuan_keuangan', "like", "%" . $term . "%");            
                                         $query->orWhere('hutang.nama_hutang', "like", "%" . $term . "%");
-                                        $query->orWhere('simpanan.nama_simpanan', "like", "%" . $term . "%");
-                                
+                                        $query->orWhere('simpanan.deskripsi', "like", "%" . $term . "%");
                                 })
-                                ->where('tujuan_keuangan.id','=', $id)
                                 ->where('tujuan_keuangan.is_delete','=',0)
+                                ->where('tujuan_keuangan.id','=',$id)
                                 ->orderBy('tujuan_keuangan.id','DESC')
                                 ->first();
             }else{
-                    $tujuankeuangan = DB::table('tujuan_keuangan')->join('kategori_tujuan_keuangan','kategori_tujuan_keuangan.id','=','tujuan_pemasukan.kategori_tujuan_keuangan_id')
-                                ->join('hutang','hutang.id','=','tujuan_pemasukan.hutang_id')
-                                ->join('simpanan','simpanan.id','=','tujuan_pemasukan.simpanan_id')
-                                ->select('tujuan_keuangan.id','.kategori_tujuan_keuangan.nama_tujuan_keuangaan as kategori','tujuan_keuangan.nama_tujuan_keuangan as nama','hutang.nama_hutang','simpanan.nama_simpanan','tujuan_keuangan.nominal','tujuan_keuangan.nominal_goals','tujuan_keuangan.tanggal','tujuan_keuangan.status_tujuan_keuangan')
-                                ->where('tujuan_keuangan.user_id',Auth::id())->where(function ($query) use ($term) {
+                    $tujuankeuangan = DB::table('tujuan_keuangan')->join('kategori_tujuan_keuangan','kategori_tujuan_keuangan.id','=','tujuan_keuangan.kategori_tujuan_keuangan_id')
+                                ->leftJoin('hutang','hutang.id','=','tujuan_keuangan.hutang_id')
+                                ->leftJoin('simpanan','simpanan.id','=','tujuan_keuangan.simpanan_id')
+                                ->select('tujuan_keuangan.id','.kategori_tujuan_keuangan.nama_tujuan_keuangan as kategori','tujuan_keuangan.nama_tujuan_keuangan as nama','hutang.nama_hutang','simpanan.deskripsi','tujuan_keuangan.nominal','tujuan_keuangan.nominal_goals',DB::raw('(tujuan_keuangan.nominal_goals / tujuan_keuangan.nominal) * 100 AS percentage_goals'),'tujuan_keuangan.tanggal','tujuan_keuangan.status_tujuan_keuangan')
+                                ->where('tujuan_keuangan.user_id',Auth::id())
+                                ->where(function ($query) use ($term) {
                                         $query->where('tujuan_keuangan.nama_tujuan_keuangan', "like", "%" . $term . "%");
-                                        $query->orWhere('kategori_tujuan_keuangan.nama_tujuan_keuangaan', "like", "%" . $term . "%");
+                                        $query->orWhere('kategori_tujuan_keuangan.nama_tujuan_keuangan', "like", "%" . $term . "%");            
                                         $query->orWhere('hutang.nama_hutang', "like", "%" . $term . "%");
-                                        $query->orWhere('simpanan.nama_simpanan', "like", "%" . $term . "%");
-                                
+                                        $query->orWhere('simpanan.deskripsi', "like", "%" . $term . "%");
                                 })
                                 ->where('tujuan_keuangan.is_delete','=',0)
                                 ->orderBy('tujuan_keuangan.id','DESC')
@@ -71,7 +71,7 @@ class TujuanKeuanganController extends Controller
     
     public function detail_tujuan_keuangan($id){
          try{
-                $goalstujuankeuangan = GoalsTujuanKeuangan::where('tujuan_keuangan_id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->paginate(10);
+                $goalstujuankeuangan = GoalsTujuanKeuangan::where('tujuan_keuangan_id',$id)->where('user_id',Auth::id())->where('is_delete','=',0)->get();
                 if($goalstujuankeuangan != null){
                     return response()->json([
                         "status" => 201,
