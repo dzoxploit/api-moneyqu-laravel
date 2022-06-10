@@ -21,6 +21,20 @@ class TujuanKeuanganController extends Controller
             $term = $request->get('search');
             $id = $request->get('id');
             $settings = Settings::where('user_id',Auth::id())->first();
+
+             $tercapai = TujuanKeuangan::where(
+                                    [
+                                        ['is_delete', '=', 0],
+                                        ['user_id', '=', Auth::id()],
+                                        ['status_tujuan_keuangan','=',1]
+                                    ])->count('id');
+                                        
+           $belumtercapai = TujuanKeuangan::where(
+                                    [
+                                        ['is_delete', '=', 0],
+                                        ['user_id', '=', Auth::id()],
+                                        ['status_tujuan_keuangan','=',0]
+                                    ])->count('id');
             if($id != null){
             $tujuankeuangan = DB::table('tujuan_keuangan')->join('kategori_tujuan_keuangan','kategori_tujuan_keuangan.id','=','tujuan_keuangan.kategori_tujuan_keuangan_id')
                                 ->leftJoin('hutang','hutang.id','=','tujuan_keuangan.hutang_id')
@@ -57,6 +71,8 @@ class TujuanKeuanganController extends Controller
             return response()->json([
                 "status" => 201,
                 "message" => "Tujuan Keuangan Berhasil Ditampilkan",
+                "tercapai" => $tercapai,
+                "belum_tercapai" => $belumtercapai,
                 "data" =>  $tujuankeuangan
             
             ]);
