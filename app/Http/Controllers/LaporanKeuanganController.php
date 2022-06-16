@@ -479,7 +479,7 @@ class LaporanKeuanganController extends Controller
                                                     ['is_delete', '=', 0],
                                                     ['user_id', '=', Auth::id()],
                                                     ['currency_id', '=', $settings->currency_id]
-                                                ])->whereMonth('created_at', date('M'))->sum('jumlah_pemasukan');
+                                                ])->where('created_at', Carbon::today()->month)->sum('jumlah_pemasukan');
 
                         $pengeluaran_bulanan = Pengeluaran::Where(
                                                 [
@@ -494,7 +494,7 @@ class LaporanKeuanganController extends Controller
                                                     ['is_delete', '=', 0],
                                                     ['user_id', '=', Auth::id()],
                                                     ['currency_id', '=', $settings->currency_id]
-                                                ])->whereMonth('created_at', date('M'))->sum('jumlah_simpanan');
+                                                ])->where('created_at', Carbon::today()->month)->sum('jumlah_simpanan');
                                                 
                         $tujuankeuangan_bulanan = TujuanKeuangan::Where(
                                                 [
@@ -502,7 +502,7 @@ class LaporanKeuanganController extends Controller
                                                     ['user_id', '=', Auth::id()],
                                                 ])->Where('simpanan_id','=',null)
                                                 ->Where('hutang_id','=',null)
-                                                ->whereMonth('created_at', date('M'))
+                                                ->whereMonth('created_at', date('m'))
                                                 ->sum('nominal_goals');
 
                         //piutang
@@ -515,6 +515,8 @@ class LaporanKeuanganController extends Controller
                                                                     ['status_piutang','=','0'],
                                                                     ['jumlah_piutang_dibayar','=',0],
                                                                 ])->whereMonth('created_at', date('M'))->sum('jumlah_hutang');
+                        
+                        dd($pemasukan_bulanan);
 
                         $calculatepiutangbelumdibayarsebagian_bulanan = Piutang::Where(
                                                                 [
@@ -601,6 +603,136 @@ class LaporanKeuanganController extends Controller
                         $calculation_pengeluaran_bulanan = (int)$piutangbelumdibayar_bulanan + (int)$hutangdibayar_bulanan + (int)$simpanan_bulanan + (int)$pengeluaran_bulanan + (int)$tujuankeuangan_bulanan + (int)$tagihan_bulanan;
 
             /** End Bulanan */
+
+
+            //   /** Tahunan */
+            //             $pemasukan_bulanan = Pemasukan::Where(
+            //                                     [
+            //                                         ['is_delete', '=', 0],
+            //                                         ['user_id', '=', Auth::id()],
+            //                                         ['currency_id', '=', $settings->currency_id]
+            //                                     ])->whereMonth('created_at', date('M'))->sum('jumlah_pemasukan');
+                     
+            //             $pengeluaran_bulanan = Pengeluaran::Where(
+            //                                     [
+            //                                         ['is_delete', '=', 0],
+            //                                         ['user_id', '=', Auth::id()],
+            //                                         ['currency_id', '=', $settings->currency_id],
+            //                                         ['hutang_id', '=', null]
+            //                                     ])->whereMonth('created_at', date('M'))->sum('jumlah_pengeluaran');
+
+            //             $simpanan_bulanan = Simpanan::Where(
+            //                                     [
+            //                                         ['is_delete', '=', 0],
+            //                                         ['user_id', '=', Auth::id()],
+            //                                         ['currency_id', '=', $settings->currency_id]
+            //                                     ])->whereMonth('created_at', date('M'))->sum('jumlah_simpanan');
+                                                
+            //             $tujuankeuangan_bulanan = TujuanKeuangan::Where(
+            //                                     [
+            //                                         ['is_delete', '=', 0],
+            //                                         ['user_id', '=', Auth::id()],
+            //                                     ])->Where('simpanan_id','=',null)
+            //                                     ->Where('hutang_id','=',null)
+            //                                     ->whereMonth('created_at', date('M'))
+            //                                     ->sum('nominal_goals');
+
+            //             //piutang
+                        
+            //             $calculatepiutangbelumdibayarsamsek_bulanan = Piutang::Where(
+            //                                                     [
+            //                                                         ['is_delete', '=', 0],
+            //                                                         ['user_id', '=', Auth::id()],
+            //                                                         ['currency_id', '=', $settings->currency_id],
+            //                                                         ['status_piutang','=','0'],
+            //                                                         ['jumlah_piutang_dibayar','=',0],
+            //                                                     ])->whereMonth('created_at', date('M'))->sum('jumlah_hutang');
+
+            //             $calculatepiutangbelumdibayarsebagian_bulanan = Piutang::Where(
+            //                                                     [
+            //                                                         ['is_delete', '=', 0],
+            //                                                         ['user_id', '=', Auth::id()],
+            //                                                         ['currency_id', '=', $settings->currency_id],
+            //                                                         ['status_piutang','=','0'],
+            //                                                         ['jumlah_piutang_dibayar','!=',0]
+            //                                                     ])->whereMonth('created_at', date('M'))->sum('jumlah_piutang_dibayar');
+            
+            //             $calculatepiutangbelumdibayarsebagiansisa_bulanan = Piutang::Where(
+            //                                                     [
+            //                                                         ['is_delete', '=', 0],
+            //                                                         ['user_id', '=', Auth::id()],
+            //                                                         ['currency_id', '=', $settings->currency_id],
+            //                                                         ['status_piutang','=','0'],
+            //                                                         ['jumlah_piutang_dibayar','!=',0]
+            //                                                     ])->whereMonth('created_at', date('M'))->sum('jumlah_hutang');
+
+
+            //             $calculatepiutangsudahibayar_bulanan = Piutang::Where(
+            //                                             [
+            //                                                 ['is_delete', '=', 0],
+            //                                                 ['user_id', '=', Auth::id()],
+            //                                                 ['currency_id', '=', $settings->currency_id],
+            //                                                 ['status_piutang','=','1']
+            //                                             ])->whereMonth('created_at', date('M'))->sum('jumlah_hutang');
+
+            //             $piutangdibayar_bulanan = $calculatepiutangsudahibayar_bulanan + $calculatepiutangbelumdibayarsebagian_bulanan;
+            //             $piutangbelumdibayar_bulanan = $calculatepiutangbelumdibayarsamsek_bulanan + $calculatepiutangbelumdibayarsebagiansisa_bulanan;
+
+
+            //             //endpiutang
+
+            //             //Hutang 
+            //             $calculatehutangbelumdibayarsamsek_bulanan = Hutang::Where(
+            //                                             [
+            //                                                 ['is_delete', '=', 0],
+            //                                                 ['user_id', '=', Auth::id()],
+            //                                                 ['currency_id', '=', $settings->currency_id],
+            //                                                 ['status_hutang','=','0'],
+            //                                                 ['jumlah_hutang_dibayar','=','0']
+            //                                             ])->whereMonth('created_at', date('M'))->sum('jumlah_hutang');
+                        
+            //             $calculatehutangbelumdibayarsebagian_bulanan = Hutang::Where(
+            //                                             [
+            //                                                 ['is_delete', '=', 0],
+            //                                                 ['user_id', '=', Auth::id()],
+            //                                                 ['currency_id', '=', $settings->currency_id],
+            //                                                 ['status_hutang','=','0'],
+            //                                                 ['jumlah_hutang_dibayar','!=','0']
+            //                                             ])->whereMonth('created_at', date('M'))->sum('jumlah_hutang_dibayar');
+
+            //             $calculatehutangbelumdibayarsebagiansisa_bulanan = Hutang::Where(
+            //                                             [
+            //                                                 ['is_delete', '=', 0],
+            //                                                 ['user_id', '=', Auth::id()],
+            //                                                 ['currency_id', '=', $settings->currency_id],
+            //                                                 ['status_hutang','=','0'],
+            //                                                 ['jumlah_hutang_dibayar','!=','0']
+            //                                             ])->whereMonth('created_at', date('M'))->sum('jumlah_hutang_dibayar');
+
+
+            //             $calculatehutangsudahdibayar_bulanan = Hutang::Where(
+            //                                             [
+            //                                                 ['is_delete', '=', 0],
+            //                                                 ['user_id', '=', Auth::id()],
+            //                                                 ['currency_id', '=', $settings->currency_id],
+            //                                                 ['status_hutang','=','1']
+            //                                             ])->whereMonth('created_at', date('M'))->sum('jumlah_hutang');
+                        
+            //             $hutangdibayar_bulanan = $calculatehutangsudahdibayar_bulanan + $calculatehutangbelumdibayarsebagiansisa_bulanan;
+            //             $hutangbelumdibayar_bulanan =  $calculatehutangbelumdibayarsamsek_bulanan +  $calculatehutangbelumdibayarsebagiansisa_bulanan;
+            //             //end Hutang
+
+            //             $tagihan_bulanan = Tagihan::Where(
+            //                                     [
+            //                                         ['is_delete', '=', 0],
+            //                                         ['user_id', '=', Auth::id()],
+            //                                         ['status_tagihan_lunas','=',1]
+            //                                     ])->whereBetween('created_at', [Carbon::now()->startOfWeek(Carbon::SUNDAY), Carbon::now()->endOfWeek(Carbon::SATURDAY)])->sum('jumlah_tagihan');
+                        
+            //             $calculation_pemasukan_bulanan = (int)$pemasukan_bulanan + (int)$piutangdibayar_bulanan + (int)$hutangbelumdibayar_bulanan ;
+            //             $calculation_pengeluaran_bulanan = (int)$piutangbelumdibayar_bulanan + (int)$hutangdibayar_bulanan + (int)$simpanan_bulanan + (int)$pengeluaran_bulanan + (int)$tujuankeuangan_bulanan + (int)$tagihan_bulanan;
+
+            // /** End Tahunan */
 
               return response()->json([
                 "status" => 201,

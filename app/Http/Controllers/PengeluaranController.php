@@ -130,8 +130,6 @@ class PengeluaranController extends Controller
         try{
             $validator = Validator::make($input, [
                 'nama_pengeluaran' => 'required',
-                'kategori_pengeluaran_id' => 'required',
-                'nama_pengeluaran' => 'required',
                 'currency_id' => 'required',
                 'jumlah_pengeluaran' => 'required', 
                 'tanggal_pengeluaran' => 'required', 
@@ -147,7 +145,7 @@ class PengeluaranController extends Controller
             }
             $pengeluaran = new Pengeluaran;
             $pengeluaran->user_id = Auth::id();
-            $pengeluaran->kategori_pengeluaran_id = $input['kategori_pengeluaran_id'];
+            $pengeluaran->kategori_pengeluaran_id = 1;
             $pengeluaran->nama_pengeluaran = $input['nama_pengeluaran'];
             $pengeluaran->currency_id = $input['currency_id'];
             $pengeluaran->hutang_id = $id;
