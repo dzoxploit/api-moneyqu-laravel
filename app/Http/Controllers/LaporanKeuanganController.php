@@ -209,7 +209,7 @@ class LaporanKeuanganController extends Controller
                                                     ['is_delete', '=', 0],
                                                     ['user_id', '=', Auth::id()],
                                                     ['currency_id', '=', $settings->currency_id]
-                                                ])->where('created_at','=',Carbon::now())->sum('jumlah_pemasukan');
+                                                ])->where('created_at','>',Carbon::now()->subDays(1))->sum('jumlah_pemasukan');
 
                         $pengeluaran_harian = Pengeluaran::Where(
                                                 [
@@ -217,24 +217,25 @@ class LaporanKeuanganController extends Controller
                                                     ['user_id', '=', Auth::id()],
                                                     ['currency_id', '=', $settings->currency_id],
                                                     ['hutang_id', '=', null]
-                                                ])->where('created_at','=',Carbon::now())->sum('jumlah_pengeluaran');
+                                                ])->where('created_at','>',Carbon::now()->subDays(1))->sum('jumlah_pengeluaran');
 
                         $simpanan_harian = Simpanan::Where(
                                                 [
                                                     ['is_delete', '=', 0],
                                                     ['user_id', '=', Auth::id()],
                                                     ['currency_id', '=', $settings->currency_id]
-                                                ])->where('created_at','=',Carbon::now())->sum('jumlah_simpanan');
+                                                ])->where('created_at','>',Carbon::now()->subDays(1))->sum('jumlah_simpanan');
                                                 
                         $tujuankeuangan_harian = TujuanKeuangan::where(
                                                 [
-                                                    ['created_at', '=', Carbon::now()],
+                                                    ['created_at','>',Carbon::now()->subDays(1)],
                                                     ['is_delete', '=', 0],
                                                     ['user_id', '=', Auth::id()],
                                                 ])
                                                 ->where('simpanan_id','=',null)
                                                 ->where('hutang_id','=',null)
                                                 ->sum('nominal_goals');
+                                                
 
                         //piutang
                         
@@ -245,7 +246,7 @@ class LaporanKeuanganController extends Controller
                                                                     ['currency_id', '=', $settings->currency_id],
                                                                     ['status_piutang','=','0'],
                                                                     ['jumlah_piutang_dibayar','=',0],
-                                                                    ['created_at','=',Carbon::now()]
+                                                                    ['created_at','>',Carbon::now()->subDays(1)]
                                                                 ])->sum('jumlah_hutang');
 
                         $calculatepiutangbelumdibayarsebagian_harian = Piutang::Where(
@@ -255,7 +256,7 @@ class LaporanKeuanganController extends Controller
                                                                     ['currency_id', '=', $settings->currency_id],
                                                                     ['status_piutang','=','0'],
                                                                     ['jumlah_piutang_dibayar','!=',0],
-                                                                    ['created_at','=',Carbon::now()]
+                                                                    ['created_at','>',Carbon::now()->subDays(1)]
                                                                 ])->sum('jumlah_piutang_dibayar');
             
                         $calculatepiutangbelumdibayarsebagiansisa_harian = Piutang::Where(
@@ -265,7 +266,7 @@ class LaporanKeuanganController extends Controller
                                                                     ['currency_id', '=', $settings->currency_id],
                                                                     ['status_piutang','=','0'],
                                                                     ['jumlah_piutang_dibayar','!=',0],
-                                                                    ['created_at','=',Carbon::now()]
+                                                                    ['created_at','>',Carbon::now()->subDays(1)],
                                                                 ])->sum('jumlah_hutang');
 
 
@@ -275,7 +276,7 @@ class LaporanKeuanganController extends Controller
                                                             ['user_id', '=', Auth::id()],
                                                             ['currency_id', '=', $settings->currency_id],
                                                             ['status_piutang','=','1'],
-                                                            ['created_at','=',Carbon::now()]
+                                                            ['created_at','>',Carbon::now()->subDays(1)]
                                                         ])->sum('jumlah_hutang');
 
                         $piutangdibayar_harian = $calculatepiutangsudahibayar_harian + $calculatepiutangbelumdibayarsebagian_harian;
@@ -292,7 +293,7 @@ class LaporanKeuanganController extends Controller
                                                             ['currency_id', '=', $settings->currency_id],
                                                             ['status_hutang','=','0'],
                                                             ['jumlah_hutang_dibayar','=','0'],
-                                                            ['created_at','=',Carbon::now()]
+                                                            ['created_at','>',Carbon::now()->subDays(1)],
                                                         ])->sum('jumlah_hutang');
                         
                         $calculatehutangbelumdibayarsebagian_harian = Hutang::Where(
@@ -302,7 +303,7 @@ class LaporanKeuanganController extends Controller
                                                             ['currency_id', '=', $settings->currency_id],
                                                             ['status_hutang','=','0'],
                                                             ['jumlah_hutang_dibayar','!=','0'],
-                                                            ['created_at','=',Carbon::now()]
+                                                            ['created_at','>',Carbon::now()->subDays(1)],
                                                         ])->sum('jumlah_hutang_dibayar');
 
                         $calculatehutangbelumdibayarsebagiansisa_harian = Hutang::Where(
@@ -312,7 +313,7 @@ class LaporanKeuanganController extends Controller
                                                             ['currency_id', '=', $settings->currency_id],
                                                             ['status_hutang','=','0'],
                                                             ['jumlah_hutang_dibayar','!=','0'],
-                                                            ['created_at','=',Carbon::now()]
+                                                            ['created_at','>',Carbon::now()->subDays(1)]
                                                         ])->sum('jumlah_hutang_dibayar');
 
 
@@ -322,7 +323,7 @@ class LaporanKeuanganController extends Controller
                                                             ['user_id', '=', Auth::id()],
                                                             ['currency_id', '=', $settings->currency_id],
                                                             ['status_hutang','=','1'],
-                                                            ['created_at','=',Carbon::now()]
+                                                            ['created_at','>',Carbon::now()->subDays(1)]
                                                         ])->sum('jumlah_hutang');
                         
                         $hutangdibayar_harian = $calculatehutangsudahdibayar_harian + $calculatehutangbelumdibayarsebagiansisa_harian;
@@ -334,7 +335,7 @@ class LaporanKeuanganController extends Controller
                                                     ['is_delete', '=', 0],
                                                     ['user_id', '=', Auth::id()],
                                                     ['status_tagihan_lunas','=',1],
-                                                    ['created_at','=',Carbon::now()]
+                                                    ['created_at','>',Carbon::now()->subDays(1)],
                                                 ])->sum('jumlah_tagihan');
                         
                         $calculation_pemasukan_harian = (int)$pemasukan_harian + (int)$piutangdibayar_harian + (int)$hutangbelumdibayar_harian ;
@@ -479,7 +480,7 @@ class LaporanKeuanganController extends Controller
                                                     ['is_delete', '=', 0],
                                                     ['user_id', '=', Auth::id()],
                                                     ['currency_id', '=', $settings->currency_id]
-                                                ])->where('created_at', Carbon::today()->month)->sum('jumlah_pemasukan');
+                                                ])->where("created_at", ">", Carbon::now()->subMonths(1))->sum('jumlah_pemasukan');
 
                         $pengeluaran_bulanan = Pengeluaran::Where(
                                                 [
@@ -487,14 +488,14 @@ class LaporanKeuanganController extends Controller
                                                     ['user_id', '=', Auth::id()],
                                                     ['currency_id', '=', $settings->currency_id],
                                                     ['hutang_id', '=', null]
-                                                ])->whereMonth('created_at', date('M'))->sum('jumlah_pengeluaran');
+                                                ])->where("created_at", ">", Carbon::now()->subMonths(1))->sum('jumlah_pengeluaran');
 
                         $simpanan_bulanan = Simpanan::Where(
                                                 [
                                                     ['is_delete', '=', 0],
                                                     ['user_id', '=', Auth::id()],
                                                     ['currency_id', '=', $settings->currency_id]
-                                                ])->where('created_at', Carbon::today()->month)->sum('jumlah_simpanan');
+                                                ])->where("created_at", ">", Carbon::now()->subMonths(1))->sum('jumlah_simpanan');
                                                 
                         $tujuankeuangan_bulanan = TujuanKeuangan::Where(
                                                 [
@@ -502,7 +503,7 @@ class LaporanKeuanganController extends Controller
                                                     ['user_id', '=', Auth::id()],
                                                 ])->Where('simpanan_id','=',null)
                                                 ->Where('hutang_id','=',null)
-                                                ->whereMonth('created_at', date('m'))
+                                                ->where("created_at", ">", Carbon::now()->subMonths(1))
                                                 ->sum('nominal_goals');
 
                         //piutang
@@ -514,9 +515,8 @@ class LaporanKeuanganController extends Controller
                                                                     ['currency_id', '=', $settings->currency_id],
                                                                     ['status_piutang','=','0'],
                                                                     ['jumlah_piutang_dibayar','=',0],
-                                                                ])->whereMonth('created_at', date('M'))->sum('jumlah_hutang');
+                                                                ])->where("created_at", ">", Carbon::now()->subMonths(1))->sum('jumlah_hutang');
                         
-                        dd($pemasukan_bulanan);
 
                         $calculatepiutangbelumdibayarsebagian_bulanan = Piutang::Where(
                                                                 [
@@ -525,7 +525,7 @@ class LaporanKeuanganController extends Controller
                                                                     ['currency_id', '=', $settings->currency_id],
                                                                     ['status_piutang','=','0'],
                                                                     ['jumlah_piutang_dibayar','!=',0]
-                                                                ])->whereMonth('created_at', date('M'))->sum('jumlah_piutang_dibayar');
+                                                                ])->where("created_at", ">", Carbon::now()->subMonths(1))->sum('jumlah_piutang_dibayar');
             
                         $calculatepiutangbelumdibayarsebagiansisa_bulanan = Piutang::Where(
                                                                 [
@@ -534,7 +534,7 @@ class LaporanKeuanganController extends Controller
                                                                     ['currency_id', '=', $settings->currency_id],
                                                                     ['status_piutang','=','0'],
                                                                     ['jumlah_piutang_dibayar','!=',0]
-                                                                ])->whereMonth('created_at', date('M'))->sum('jumlah_hutang');
+                                                                ])->where("created_at", ">", Carbon::now()->subMonths(1))->sum('jumlah_hutang');
 
 
                         $calculatepiutangsudahibayar_bulanan = Piutang::Where(
@@ -543,7 +543,7 @@ class LaporanKeuanganController extends Controller
                                                             ['user_id', '=', Auth::id()],
                                                             ['currency_id', '=', $settings->currency_id],
                                                             ['status_piutang','=','1']
-                                                        ])->whereMonth('created_at', date('M'))->sum('jumlah_hutang');
+                                                        ])->where("created_at", ">", Carbon::now()->subMonths(1))->sum('jumlah_hutang');
 
                         $piutangdibayar_bulanan = $calculatepiutangsudahibayar_bulanan + $calculatepiutangbelumdibayarsebagian_bulanan;
                         $piutangbelumdibayar_bulanan = $calculatepiutangbelumdibayarsamsek_bulanan + $calculatepiutangbelumdibayarsebagiansisa_bulanan;
@@ -559,7 +559,7 @@ class LaporanKeuanganController extends Controller
                                                             ['currency_id', '=', $settings->currency_id],
                                                             ['status_hutang','=','0'],
                                                             ['jumlah_hutang_dibayar','=','0']
-                                                        ])->whereMonth('created_at', date('M'))->sum('jumlah_hutang');
+                                                        ])->where("created_at", ">", Carbon::now()->subMonths(1))->sum('jumlah_hutang');
                         
                         $calculatehutangbelumdibayarsebagian_bulanan = Hutang::Where(
                                                         [
@@ -568,7 +568,7 @@ class LaporanKeuanganController extends Controller
                                                             ['currency_id', '=', $settings->currency_id],
                                                             ['status_hutang','=','0'],
                                                             ['jumlah_hutang_dibayar','!=','0']
-                                                        ])->whereMonth('created_at', date('M'))->sum('jumlah_hutang_dibayar');
+                                                        ])->where("created_at", ">", Carbon::now()->subMonths(1))->sum('jumlah_hutang_dibayar');
 
                         $calculatehutangbelumdibayarsebagiansisa_bulanan = Hutang::Where(
                                                         [
@@ -577,7 +577,7 @@ class LaporanKeuanganController extends Controller
                                                             ['currency_id', '=', $settings->currency_id],
                                                             ['status_hutang','=','0'],
                                                             ['jumlah_hutang_dibayar','!=','0']
-                                                        ])->whereMonth('created_at', date('M'))->sum('jumlah_hutang_dibayar');
+                                                        ])->where("created_at", ">", Carbon::now()->subMonths(1))->sum('jumlah_hutang_dibayar');
 
 
                         $calculatehutangsudahdibayar_bulanan = Hutang::Where(
@@ -586,7 +586,7 @@ class LaporanKeuanganController extends Controller
                                                             ['user_id', '=', Auth::id()],
                                                             ['currency_id', '=', $settings->currency_id],
                                                             ['status_hutang','=','1']
-                                                        ])->whereMonth('created_at', date('M'))->sum('jumlah_hutang');
+                                                        ])->where("created_at", ">", Carbon::now()->subMonths(1))->sum('jumlah_hutang');
                         
                         $hutangdibayar_bulanan = $calculatehutangsudahdibayar_bulanan + $calculatehutangbelumdibayarsebagiansisa_bulanan;
                         $hutangbelumdibayar_bulanan =  $calculatehutangbelumdibayarsamsek_bulanan +  $calculatehutangbelumdibayarsebagiansisa_bulanan;
@@ -597,7 +597,7 @@ class LaporanKeuanganController extends Controller
                                                     ['is_delete', '=', 0],
                                                     ['user_id', '=', Auth::id()],
                                                     ['status_tagihan_lunas','=',1]
-                                                ])->whereBetween('created_at', [Carbon::now()->startOfWeek(Carbon::SUNDAY), Carbon::now()->endOfWeek(Carbon::SATURDAY)])->sum('jumlah_tagihan');
+                                                ])->where("created_at", ">", Carbon::now()->subMonths(1))->sum('jumlah_tagihan');
                         
                         $calculation_pemasukan_bulanan = (int)$pemasukan_bulanan + (int)$piutangdibayar_bulanan + (int)$hutangbelumdibayar_bulanan ;
                         $calculation_pengeluaran_bulanan = (int)$piutangbelumdibayar_bulanan + (int)$hutangdibayar_bulanan + (int)$simpanan_bulanan + (int)$pengeluaran_bulanan + (int)$tujuankeuangan_bulanan + (int)$tagihan_bulanan;

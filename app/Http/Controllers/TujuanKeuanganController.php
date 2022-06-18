@@ -165,7 +165,7 @@ class TujuanKeuanganController extends Controller
             ]);
         } 
     }
-
+    
     public function add_goals_tujuan_keuangan(Request $request, $id){
           $input = $request->all();
         
@@ -209,9 +209,13 @@ class TujuanKeuanganController extends Controller
                 $simpanan = Simpanan::where('user_id',Auth::id())->where('is_delete','=',0)->where('id','=',$tujuankeuanganvalidation->simpanan_id)->firstOrFail();
                 $simpanan->jumlah_simpanan = $simpanan->jumlah_simpanan + $input['nominal'];
                 
+                 if($tujuankeuangan->nominal == $tujuankeuangan->nominal_goals){
+                        $tujuankeuangan->status_tujuan_keuangan = 1;
+                }
+
                 $goalstujuankeuangan->save();
                 $tujuankeuangan->save();
-                $simpaanan->save();
+                $simpanan->save();
             } else {
                 
                  $tujuankeuanganvalidationhutang  = TujuanKeuangan::where('id',$id)
@@ -243,6 +247,10 @@ class TujuanKeuanganController extends Controller
                                                        ->firstOrFail();
                     $hutang->jumlah_hutang_dibayar = $hutang->jumlah_hutang_dibayar + $input['nominal'];
                     
+                    if($tujuankeuangan->nominal == $tujuankeuangan->nominal_goals){
+                        $tujuankeuangan->status_tujuan_keuangan = 1;
+                    }
+
                     $goalstujuankeuangan->save();
                     $tujuankeuangan->save();
                     $hutang->save();
@@ -262,6 +270,12 @@ class TujuanKeuanganController extends Controller
                                                         ->firstOrFail();
             
                     $tujuankeuangan->nominal_goals = $tujuankeuangan->nominal_goals + $input['nominal'];
+
+                    if($tujuankeuangan->nominal == $tujuankeuangan->nominal_goals){
+                        $tujuankeuangan->status_tujuan_keuangan = 1;
+                    }
+                    
+                    $goalstujuankeuangan->save();
                     $tujuankeuangan->save();
                     $goalstujuankeuangan->save();
                 }

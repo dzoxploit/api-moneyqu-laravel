@@ -234,7 +234,28 @@ class PiutangController extends Controller
 
     
     public function update_bayaran_piutang($id){
+         try{
+            
+                    $piutang = Piutang::where('id',$id)->where('is_delete','=',0)->firstOrFail();
+                    $piutang->jumlah_piutang_dibayar = $piutang->jumlah_hutang;
+                    $piutang->status_piutang = 1;
+                    $piutang->tanggal_piutang_dibayar = Carbon::now();
+                    $piutang->is_delete = 0;
+                    $piutang->save();
 
+                    return response()->json([
+                        "status" => 201,
+                        "message" => "Pembayaran Piutang created successfully.",
+                        "data" => $piutang
+                    ]);
+
+                }catch(\Exception $e){
+                    return response()->json([
+                        "status" => 401,
+                        "message" => 'Error'.$e->getMessage(),
+                        "data" => null
+                    ]);
+                }
     }
     
 

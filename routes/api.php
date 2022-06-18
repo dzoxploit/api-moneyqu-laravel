@@ -63,6 +63,7 @@ Route::group(['prefix' => 'v1'], function(){
         Route::post('piutang/create', [PiutangController::class, 'create'])->middleware('auth:api');
         Route::match(array('GET','POST'),'piutang/update/{id}', [PiutangController::class, 'update'])->middleware('auth:api');
         Route::post('piutang/destroy/{id}', [PiutangController::class, 'destroy_piutang'])->middleware('auth:api');
+        Route::post('piutang/create/bayar-piutang/{id}', [PiutangController::class, 'update_bayaran_piutang'])->middleware('auth:api');
 
         Route::get('simpanan', [SimpananController::class, 'index'])->middleware('auth:api');
         Route::post('simpanan/create', [SimpananController::class, 'create'])->middleware('auth:api');
