@@ -38,7 +38,8 @@ class PengeluaranController extends Controller
             
             if($id != null) {
                   $pengeluaran = DB::table('pengeluaran')->join('kategori_pengeluaran','kategori_pengeluaran.id','=','pengeluaran.kategori_pengeluaran_id')
-                        ->select('pengeluaran.id','pengeluaran.nama_pengeluaran as nama','kategori_pengeluaran.nama_pengeluaran as kategori','pengeluaran.jumlah_pengeluaran','pengeluaran.tanggal_pengeluaran','pengeluaran.keterangan')
+                        ->join('hutang','hutang.id','=','pengeluaran.hutang_id','left outer')
+                        ->select('pengeluaran.id','pengeluaran.nama_pengeluaran as nama','kategori_pengeluaran.nama_pengeluaran as kategori','hutang.nama_hutang','pengeluaran.jumlah_pengeluaran','pengeluaran.tanggal_pengeluaran','pengeluaran.keterangan')
                         ->where('pengeluaran.user_id',Auth::id())->where(function ($query) use ($term) {
                                 $query->where('pengeluaran.nama_pengeluaran', "like", "%" . $term . "%");
                                 $query->orWhere('kategori_pengeluaran.nama_pengeluaran', "like", "%" . $term . "%");

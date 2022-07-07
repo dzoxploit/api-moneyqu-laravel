@@ -864,7 +864,7 @@ class LaporanKeuanganController extends Controller
 
     public function kategori_pengeluaran(){
            try{
-            $kategoripengeluaran = KategoriPengeluaran::where('is_delete','=',0)->where('is_active','=',1)->get();
+            $kategoripengeluaran = KategoriPengeluaran::where('is_delete','=',0)->where('id','!=', 1)->where('is_active','=',1)->get();
                 if($kategoripengeluaran != null){
                     return response()->json([
                         "status" => 201,
