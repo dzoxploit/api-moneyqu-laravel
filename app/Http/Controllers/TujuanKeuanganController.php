@@ -241,7 +241,7 @@ class TujuanKeuanganController extends Controller
                     
                     
 
-                    $hutang = Hutang::where('id',$request->get('id'))->where('is_delete',0)
+                    $hutang = Hutang::where('id',$tujuankeuangan->hutang_id)->where('is_delete',0)
                                                        ->where('user_id',Auth::id())
                                                        ->where('is_delete','=',0)
                                                        ->firstOrFail();
@@ -249,6 +249,7 @@ class TujuanKeuanganController extends Controller
                     
                     if($tujuankeuangan->nominal == $tujuankeuangan->nominal_goals){
                         $tujuankeuangan->status_tujuan_keuangan = 1;
+                        $hutang->status_hutang = 1;
                     }
 
                     $goalstujuankeuangan->save();

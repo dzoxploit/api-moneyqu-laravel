@@ -77,6 +77,36 @@ class SimpananController extends Controller
         }
     }
 
+    public function index_non_active(Request $request){
+        try{
+         
+            $settings = Settings::where('user_id',Auth::id())->first();
+            
+                  $simpanan = DB::table('simpanan')->join('tujuan_simpanan','tujuan_simpanan.id','=','simpanan.tujuan_simpanan_id')
+                        ->join('jenis_simpanan','jenis_simpanan.id','=','simpanan.jenis_simpanan_id')
+                        ->select('simpanan.id','simpanan.deskripsi','simpanan.jumlah_simpanan','tujuan_simpanan.nama_tujuan_simpanan','jenis_simpanan.nama_jenis_simpanan','simpanan.status_simpanan')
+                        ->where('simpanan.is_delete','=',0)
+                        ->where('simpanan.status_simpanan','=',0)
+                        ->orderBy('simpanan.id','DESC')
+                        ->get();
+        
+            return response()->json([
+                "status" => 201,
+                "message" => "Simpanan Berhasil Ditampilkan",
+                "data" => [
+                    "data_simpanan" => $simpanan
+                ]
+            
+            ]);
+        }catch(\Exception $e){
+            return response()->json([
+                "status" => 400,
+                 "message" => 'Error'.$e->getMessage(),
+                "data" => null
+            ]);
+        }
+    }
+
     public function create(Request $request){
         $input = $request->all();
         
@@ -87,6 +117,7 @@ class SimpananController extends Controller
                 'deskripsi' => 'required',
                 'jenis_simpanan_id' => 'required',
                 'currency_id' => 'required', 
+                'status_simpanan' => 'required',
             ]);
 
             if($validator->fails()){
@@ -104,7 +135,7 @@ class SimpananController extends Controller
             $simpanan->deskripsi = $input['deskripsi'];
             $simpanan->jenis_simpanan_id = $input['jenis_simpanan_id'];
             $simpanan->is_delete = 0;
-            $simpanan->status_simpanan = 0;
+            $simpanan->status_simpanan = $input['status_simpanan'];
             $simpanan->save();
             
             return response()->json([
@@ -158,6 +189,7 @@ class SimpananController extends Controller
                         'deskripsi' => 'required',
                         'jenis_simpanan_id' => 'required',
                         'currency_id' => 'required', 
+                        'status_simpanan' => 'required',
                     ]);
 
                     if($validator->fails()){
@@ -168,6 +200,7 @@ class SimpananController extends Controller
                         $simpanan->currency_id = $input['currency_id'];
                         $simpanan->deskripsi = $input['deskripsi'];
                         $simpanan->jenis_simpanan_id = $input['jenis_simpanan_id'];
+                        $simpanan->status_simpanan = $input['status_simpanan'];
                         $simpanan->is_delete = 0;
                         $simpanan->save();
 
@@ -185,6 +218,7 @@ class SimpananController extends Controller
                         $simpanan->deskripsi = $input['deskripsi'];
                         $simpanan->jenis_simpanan_id = $input['jenis_simpanan_id'];
                         $simpanan->is_delete = 0;
+                        $simpanan->status_simpanan = $input['status_simpanan'];
                         $simpanan->save();
 
                     

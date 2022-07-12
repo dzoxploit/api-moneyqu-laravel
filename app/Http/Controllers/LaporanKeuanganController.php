@@ -58,7 +58,8 @@ class LaporanKeuanganController extends Controller
                                     [
                                         ['is_delete', '=', 0],
                                         ['user_id', '=', Auth::id()],
-                                        ['currency_id', '=', $settings->currency_id]
+                                        ['currency_id', '=', $settings->currency_id],
+                                        ['status_simpanan','=',1]
                                     ])->sum('jumlah_simpanan');
                                     
             $tujuankeuangan = TujuanKeuangan::Where(

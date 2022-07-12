@@ -114,6 +114,82 @@ class HutangController extends Controller
         }
     }
 
+     public function index_belum_lunas(Request $request){
+        try{
+            $term = $request->get('search');
+            $datedata = $request->get('date');
+            $id = $request->get('id');
+            $settings = Settings::where('user_id',Auth::id())->first();
+
+            $calculatehutangbelumdibayarsamsek = Hutang::Where(
+                                            [
+                                                ['is_delete', '=', 0],
+                                                ['user_id', '=', Auth::id()],
+                                                ['currency_id', '=', $settings->currency_id],
+                                                ['status_hutang','=','0'],
+                                                ['jumlah_hutang_dibayar','=','0']
+                                            ])->sum('jumlah_hutang');
+            
+            $calculatehutangbelumdibayarsebagian = Hutang::Where(
+                                            [
+                                                ['is_delete', '=', 0],
+                                                ['user_id', '=', Auth::id()],
+                                                ['currency_id', '=', $settings->currency_id],
+                                                ['status_hutang','=','0'],
+                                                ['jumlah_hutang_dibayar','!=','0']
+                                            ])->sum('jumlah_hutang_dibayar');
+
+            $calculatehutangbelumdibayarsebagiansisa = Hutang::Where(
+                                            [
+                                                ['is_delete', '=', 0],
+                                                ['user_id', '=', Auth::id()],
+                                                ['currency_id', '=', $settings->currency_id],
+                                                ['status_hutang','=','0'],
+                                                ['jumlah_hutang_dibayar','!=','0']
+                                            ])->sum('jumlah_hutang_dibayar');
+
+
+            $calculatehutangsudahdibayar = Hutang::Where(
+                                            [
+                                                ['is_delete', '=', 0],
+                                                ['user_id', '=', Auth::id()],
+                                                ['currency_id', '=', $settings->currency_id],
+                                                ['status_hutang','=','1']
+                                            ])->sum('jumlah_hutang');
+
+             $calculatehutangsudahdibayarlunas = $calculatehutangsudahdibayar + $calculatehutangbelumdibayarsebagiansisa;
+             $calculatehutangbelumdibayar =  $calculatehutangbelumdibayarsamsek +  $calculatehutangbelumdibayarsebagiansisa;
+            
+           
+            $hutang = Hutang::where(function ($query) use ($term) {
+                                $query->where('nama_hutang', "like", "%" . $term . "%");
+                                $query->orWhere('deksripsi', "like", "%" . $term . "%");
+                        })
+                        ->where('user_id',Auth::id())   
+                        ->where('is_delete','=',0)
+                        ->where('status_hutang','=',0)
+                        ->orderBy('id','DESC')
+                        ->get();
+
+            return response()->json([
+                "status" => 201,
+                "message" => "Hutang Berhasil Ditampilkan",
+                "data" => [
+                    "total_hutang_sudah_dibayar" => $calculatehutangsudahdibayarlunas,
+                    "total_hutang_belum_dibayar" => $calculatehutangbelumdibayar,
+                    "data_hutang" => $hutang
+                ]
+            
+            ]);
+        }catch(\Exception $e){
+            return response()->json([
+                "status" => 400,
+                 "message" => 'Error'.$e->getMessage(),
+                "data" => null
+            ]);
+        }
+    }
+
     public function create(Request $request){
         $input = $request->all();
         

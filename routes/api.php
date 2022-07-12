@@ -54,6 +54,7 @@ Route::group(['prefix' => 'v1'], function(){
 
         
         Route::get('hutang', [HutangController::class, 'index'])->middleware('auth:api');
+        Route::get('hutang-belum-lunas', [HutangController::class, 'index_belum_lunas'])->middleware('auth:api');
         Route::post('hutang/create', [HutangController::class, 'create'])->middleware('auth:api');
         Route::match(array('GET','POST'),'hutang/update/{id}', [HutangController::class, 'update'])->middleware('auth:api');
         Route::post('hutang/destroy/{id}', [HutangController::class, 'destroy_hutang'])->middleware('auth:api');
@@ -66,6 +67,7 @@ Route::group(['prefix' => 'v1'], function(){
         Route::post('piutang/create/bayar-piutang/{id}', [PiutangController::class, 'update_bayaran_piutang'])->middleware('auth:api');
 
         Route::get('simpanan', [SimpananController::class, 'index'])->middleware('auth:api');
+        Route::get('simpanan-non-active', [SimpananController::class, 'index_non_active'])->middleware('auth:api');
         Route::post('simpanan/create', [SimpananController::class, 'create'])->middleware('auth:api');
         Route::match(array('GET','POST'),'simpanan/update/{id}', [SimpananController::class, 'update'])->middleware('auth:api');
         Route::post('simpanan/destroy/{id}', [SimpananController::class, 'destroy_simpanan'])->middleware('auth:api');
