@@ -207,10 +207,10 @@ class TujuanKeuanganController extends Controller
                 
 
                 $simpanan = Simpanan::where('user_id',Auth::id())->where('is_delete','=',0)->where('id','=',$tujuankeuanganvalidation->simpanan_id)->firstOrFail();
-                $simpanan->jumlah_simpanan = $simpanan->jumlah_simpanan + $input['nominal'];
                 
                  if($tujuankeuangan->nominal == $tujuankeuangan->nominal_goals){
                         $tujuankeuangan->status_tujuan_keuangan = 1;
+                        $simpanan->status_simpanan = 1;
                 }
 
                 $goalstujuankeuangan->save();
