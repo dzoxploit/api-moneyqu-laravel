@@ -212,10 +212,27 @@ class TujuanKeuanganController extends Controller
                         $tujuankeuangan->status_tujuan_keuangan = 1;
                         $simpanan->status_simpanan = 1;
                 }
+                    $validation = balancedata($goalstujuankeuangan->nominal);
+            
+                    if($validation == true){
+                        $goalstujuankeuangan->save();
+                        $tujuankeuangan->save();
+                        $simpanan->save();
+                    
+                        return response()->json([
+                            "status" => 201,
+                            "message" => "Goals Tujuan Keuangan created successfully.",
+                            "data" => $goalstujuankeuangan
+                        ]);
+                    }else{
 
-                $goalstujuankeuangan->save();
-                $tujuankeuangan->save();
-                $simpanan->save();
+                        return response()->json([
+                            "status" => 400,
+                            "errors" => "Saldo Tidak Mencukupi",
+                            "data" => null
+                        ]);          
+                    }
+            
             } else {
                 
                  $tujuankeuanganvalidationhutang  = TujuanKeuangan::where('id',$id)
@@ -252,9 +269,26 @@ class TujuanKeuanganController extends Controller
                         $hutang->status_hutang = 1;
                     }
 
-                    $goalstujuankeuangan->save();
-                    $tujuankeuangan->save();
-                    $hutang->save();
+                     $validation = balancedata($goalstujuankeuangan->nominal);
+            
+                    if($validation == true){
+                        $goalstujuankeuangan->save();
+                        $tujuankeuangan->save();
+                        $simpanan->save();
+                    
+                        return response()->json([
+                            "status" => 201,
+                            "message" => "Goals Tujuan Keuangan created successfully.",
+                            "data" => $goalstujuankeuangan
+                        ]);
+                    }else{
+
+                        return response()->json([
+                            "status" => 400,
+                            "errors" => "Saldo Tidak Mencukupi",
+                            "data" => null
+                        ]);          
+                    }
                     
                     
                 }else{
@@ -276,9 +310,26 @@ class TujuanKeuanganController extends Controller
                         $tujuankeuangan->status_tujuan_keuangan = 1;
                     }
                     
-                    $goalstujuankeuangan->save();
-                    $tujuankeuangan->save();
-                    $goalstujuankeuangan->save();
+                     $validation = balancedata($goalstujuankeuangan->nominal);
+            
+                    if($validation == true){
+                        $goalstujuankeuangan->save();
+                        $tujuankeuangan->save();
+                        $simpanan->save();
+                    
+                        return response()->json([
+                            "status" => 201,
+                            "message" => "Goals Tujuan Keuangan created successfully.",
+                            "data" => $goalstujuankeuangan
+                        ]);
+                    }else{
+
+                        return response()->json([
+                            "status" => 400,
+                            "errors" => "Saldo Tidak Mencukupi",
+                            "data" => null
+                        ]);          
+                    }
                 }
             }
             

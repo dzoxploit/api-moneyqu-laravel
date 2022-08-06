@@ -132,13 +132,24 @@ class PiutangController extends Controller
             $piutang->tanggal_piutang = $input['tanggal_piutang'];
             $piutang->status_piutang = 0;
             $piutang->is_delete = 0;
-            $piutang->save();
+            $validation = balancedata($piutang->jumlah_hutang);
             
-            return response()->json([
-                "status" => 201,
-                "message" => "Piutang created successfully.",
-                "data" => $piutang
-            ]);
+                    if($validation == true){
+                        $piutang->save();
+                    
+                        return response()->json([
+                            "status" => 201,
+                            "message" => "Piutang created successfully.",
+                            "data" => $piutang
+                        ]);
+                    }else{
+
+                        return response()->json([
+                            "status" => 400,
+                            "errors" => "Saldo Tidak Mencukupi",
+                            "data" => null
+                        ]);          
+                    }
         }catch(\Exception $e){
             return response()->json([
                 "status" => 401,
@@ -198,13 +209,24 @@ class PiutangController extends Controller
                         $piutang->tanggal_piutang = $input['tanggal_piutang'];
                         $piutang->currency_id = $input['currency_id'];
                         $piutang->is_delete = 0;
+                       $validation = balancedata($piutang->jumlah_hutang);
+            
+                    if($validation == true){
                         $piutang->save();
-
+                    
                         return response()->json([
                             "status" => 201,
                             "message" => "Piutang created successfully.",
-                            "data" => $pengeluaran
+                            "data" => $piutang
                         ]);
+                    }else{
+
+                        return response()->json([
+                            "status" => 400,
+                            "errors" => "Saldo Tidak Mencukupi",
+                            "data" => null
+                        ]);          
+                    }
                     }
                     $piutang = Piutang::where('id',$id)->where('is_delete','=',0)->firstOrFail();
                     $piutang->user_id = Auth::id();
@@ -214,13 +236,25 @@ class PiutangController extends Controller
                     $piutang->currency_id = $input['currency_id'];
                     $piutang->jumlah_hutang = $input['jumlah_hutang'];
                     $piutang->is_delete = 0;
-                    $piutang->save();
+                    
+                    $validation = balancedata($piutang->jumlah_hutang);
+            
+                    if($validation == true){
+                        $piutang->save();
+                    
+                        return response()->json([
+                            "status" => 201,
+                            "message" => "Piutang created successfully.",
+                            "data" => $piutang
+                        ]);
+                    }else{
 
-                    return response()->json([
-                        "status" => 201,
-                        "message" => "Piutang created successfully.",
-                        "data" => $piutang
-                    ]);
+                        return response()->json([
+                            "status" => 400,
+                            "errors" => "Saldo Tidak Mencukupi",
+                            "data" => null
+                        ]);          
+                    }
 
                 }catch(\Exception $e){
                     return response()->json([

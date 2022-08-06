@@ -121,14 +121,12 @@ class PengeluaranController extends Controller
                     "data" => $pengeluaran
                 ]);
             }else{
-                
-            if($validator->fails()){
+
                 return response()->json([
                     "status" => 400,
                     "errors" => "Saldo Tidak Mencukupi",
                     "data" => null
                 ]);          
-            }
             }
         }catch(\Exception $e){
             return response()->json([
@@ -182,15 +180,25 @@ class PengeluaranController extends Controller
                         $hutang->save();
                     } 
                     else{
-                        $pengeluaran->save();
-                        $hutang->save();
+                        $validation = balancedata($hutang->jumlah_hutang);
+            
+                        if($validation == true){
+                              $pengeluaran->save();
+                              $hutang->save();
+                            return response()->json([
+                                "status" => 201,
+                                "message" => "Pengeluaran hutang created successfully.",
+                                "data" => $pengeluaran
+                            ]);
+                        }else{
+
+                            return response()->json([
+                                "status" => 400,
+                                "errors" => "Saldo Tidak Mencukupi",
+                                "data" => null
+                            ]);          
+                        }
                     }
-                    
-                    return response()->json([
-                        "status" => 201,
-                        "message" => "Pengeluaran hutang created successfully.",
-                        "data" => $pengeluaran
-                    ]);
             } else {
                  return response()->json([
                         "status" => 402,
@@ -259,13 +267,25 @@ class PengeluaranController extends Controller
                         $pengeluaran->tanggal_pengeluaran = $input['tanggal_pengeluaran'];
                         $pengeluaran->keterangan = $input['keterangan'];
                         $pengeluaran->is_delete = 0;
-                        $pengeluaran->save();
+                        
+                        $validation = balancedata($pengeluaran->jumlah_pengeluaran);
+                    
+                        if($validation == true){
+                            $pengeluaran->save();
+                        
+                            return response()->json([
+                                "status" => 201,
+                                "message" => "Pengeluaran created successfully.",
+                                "data" => $pengeluaran
+                            ]);
+                        }else{
 
-                        return response()->json([
-                            "status" => 201,
-                            "message" => "Pengeluaran created successfully.",
-                            "data" => $pengeluaran
-                        ]);
+                            return response()->json([
+                                "status" => 400,
+                                "errors" => "Saldo Tidak Mencukupi",
+                                "data" => null
+                            ]);          
+                        }
                     }
                     $pengeluaran = Pengeluaran::where('id', $id)->where('user_id',Auth::id())->where('is_delete',0)->first();
                     $pengeluaran->user_id = Auth::id();
@@ -276,13 +296,25 @@ class PengeluaranController extends Controller
                     $pengeluaran->tanggal_pengeluaran = $input['tanggal_pengeluaran'];
                     $pengeluaran->keterangan = $input['keterangan'];
                     $pengeluaran->is_delete = 0;
-                    $pengeluaran->save();
+                    
+                    $validation = balancedata($pengeluaran->jumlah_pengeluaran);
+                    
+                    if($validation == true){
+                        $pengeluaran->save();
+                    
+                        return response()->json([
+                            "status" => 201,
+                            "message" => "Pengeluaran created successfully.",
+                            "data" => $pengeluaran
+                        ]);
+                    }else{
 
-                    return response()->json([
-                        "status" => 201,
-                        "message" => "Pengeluarancreated successfully.",
-                        "data" => $pengeluaran
-                    ]);
+                        return response()->json([
+                            "status" => 400,
+                            "errors" => "Saldo Tidak Mencukupi",
+                            "data" => null
+                        ]);          
+                    }
 
                 }catch(\Exception $e){
                     return response()->json([

@@ -136,13 +136,32 @@ class SimpananController extends Controller
             $simpanan->jenis_simpanan_id = $input['jenis_simpanan_id'];
             $simpanan->is_delete = 0;
             $simpanan->status_simpanan = $input['status_simpanan'];
-            $simpanan->save();
             
-            return response()->json([
-                "status" => 201,
-                "message" => "Simpanan created successfully.",
-                "data" => $simpanan
-            ]);
+            $validation = balancedata($simpanan->jumlah_simpanan);
+            
+                    if($validation == true && $simpanan->status_simpanan == 1){
+                        $simpanan->save();
+                    
+                        return response()->json([
+                            "status" => 201,
+                            "message" => "Simpanan created successfully.",
+                            "data" => $simpanan
+                        ]);
+                    }else if($simpanan->status_simpanan == 0){
+                        $simpanan->save();
+                    
+                        return response()->json([
+                            "status" => 201,
+                            "message" => "Simpanan created successfully.",
+                            "data" => $simpanan
+                        ]);
+                    }else{
+                          return response()->json([
+                            "status" => 400,
+                            "errors" => "Saldo Tidak Mencukupi",
+                            "data" => null
+                        ]);          
+                    }
         }catch(\Exception $e){
             return response()->json([
                 "status" => 401,
@@ -202,13 +221,31 @@ class SimpananController extends Controller
                         $simpanan->jenis_simpanan_id = $input['jenis_simpanan_id'];
                         $simpanan->status_simpanan = $input['status_simpanan'];
                         $simpanan->is_delete = 0;
-                        $simpanan->save();
-
-                        return response()->json([
-                            "status" => 201,
-                            "message" => "Simpanan created successfully.",
-                            "data" => $simpanan
-                        ]);
+                       $validation = balancedata($simpanan->jumlah_simpanan);
+            
+                        if($validation == true && $simpanan->status_simpanan == 1){
+                            $simpanan->save();
+                        
+                            return response()->json([
+                                "status" => 201,
+                                "message" => "Simpanan created successfully.",
+                                "data" => $simpanan
+                            ]);
+                        }else if($simpanan->status_simpanan == 0){
+                            $simpanan->save();
+                        
+                            return response()->json([
+                                "status" => 201,
+                                "message" => "Simpanan created successfully.",
+                                "data" => $simpanan
+                            ]);
+                        }else{
+                            return response()->json([
+                                "status" => 400,
+                                "errors" => "Saldo Tidak Mencukupi",
+                                "data" => null
+                            ]);          
+                        }
                     }
                      $simpanan = Simpanan::where('id',$id)->where('is_delete','=',0)->where('user_id',Auth::id())->firstOrFail();
                         $simpanan->user_id = Auth::id();
@@ -222,11 +259,31 @@ class SimpananController extends Controller
                         $simpanan->save();
 
                     
-                    return response()->json([
-                        "status" => 201,
-                        "message" => "Simpanan created successfully.",
-                        "data" => $simpanan
-                    ]);
+                   $validation = balancedata($simpanan->jumlah_simpanan);
+            
+                    if($validation == true && $simpanan->status_simpanan == 1){
+                        $simpanan->save();
+                    
+                        return response()->json([
+                            "status" => 201,
+                            "message" => "Simpanan created successfully.",
+                            "data" => $simpanan
+                        ]);
+                    }else if($simpanan->status_simpanan == 0){
+                        $simpanan->save();
+                    
+                        return response()->json([
+                            "status" => 201,
+                            "message" => "Simpanan created successfully.",
+                            "data" => $simpanan
+                        ]);
+                    }else{
+                          return response()->json([
+                            "status" => 400,
+                            "errors" => "Saldo Tidak Mencukupi",
+                            "data" => null
+                        ]);          
+                    }
                 }catch(\Exception $e){
                     return response()->json([
                         "status" => 401,
