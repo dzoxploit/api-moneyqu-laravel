@@ -82,7 +82,6 @@ class PengeluaranController extends Controller
 
     public function create(Request $request){
         $input = $request->all();
-        
         try{
             $validator = Validator::make($input, [
                 'nama_pengeluaran' => 'required',
@@ -100,6 +99,7 @@ class PengeluaranController extends Controller
                     "data" => null
                 ]);          
             }
+           
             $pengeluaran = new Pengeluaran;
             $pengeluaran->user_id = Auth::id();
             $pengeluaran->kategori_pengeluaran_id = $input['kategori_pengeluaran_id'];
@@ -109,13 +109,27 @@ class PengeluaranController extends Controller
             $pengeluaran->tanggal_pengeluaran = $input['tanggal_pengeluaran'];
             $pengeluaran->keterangan = $input['keterangan'];
             $pengeluaran->is_delete = 0;
-            $pengeluaran->save();
             
-            return response()->json([
-                "status" => 201,
-                "message" => "Pengeluaran created successfully.",
-                "data" => $pengeluaran
-            ]);
+            $validation = balancedata($pengeluaran->jumlah_pengeluaran);
+            
+            if($validation == true){
+                $pengeluaran->save();
+            
+                return response()->json([
+                    "status" => 201,
+                    "message" => "Pengeluaran created successfully.",
+                    "data" => $pengeluaran
+                ]);
+            }else{
+                
+            if($validator->fails()){
+                return response()->json([
+                    "status" => 400,
+                    "errors" => "Saldo Tidak Mencukupi",
+                    "data" => null
+                ]);          
+            }
+            }
         }catch(\Exception $e){
             return response()->json([
                 "status" => 401,
