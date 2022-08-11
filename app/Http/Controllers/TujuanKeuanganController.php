@@ -13,6 +13,7 @@ use Auth;
 use DB;
 use Validator;
 use Carbon\Carbon;
+use App\Helpers\Helper;
 
 class TujuanKeuanganController extends Controller
 {
@@ -212,7 +213,7 @@ class TujuanKeuanganController extends Controller
                         $tujuankeuangan->status_tujuan_keuangan = 1;
                         $simpanan->status_simpanan = 1;
                 }
-                    $validation = balancedata($goalstujuankeuangan->nominal);
+                    $validation = Helper::balancedata($goalstujuankeuangan->nominal);
             
                     if($validation == true){
                         $goalstujuankeuangan->save();
@@ -269,7 +270,7 @@ class TujuanKeuanganController extends Controller
                         $hutang->status_hutang = 1;
                     }
 
-                     $validation = balancedata($goalstujuankeuangan->nominal);
+                     $validation = Helper::balancedata($goalstujuankeuangan->nominal);
             
                     if($validation == true){
                         $goalstujuankeuangan->save();
@@ -310,7 +311,7 @@ class TujuanKeuanganController extends Controller
                         $tujuankeuangan->status_tujuan_keuangan = 1;
                     }
                     
-                     $validation = balancedata($goalstujuankeuangan->nominal);
+                     $validation = Helper::balancedata($goalstujuankeuangan->nominal);
             
                     if($validation == true){
                         $goalstujuankeuangan->save();

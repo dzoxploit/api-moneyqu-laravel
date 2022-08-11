@@ -9,6 +9,7 @@ use App\Models\CurrencyData;
 use Illuminate\Support\Facades\Crypt;
 use Auth;
 use DB;
+use App\Helpers\Helper;
 use Validator;
 class TagihanController extends Controller
 {
@@ -115,7 +116,7 @@ class TagihanController extends Controller
             $tagihan->tanggal_tagihan = $input['tanggal_tagihan'];
             $tagihan->status_tagihan_lunas = 0;
             $tagihan->is_delete = 0;
-            $validation = balancedata($tagihan->jumlah_tagihan);
+            $validation = Helper::balancedata($tagihan->jumlah_tagihan);
             
                     if($validation == true){
                         $tagihan->save();
@@ -198,7 +199,7 @@ class TagihanController extends Controller
                 $tagihan->tanggal_tagihan = $input['tanggal_tagihan'];
                 $tagihan->status_tagihan_lunas = 0;
                 $tagihan->is_delete = 0;
-                $validation = balancedata($tagihan->jumlah_tagihan);
+                $validation = Helper::balancedata($tagihan->jumlah_tagihan);
             
                     if($validation == true){
                         $tagihan->save();
@@ -230,7 +231,7 @@ class TagihanController extends Controller
             $tagihan->tanggal_tagihan = $input['tanggal_tagihan'];
             $tagihan->status_tagihan_lunas = 0;
             $tagihan->is_delete = 0;
-            $validation = balancedata($tagihan->jumlah_tagihan);
+            $validation = Helper::balancedata($tagihan->jumlah_tagihan);
             
                     if($validation == true){
                         $tagihan->save();

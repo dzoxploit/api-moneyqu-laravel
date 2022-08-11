@@ -11,6 +11,7 @@ use Auth;
 use DB;
 use Validator;
 use Carbon\Carbon;
+use App\Helpers\Helper;
 
 
 class PiutangController extends Controller
@@ -132,7 +133,7 @@ class PiutangController extends Controller
             $piutang->tanggal_piutang = $input['tanggal_piutang'];
             $piutang->status_piutang = 0;
             $piutang->is_delete = 0;
-            $validation = balancedata($piutang->jumlah_hutang);
+            $validation = Helper::balancedata($piutang->jumlah_hutang);
             
                     if($validation == true){
                         $piutang->save();
@@ -209,7 +210,7 @@ class PiutangController extends Controller
                         $piutang->tanggal_piutang = $input['tanggal_piutang'];
                         $piutang->currency_id = $input['currency_id'];
                         $piutang->is_delete = 0;
-                       $validation = balancedata($piutang->jumlah_hutang);
+                       $validation = Helper::balancedata($piutang->jumlah_hutang);
             
                     if($validation == true){
                         $piutang->save();
@@ -237,7 +238,7 @@ class PiutangController extends Controller
                     $piutang->jumlah_hutang = $input['jumlah_hutang'];
                     $piutang->is_delete = 0;
                     
-                    $validation = balancedata($piutang->jumlah_hutang);
+                    $validation = Helper::balancedata($piutang->jumlah_hutang);
             
                     if($validation == true){
                         $piutang->save();

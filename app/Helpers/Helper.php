@@ -1,5 +1,5 @@
 <?php
- 
+namespace App\Helpers;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Pemasukan;
@@ -24,7 +24,8 @@ use Auth;
 use Carbon\Carbon;
 use Validator;
 
-    function balancedata($jumlah){
+class Helper {
+     public static function balancedata($jumlah){
 
          $settings = Settings::where('user_id',Auth::id())->first();
             $pemasukan = Pemasukan::Where(
@@ -182,4 +183,6 @@ use Validator;
                 return true;
             }
 
+    }
 }
+?>

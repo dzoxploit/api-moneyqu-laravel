@@ -12,6 +12,7 @@ use Auth;
 use DB;
 use Carbon\Carbon;
 use Validator;
+use App\Helpers\Helper;
 use App\Models\Hutang;
 
 class PengeluaranController extends Controller
@@ -110,7 +111,7 @@ class PengeluaranController extends Controller
             $pengeluaran->keterangan = $input['keterangan'];
             $pengeluaran->is_delete = 0;
             
-            $validation = balancedata($pengeluaran->jumlah_pengeluaran);
+            $validation = Helper::balancedata($pengeluaran->jumlah_pengeluaran);
             
             if($validation == true){
                 $pengeluaran->save();
@@ -180,7 +181,7 @@ class PengeluaranController extends Controller
                         $hutang->save();
                     } 
                     else{
-                        $validation = balancedata($hutang->jumlah_hutang);
+                        $validation = Helper::balancedata($hutang->jumlah_hutang);
             
                         if($validation == true){
                               $pengeluaran->save();
@@ -268,7 +269,7 @@ class PengeluaranController extends Controller
                         $pengeluaran->keterangan = $input['keterangan'];
                         $pengeluaran->is_delete = 0;
                         
-                        $validation = balancedata($pengeluaran->jumlah_pengeluaran);
+                        $validation = Helper::balancedata($pengeluaran->jumlah_pengeluaran);
                     
                         if($validation == true){
                             $pengeluaran->save();
@@ -297,7 +298,7 @@ class PengeluaranController extends Controller
                     $pengeluaran->keterangan = $input['keterangan'];
                     $pengeluaran->is_delete = 0;
                     
-                    $validation = balancedata($pengeluaran->jumlah_pengeluaran);
+                    $validation = Helper::balancedata($pengeluaran->jumlah_pengeluaran);
                     
                     if($validation == true){
                         $pengeluaran->save();

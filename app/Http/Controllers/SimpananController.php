@@ -9,6 +9,7 @@ use Validator;
 use Auth;
 use DB;
 use Carbon\Carbon;
+use App\Helpers\Helper;
 
 class SimpananController extends Controller
 {
@@ -137,7 +138,7 @@ class SimpananController extends Controller
             $simpanan->is_delete = 0;
             $simpanan->status_simpanan = $input['status_simpanan'];
             
-            $validation = balancedata($simpanan->jumlah_simpanan);
+            $validation = Helper::balancedata($simpanan->jumlah_simpanan);
             
                     if($validation == true && $simpanan->status_simpanan == 1){
                         $simpanan->save();
@@ -221,7 +222,7 @@ class SimpananController extends Controller
                         $simpanan->jenis_simpanan_id = $input['jenis_simpanan_id'];
                         $simpanan->status_simpanan = $input['status_simpanan'];
                         $simpanan->is_delete = 0;
-                       $validation = balancedata($simpanan->jumlah_simpanan);
+                       $validation = Helper::balancedata($simpanan->jumlah_simpanan);
             
                         if($validation == true && $simpanan->status_simpanan == 1){
                             $simpanan->save();
@@ -259,7 +260,7 @@ class SimpananController extends Controller
                         $simpanan->save();
 
                     
-                   $validation = balancedata($simpanan->jumlah_simpanan);
+                   $validation = Helper::balancedata($simpanan->jumlah_simpanan);
             
                     if($validation == true && $simpanan->status_simpanan == 1){
                         $simpanan->save();
