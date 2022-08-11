@@ -198,7 +198,7 @@ class TagihanController extends Controller
                 $tagihan->tanggal_tagihan = $input['tanggal_tagihan'];
                 $tagihan->status_tagihan_lunas = 0;
                 $tagihan->is_delete = 0;
-                  $validation = balancedata($tagihan->jumlah_tagihan);
+                $validation = balancedata($tagihan->jumlah_tagihan);
             
                     if($validation == true){
                         $tagihan->save();
@@ -230,13 +230,25 @@ class TagihanController extends Controller
             $tagihan->tanggal_tagihan = $input['tanggal_tagihan'];
             $tagihan->status_tagihan_lunas = 0;
             $tagihan->is_delete = 0;
-            $tagihan->save();
+            $validation = balancedata($tagihan->jumlah_tagihan);
             
-            return response()->json([
-                "status" => 201,
-                "message" => "Tagihan Updated successfully.",
-                "data" => $tagihan
-            ]);
+                    if($validation == true){
+                        $tagihan->save();
+                    
+                        return response()->json([
+                            "status" => 201,
+                            "message" => "Tagihan created successfully.",
+                            "data" => $tagihan
+                        ]);
+                    }else{
+
+                        return response()->json([
+                            "status" => 400,
+                            "errors" => "Saldo Tidak Mencukupi",
+                            "data" => null
+                        ]);          
+                    }
+           
         }catch(\Exception $e){
             return response()->json([
                 "status" => 401,
