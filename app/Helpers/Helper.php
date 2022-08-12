@@ -171,16 +171,12 @@ class Helper {
 
             $pengeluaran_total =  (int)$piutangbelumdibayar + (int)$hutangdibayar + (int)$simpanan + (int)$pengeluaran + (int)$tujuankeuangan + (int)$tagihan;
             
-            $jumlah_temporary = $calculation + $jumlah;
+            $jumlah_temporary = $calculation - $jumlah;
 
-            if($calculation < $jumlah){
-
-            return false;
-            
-            }else if($jumlah_temporary > $calculation){
-                return false;
-            }else{
+            if($jumlah_temporary >= 0){
                 return true;
+            }else{
+                return false;
             }
 
     }

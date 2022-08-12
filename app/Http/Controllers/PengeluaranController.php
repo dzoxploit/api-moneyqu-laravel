@@ -112,7 +112,7 @@ class PengeluaranController extends Controller
             $pengeluaran->is_delete = 0;
             
             $validation = Helper::balancedata($pengeluaran->jumlah_pengeluaran);
-            
+
             if($validation == true){
                 $pengeluaran->save();
             
