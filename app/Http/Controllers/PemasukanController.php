@@ -215,7 +215,6 @@ class PemasukanController extends Controller
          $pemasukan->is_delete = 1;
          $pemasukan->deleted_at = Carbon::now();
          $pemasukan->save();
-
           return response()->json([
                         "status" => 201,
                         "message" => 'delete pemasukan succesfully',

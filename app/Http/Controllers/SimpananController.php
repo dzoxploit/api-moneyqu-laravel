@@ -140,15 +140,7 @@ class SimpananController extends Controller
             
             $validation = Helper::balancedata($simpanan->jumlah_simpanan);
             
-                    if($validation == true && $simpanan->status_simpanan == 1){
-                        $simpanan->save();
-                    
-                        return response()->json([
-                            "status" => 201,
-                            "message" => "Simpanan created successfully.",
-                            "data" => $simpanan
-                        ]);
-                    }else if($simpanan->status_simpanan == 0){
+                    if($validation == true){
                         $simpanan->save();
                     
                         return response()->json([
@@ -224,15 +216,7 @@ class SimpananController extends Controller
                         $simpanan->is_delete = 0;
                        $validation = Helper::balancedata($simpanan->jumlah_simpanan);
             
-                        if($validation == true && $simpanan->status_simpanan == 1){
-                            $simpanan->save();
-                        
-                            return response()->json([
-                                "status" => 201,
-                                "message" => "Simpanan created successfully.",
-                                "data" => $simpanan
-                            ]);
-                        }else if($simpanan->status_simpanan == 0){
+                        if($validation == true){
                             $simpanan->save();
                         
                             return response()->json([
