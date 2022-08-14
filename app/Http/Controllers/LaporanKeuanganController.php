@@ -1040,5 +1040,14 @@ class LaporanKeuanganController extends Controller
         } 
     }
 
+    public function data_bank(Request $request){
+        $banks = json_decode(file_get_contents(public_path() . "/bank.json"), true);
+        return response()->json([
+                "status" => 201,
+                "message" => "Data Bank Json Berhasil ditampilkan",
+                "data" => $banks            
+            ]);
+    }
+
    
 }

@@ -37,6 +37,7 @@ Route::group(['prefix' => 'v1'], function(){
         Route::get('kategori-pengeluaran', [LaporanKeuanganController::class, 'kategori_pengeluaran'])->middleware('auth:api');
         Route::get('kategori-tagihan', [LaporanKeuanganController::class, 'kategori_tagihan'])->middleware('auth:api');
         Route::get('jenis-simpanan', [LaporanKeuanganController::class, 'jenis_simpanan'])->middleware('auth:api');
+        Route::get('data-bank', [LaporanKeuanganController::class, 'data_bank'])->middleware('auth:api');
         Route::get('kategori-tujuan-keuangan', [LaporanKeuanganController::class, 'kategori_tujuan_keuangan'])->middleware('auth:api');
         Route::get('tujuan-simpanan', [LaporanKeuanganController::class, 'tujuan_simpanan'])->middleware('auth:api');
         Route::get('currency', [LaporanKeuanganController::class, 'currencydata'])->middleware('auth:api');

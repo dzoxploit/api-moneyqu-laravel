@@ -193,7 +193,7 @@ class TagihanController extends Controller
                 $tagihan->no_rekening = Crypt::encryptString($input['no_rekening']);
                 $tagihan->no_tagihan = $input['no_tagihan'];
                 $tagihan->kode_bank = $input['kode_bank'];
-                $tagihan->deskripsi = $input['deskripsi'];
+                $tagihan->deksripsi = $input['deskripsi'];
                 $tagihan->jumlah_tagihan = $input['jumlah_tagihan'];
                 $tagihan->status_tagihan = $input['status_tagihan'];
                 $tagihan->tanggal_tagihan = $input['tanggal_tagihan'];
@@ -225,7 +225,7 @@ class TagihanController extends Controller
             $tagihan->no_rekening = Crypt::encryptString($input['no_rekening']);
             $tagihan->no_tagihan = $input['no_tagihan'];
             $tagihan->kode_bank = $input['kode_bank'];
-            $tagihan->deskripsi = $input['deskripsi'];
+            $tagihan->deksripsi = $input['deskripsi'];
             $tagihan->jumlah_tagihan = $input['jumlah_tagihan'];
             $tagihan->status_tagihan = $input['status_tagihan'];
             $tagihan->tanggal_tagihan = $input['tanggal_tagihan'];
