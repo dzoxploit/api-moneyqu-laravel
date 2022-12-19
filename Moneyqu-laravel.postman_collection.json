@@ -1,0 +1,2609 @@
+{
+	"info": {
+		"_postman_id": "7403cb47-2697-4dab-9b61-ba5aaf67e031",
+		"name": "Moneyqu-laravel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pemasukan",
+			"item": [
+				{
+					"name": "index-pemasukan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/v1/pemasukan",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"pemasukan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-pemasukan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_pemasukan",
+									"value": "Uang Bulanan Dari mamak tersayang muahh",
+									"type": "default"
+								},
+								{
+									"key": "kategori_pemasukan_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_pemasukan",
+									"value": "3000000",
+									"type": "default"
+								},
+								{
+									"key": "tanggal_pemasukan",
+									"value": "2022-04-11 10:44:27",
+									"type": "default"
+								},
+								{
+									"key": "keterangan",
+									"value": "ok",
+									"type": "default"
+								},
+								{
+									"key": "status_transaksi_berulang",
+									"value": "0",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/v1/pemasukan/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"pemasukan",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-pemasukan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_pemasukan",
+									"value": "Uang Gajian MNC",
+									"type": "default"
+								},
+								{
+									"key": "kategori_pemasukan_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_pemasukan",
+									"value": "2500000",
+									"type": "default"
+								},
+								{
+									"key": "tanggal_pemasukan",
+									"value": "2022-04-11 10:44:27",
+									"type": "default"
+								},
+								{
+									"key": "keterangan",
+									"value": "ok",
+									"type": "default"
+								},
+								{
+									"key": "status_transaksi_berulang",
+									"value": "0",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/v1/pemasukan/update/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"pemasukan",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show-data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/v1/pemasukan/update/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"pemasukan",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/v1/pemasukan/destroy/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"pemasukan",
+								"destroy",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search-pemasukan",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pengeluaran",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/v1/pengeluaran",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"pengeluaran"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_pengeluaran",
+									"value": "Beli Sabun shampo indomie dll",
+									"type": "default"
+								},
+								{
+									"key": "kategori_pengeluaran_id",
+									"value": "2",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_pengeluaran",
+									"value": "40000",
+									"type": "default"
+								},
+								{
+									"key": "tanggal_pengeluaran",
+									"value": "2022-04-11 10:44:27",
+									"type": "default"
+								},
+								{
+									"key": "keterangan",
+									"value": "ok",
+									"type": "default"
+								},
+								{
+									"key": "status_transaksi_berulang",
+									"value": "0",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/v1/pengeluaran/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"pengeluaran",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create hutang",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_pengeluaran",
+									"value": "bayar hutang khonisa",
+									"type": "default"
+								},
+								{
+									"key": "kategori_pengeluaran_id",
+									"value": "3",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_pengeluaran",
+									"value": "15000",
+									"type": "default"
+								},
+								{
+									"key": "tanggal_pengeluaran",
+									"value": "2022-04-13 10:44:27",
+									"type": "default"
+								},
+								{
+									"key": "keterangan",
+									"value": "ok",
+									"type": "default"
+								},
+								{
+									"key": "status_transaksi_berulang",
+									"value": "0",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/pengeluaran/create/bayar-hutang/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"pengeluaran",
+								"create",
+								"bayar-hutang",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_pengeluaran",
+									"value": "Traktir di KFC",
+									"type": "default"
+								},
+								{
+									"key": "kategori_pengeluaran_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_pengeluaran",
+									"value": "20000",
+									"type": "default"
+								},
+								{
+									"key": "tanggal_pengeluaran",
+									"value": "2022-04-11 10:44:27",
+									"type": "default"
+								},
+								{
+									"key": "keterangan",
+									"value": "ok",
+									"type": "default"
+								},
+								{
+									"key": "status_transaksi_berulang",
+									"value": "0",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/v1/pengeluaran/update/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"pengeluaran",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show-data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/v1/pengeluaran/update/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"pengeluaran",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/v1/pengeluaran/destroy/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"pengeluaran",
+								"destroy",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "kategori",
+			"item": [
+				{
+					"name": "Kategori-pemasukan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/kategori-pemasukan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"kategori-pemasukan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Data-bank",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/kategori-pemasukan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"kategori-pemasukan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hutang non active",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/kategori-pemasukan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"kategori-pemasukan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hutang non active Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/kategori-pemasukan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"kategori-pemasukan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Kategori-pengeluaran",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/kategori-pengeluaran",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"kategori-pengeluaran"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tujuan Simpanan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/tujuan-simpanan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"tujuan-simpanan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Kategori Tujuan Keuangan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/kategori-tujuan-keuangan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"kategori-tujuan-keuangan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Jenis Simpanan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/jenis-simpanan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"jenis-simpanan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Kategori Laporan Keuangan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/kategori-laporan-keuangan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"kategori-laporan-keuangan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Currency",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/currency",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"currency"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Kategori Tagihan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/kategori-tagihan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"kategori-tagihan"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "kategori Copy",
+			"item": [
+				{
+					"name": "Kategori-pemasukan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/kategori-pemasukan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"kategori-pemasukan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Kategori-pengeluaran",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/kategori-pengeluaran",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"kategori-pengeluaran"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tujuan Simpanan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/tujuan-simpanan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"tujuan-simpanan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Kategori Tujuan Keuangan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/kategori-tujuan-keuangan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"kategori-tujuan-keuangan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Jenis Simpanan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/jenis-simpanan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"jenis-simpanan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Kategori Laporan Keuangan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/kategori-laporan-keuangan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"kategori-laporan-keuangan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Currency",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/currency",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"currency"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Kategori Tagihan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/kategori-tagihan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"kategori-tagihan"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hutang",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/hutang",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"hutang"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_hutang",
+									"value": "ngutang ke rehan",
+									"type": "default"
+								},
+								{
+									"key": "no_telepon",
+									"value": "085262525",
+									"type": "default"
+								},
+								{
+									"key": "deksripsi",
+									"value": "Minjam uang ke rehan buat beli hadiah valentine ",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_hutang",
+									"value": "18000",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "tanggal_hutang",
+									"value": "2022-04-12 10:18:54",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/hutang/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"hutang",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_hutang",
+									"value": "ngutang ke rehan",
+									"type": "default"
+								},
+								{
+									"key": "no_telepon",
+									"value": "085262525",
+									"type": "default"
+								},
+								{
+									"key": "deksripsi",
+									"value": "Minjam uang ke rehan buat beli gacoan",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_hutang",
+									"value": "15000",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/hutang/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"hutang",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_hutang",
+									"value": "ngutang ke rehan",
+									"type": "default"
+								},
+								{
+									"key": "no_telepon",
+									"value": "085262525",
+									"type": "default"
+								},
+								{
+									"key": "deksripsi",
+									"value": "Minjam uang ke rehan buat beli gacoan",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_hutang",
+									"value": "15000",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/hutang/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"hutang",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/tujuan-keuangan/destroy/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"tujuan-keuangan",
+								"destroy",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Piutang",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/piutang",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"piutang"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_piutang",
+									"value": "ngutang ke rehan",
+									"type": "default"
+								},
+								{
+									"key": "no_telepon",
+									"value": "085262525",
+									"type": "default"
+								},
+								{
+									"key": "deksripsi",
+									"value": "Minjam uang ke rehan buat beli hadiah valentine ",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_hutang",
+									"value": "18000",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "tanggal_piutang",
+									"value": "2022-04-12 10:18:54",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/piutang/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"piutang",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_piutang",
+									"value": "Ngasih pinjaman uang makan ke cecep",
+									"type": "default"
+								},
+								{
+									"key": "no_telepon",
+									"value": "085262525",
+									"type": "default"
+								},
+								{
+									"key": "deksripsi",
+									"value": "lapar mau makan",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_hutang",
+									"value": "40000",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "tanggal_piutang",
+									"value": "2022-04-12 10:18:54",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/piutang/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"piutang",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNTkyODAxZmY5M2ZmMjA1NjkzMDY2ZjI0NThmYTk0YTc5MDc4YzRhMThiNDNlNTZiYTFjN2VjN2Y4ODE3Y2E2MjUyOTU0YjU2NTVkZDY5YjciLCJpYXQiOjE2NDk4MTg2NDEuOTEzOTMyLCJuYmYiOjE2NDk4MTg2NDEuOTEzOTM1LCJleHAiOjE2ODEzNTQ2NDEuODUxMjUsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.YMwmt5PfpFZ38RLUx4LYFMTEEiWLaGKzsGfVjKCidkmReHnrCoIIKOPC3-5e9LaMRZ3cpgl6xZ10JnlauWRIbznZnWiaqjMsRfPiAAG9pVwUebu4QB00WG8M3YAS0wRd_uruh2EV1KpvcmZFvXk-GanprvsN2cpGoCYyis1RbYg7r3osMlV88zbB8Kf9W32rKlzKlGRdyHxgenOHDXbYIN9zSTGBB4xFDCaSe4QSKUhDn_08NlEeabEOp_IJxvJasSN0Zw-0e4rFTJ308ULvZT_4b0iO1RlK6_9r21c-ounG4_OV6PEOnPddEdg4whrFB9Uv2m0PSsfCNyxAmaBBgp5YZjZJyniMSZDd4cIto0sVXZ1fso3uccdYg5CUG45SXZ0CRAJwmMVKtjsmSb8GdGkqjbrqkjkedspDyl8UApD1yE4xLbNilUFOvbdepnJxZqZv6QksRJp8gvHPFqzpSOUOCMBpersv9nEoSjYEtEeigLc0z7tYOKXwS2nX2AK_yzbKbKIzloxj6jWRblTlazlhbleaQlNznDTQxzO0RIFSmyPuXXxTUSaMUkA98TeBDPRC1DrXpIc88ZI7pyJS7usOrhV9gldSagJok31FxvIWb1YGY0nnQW6vK5APfYAeRSCQI8RsAnmnpOn3f59_UincxXyRRbFA3s_PlstYH7w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/piutang/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"piutang",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNTkyODAxZmY5M2ZmMjA1NjkzMDY2ZjI0NThmYTk0YTc5MDc4YzRhMThiNDNlNTZiYTFjN2VjN2Y4ODE3Y2E2MjUyOTU0YjU2NTVkZDY5YjciLCJpYXQiOjE2NDk4MTg2NDEuOTEzOTMyLCJuYmYiOjE2NDk4MTg2NDEuOTEzOTM1LCJleHAiOjE2ODEzNTQ2NDEuODUxMjUsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.YMwmt5PfpFZ38RLUx4LYFMTEEiWLaGKzsGfVjKCidkmReHnrCoIIKOPC3-5e9LaMRZ3cpgl6xZ10JnlauWRIbznZnWiaqjMsRfPiAAG9pVwUebu4QB00WG8M3YAS0wRd_uruh2EV1KpvcmZFvXk-GanprvsN2cpGoCYyis1RbYg7r3osMlV88zbB8Kf9W32rKlzKlGRdyHxgenOHDXbYIN9zSTGBB4xFDCaSe4QSKUhDn_08NlEeabEOp_IJxvJasSN0Zw-0e4rFTJ308ULvZT_4b0iO1RlK6_9r21c-ounG4_OV6PEOnPddEdg4whrFB9Uv2m0PSsfCNyxAmaBBgp5YZjZJyniMSZDd4cIto0sVXZ1fso3uccdYg5CUG45SXZ0CRAJwmMVKtjsmSb8GdGkqjbrqkjkedspDyl8UApD1yE4xLbNilUFOvbdepnJxZqZv6QksRJp8gvHPFqzpSOUOCMBpersv9nEoSjYEtEeigLc0z7tYOKXwS2nX2AK_yzbKbKIzloxj6jWRblTlazlhbleaQlNznDTQxzO0RIFSmyPuXXxTUSaMUkA98TeBDPRC1DrXpIc88ZI7pyJS7usOrhV9gldSagJok31FxvIWb1YGY0nnQW6vK5APfYAeRSCQI8RsAnmnpOn3f59_UincxXyRRbFA3s_PlstYH7w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/piutang/destroy/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"piutang",
+								"destroy",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bayar piutang",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NjdmZTZlMS0zYjdmLTQzNmItYmE4NC1lYTU0MGJlOGU2ODAiLCJqdGkiOiIwODk3YmE2ZDQ2ODJiYTUwNTk1YzllMDE1YzY3MjBhMDBjZjJiMzQzN2JmZmRjYmY0Y2EwZjMxMWNkNzNkZDY3MGIzMTczYjMyNjU5ZTczNCIsImlhdCI6MTY1NDc3NDY0NC42NzI2MTksIm5iZiI6MTY1NDc3NDY0NC42NzI2MjMsImV4cCI6MTY4NjMxMDY0NC42NTYzMTEsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.cHcSqKLSJs_Ch2E5aAiQbdpx5IiivxsDxL9yhH44Qn6fQ3N6QB-15WulS2ISe8H9aNQ6a-7Opgc1uf0kNa67o1Aieb1JYlOtcWbFqOTc71HGwEbhuU_Z5UIkujNdVjZ6W6aoOBDTasszziFfNMMJuPBP9l8tyTkuS48eokPrhmr0CN21htDRdFs80TXqX3tQX2OqQ-hP_zEHHd67TfEDvreYHm5iucpX8G6vWQ78yn9ueMVZ0e9AkcAn19F0p0_ch5v7QE4VCrV0uARQRSRwEX1A7KXmjz07E2Dgl9Y22-vvZvS5YnzHoDPbwyGLtfe7iGQqoyYT2XC3pnnyDJc4tprULkde2ahfZ6SHaYvjO0666qNcDFL2LaYs9Pcd-VzEtuOCjFZbZBvyy1O9lnLNVuK_FEkb-I2LJh8pwoZQrumKfYqegvKr_Jp6VjhucRNe2iwzJ5qJKGLLn2YYQo_u4y-eqO3MsNUCD1EAfTzJ_W_GuxOdVtAOXR1JA2BE-vrHLti5scUKKhWKPQU7cxwTtipXmM8LMM_p9mVvIHCFHPv9bKV_fzgG55OMGuFGNzZli9f32PiLPDfCd0jUeGCfOR4uJxFqm7FIwfxoIr1wLhisRUEG4nxksgZcMaEM5zwQZIMkFa5sJf_oeKTAKTe2jdrQcEJPFj0yjEEkS1MdEPA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/piutang/create/bayar-piutang/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"piutang",
+								"create",
+								"bayar-piutang",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Simpanan",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/simpanan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"simpanan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "tujuan_simpanan_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_simpanan",
+									"value": "200000",
+									"type": "default"
+								},
+								{
+									"key": "deskripsi",
+									"value": "Tabungan Buat Nikah",
+									"type": "default"
+								},
+								{
+									"key": "jenis_simpanan_id",
+									"value": "3",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/simpanan/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"simpanan",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "tujuan_simpanan_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_simpanan",
+									"value": "250000",
+									"type": "default"
+								},
+								{
+									"key": "deskripsi",
+									"value": "Tabungan Buat Nikah",
+									"type": "default"
+								},
+								{
+									"key": "jenis_simpanan_id",
+									"value": "3",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/simpanan/update/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"simpanan",
+								"update",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_hutang",
+									"value": "ngutang ke rehan",
+									"type": "default"
+								},
+								{
+									"key": "no_telepon",
+									"value": "085262525",
+									"type": "default"
+								},
+								{
+									"key": "deksripsi",
+									"value": "Minjam uang ke rehan buat beli gacoan",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_hutang",
+									"value": "15000",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/simpanan/update/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"simpanan",
+								"update",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNTkyODAxZmY5M2ZmMjA1NjkzMDY2ZjI0NThmYTk0YTc5MDc4YzRhMThiNDNlNTZiYTFjN2VjN2Y4ODE3Y2E2MjUyOTU0YjU2NTVkZDY5YjciLCJpYXQiOjE2NDk4MTg2NDEuOTEzOTMyLCJuYmYiOjE2NDk4MTg2NDEuOTEzOTM1LCJleHAiOjE2ODEzNTQ2NDEuODUxMjUsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.YMwmt5PfpFZ38RLUx4LYFMTEEiWLaGKzsGfVjKCidkmReHnrCoIIKOPC3-5e9LaMRZ3cpgl6xZ10JnlauWRIbznZnWiaqjMsRfPiAAG9pVwUebu4QB00WG8M3YAS0wRd_uruh2EV1KpvcmZFvXk-GanprvsN2cpGoCYyis1RbYg7r3osMlV88zbB8Kf9W32rKlzKlGRdyHxgenOHDXbYIN9zSTGBB4xFDCaSe4QSKUhDn_08NlEeabEOp_IJxvJasSN0Zw-0e4rFTJ308ULvZT_4b0iO1RlK6_9r21c-ounG4_OV6PEOnPddEdg4whrFB9Uv2m0PSsfCNyxAmaBBgp5YZjZJyniMSZDd4cIto0sVXZ1fso3uccdYg5CUG45SXZ0CRAJwmMVKtjsmSb8GdGkqjbrqkjkedspDyl8UApD1yE4xLbNilUFOvbdepnJxZqZv6QksRJp8gvHPFqzpSOUOCMBpersv9nEoSjYEtEeigLc0z7tYOKXwS2nX2AK_yzbKbKIzloxj6jWRblTlazlhbleaQlNznDTQxzO0RIFSmyPuXXxTUSaMUkA98TeBDPRC1DrXpIc88ZI7pyJS7usOrhV9gldSagJok31FxvIWb1YGY0nnQW6vK5APfYAeRSCQI8RsAnmnpOn3f59_UincxXyRRbFA3s_PlstYH7w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/simpanan/destroy/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"simpanan",
+								"destroy",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tujuan Keuangan",
+			"item": [
+				{
+					"name": "goals-tujuan-keuangan",
+					"item": [
+						{
+							"name": "create goals tujuan keuangan",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNTkyODAxZmY5M2ZmMjA1NjkzMDY2ZjI0NThmYTk0YTc5MDc4YzRhMThiNDNlNTZiYTFjN2VjN2Y4ODE3Y2E2MjUyOTU0YjU2NTVkZDY5YjciLCJpYXQiOjE2NDk4MTg2NDEuOTEzOTMyLCJuYmYiOjE2NDk4MTg2NDEuOTEzOTM1LCJleHAiOjE2ODEzNTQ2NDEuODUxMjUsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.YMwmt5PfpFZ38RLUx4LYFMTEEiWLaGKzsGfVjKCidkmReHnrCoIIKOPC3-5e9LaMRZ3cpgl6xZ10JnlauWRIbznZnWiaqjMsRfPiAAG9pVwUebu4QB00WG8M3YAS0wRd_uruh2EV1KpvcmZFvXk-GanprvsN2cpGoCYyis1RbYg7r3osMlV88zbB8Kf9W32rKlzKlGRdyHxgenOHDXbYIN9zSTGBB4xFDCaSe4QSKUhDn_08NlEeabEOp_IJxvJasSN0Zw-0e4rFTJ308ULvZT_4b0iO1RlK6_9r21c-ounG4_OV6PEOnPddEdg4whrFB9Uv2m0PSsfCNyxAmaBBgp5YZjZJyniMSZDd4cIto0sVXZ1fso3uccdYg5CUG45SXZ0CRAJwmMVKtjsmSb8GdGkqjbrqkjkedspDyl8UApD1yE4xLbNilUFOvbdepnJxZqZv6QksRJp8gvHPFqzpSOUOCMBpersv9nEoSjYEtEeigLc0z7tYOKXwS2nX2AK_yzbKbKIzloxj6jWRblTlazlhbleaQlNznDTQxzO0RIFSmyPuXXxTUSaMUkA98TeBDPRC1DrXpIc88ZI7pyJS7usOrhV9gldSagJok31FxvIWb1YGY0nnQW6vK5APfYAeRSCQI8RsAnmnpOn3f59_UincxXyRRbFA3s_PlstYH7w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "nama_goals_tujuan_keuangan",
+											"value": "dapet duit dari adi",
+											"type": "default"
+										},
+										{
+											"key": "nominal",
+											"value": "20000",
+											"type": "default"
+										},
+										{
+											"key": "currency_id",
+											"value": "1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/v1/tujuan-keuangan/goals/create/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"tujuan-keuangan",
+										"goals",
+										"create",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "detail",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Goals",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNTkyODAxZmY5M2ZmMjA1NjkzMDY2ZjI0NThmYTk0YTc5MDc4YzRhMThiNDNlNTZiYTFjN2VjN2Y4ODE3Y2E2MjUyOTU0YjU2NTVkZDY5YjciLCJpYXQiOjE2NDk4MTg2NDEuOTEzOTMyLCJuYmYiOjE2NDk4MTg2NDEuOTEzOTM1LCJleHAiOjE2ODEzNTQ2NDEuODUxMjUsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.YMwmt5PfpFZ38RLUx4LYFMTEEiWLaGKzsGfVjKCidkmReHnrCoIIKOPC3-5e9LaMRZ3cpgl6xZ10JnlauWRIbznZnWiaqjMsRfPiAAG9pVwUebu4QB00WG8M3YAS0wRd_uruh2EV1KpvcmZFvXk-GanprvsN2cpGoCYyis1RbYg7r3osMlV88zbB8Kf9W32rKlzKlGRdyHxgenOHDXbYIN9zSTGBB4xFDCaSe4QSKUhDn_08NlEeabEOp_IJxvJasSN0Zw-0e4rFTJ308ULvZT_4b0iO1RlK6_9r21c-ounG4_OV6PEOnPddEdg4whrFB9Uv2m0PSsfCNyxAmaBBgp5YZjZJyniMSZDd4cIto0sVXZ1fso3uccdYg5CUG45SXZ0CRAJwmMVKtjsmSb8GdGkqjbrqkjkedspDyl8UApD1yE4xLbNilUFOvbdepnJxZqZv6QksRJp8gvHPFqzpSOUOCMBpersv9nEoSjYEtEeigLc0z7tYOKXwS2nX2AK_yzbKbKIzloxj6jWRblTlazlhbleaQlNznDTQxzO0RIFSmyPuXXxTUSaMUkA98TeBDPRC1DrXpIc88ZI7pyJS7usOrhV9gldSagJok31FxvIWb1YGY0nnQW6vK5APfYAeRSCQI8RsAnmnpOn3f59_UincxXyRRbFA3s_PlstYH7w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/api/v1/tujuan-keuangan/goals/destroy/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"tujuan-keuangan",
+										"goals",
+										"destroy",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_tujuan_keuangan",
+									"value": "bayar kuliah",
+									"type": "default"
+								},
+								{
+									"key": "status_fleksibel",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "kategori_tujuan_keuangan_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "tanggal",
+									"value": "2022-04-12 10:18:54",
+									"type": "default"
+								},
+								{
+									"key": "nominal",
+									"value": "2000000",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/tujuan-keuangan/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"tujuan-keuangan",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_tujuan_keuangan",
+									"value": "pengen beli baju",
+									"type": "default"
+								},
+								{
+									"key": "status_fleksibel",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "kategori_tujuan_keuangan_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "tanggal",
+									"value": "2022-04-12 10:18:54",
+									"type": "default"
+								},
+								{
+									"key": "nominal ",
+									"value": "100000",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/tujuan-keuangan/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"tujuan-keuangan",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "index",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "tujuan_simpanan_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_simpanan",
+									"value": "200000",
+									"type": "default"
+								},
+								{
+									"key": "deskripsi",
+									"value": "Tabungan Buat Lebaran",
+									"type": "default"
+								},
+								{
+									"key": "jenis_simpanan_id",
+									"value": "3",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/tujuan-keuangan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"tujuan-keuangan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_hutang",
+									"value": "ngutang ke rehan",
+									"type": "default"
+								},
+								{
+									"key": "no_telepon",
+									"value": "085262525",
+									"type": "default"
+								},
+								{
+									"key": "deksripsi",
+									"value": "Minjam uang ke rehan buat beli gacoan",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_hutang",
+									"value": "15000",
+									"type": "default"
+								},
+								{
+									"key": "currency_id",
+									"value": "1",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/simpanan/update/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"simpanan",
+								"update",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tagihan",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMyZDYxYzBiZTJjZGNjNjJkMWZhM2Q3ZGU4NDc4MTkwNzFjNjYyMGI5Y2U5MTVmNGYzYjViM2U4MDg2Nzg4NGY4ZGEzOGM0ZWFiNmViMWIiLCJpYXQiOjE2NDk2NTEyNjAuNTQyNDM0LCJuYmYiOjE2NDk2NTEyNjAuNTQyNDM3LCJleHAiOjE2ODExODcyNjAuNDkyNDQzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bvRvYh39oFxR9K2o-QbCi1WcVlfo0vPXfKuQoz3R5DPS17t49pSMlvkQiNTUjUhNuo7XA-ZCfOaJ1W6H_ZPEw53FzFGx107yO1_seksWxIE1jAuL_N147GBcjWEQDGDWhnCvMjc7c6_71LSeZmLgvFlRm3w9gygpEsUsaOM9N7AMO152z9hln0lmkCPkLhVqz47X5F2iv3kSaGXqRhVmn8Y1Dyg1DwjLu1L4yqsQmMDXAEWfJ9WQJNFxJJOYn6JVeFSA4-nzzkVRrIiu68Te1ZBF6AKYXywZF4Sjm-5j1eYa4OSayS-Jz6t9_XZcfysU-G9hX7Nww55g-cekplC-Vgl8ng4pDqCFNQWgvDgcTIRcSN-tE1EuZf_h8GtKKBB0iXfllgw2O1oIEVzDkJiDOLNAbcySLq5VpgW67BCynA_qhxp15XbKsph8ptDNAELC8JWPiElux4qgT3H459rwLIMzGX_cIAc8YLyJ9xEYi_fHrfRr0BmtKFPHBwJMRE7wed-rx4rF-6rC1oHxMdkKO1Sj9NSMfYz7WDmMvJaBZxok9radsYOibuZdFiusEhLbaOvkaff_GDs0LiZwkLelTU7R0Ety6DKfM_VC75Md0AQO5_VyyABncA74MCyouOpmJdqRkXnU_jtKYUVuXQL783KYyLddrnJm1WTK02ExJZg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_tagihan",
+									"value": "bayar listrik",
+									"type": "default"
+								},
+								{
+									"key": "kategori_tagihan_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "no_tagihan",
+									"value": "12342424",
+									"type": "default"
+								},
+								{
+									"key": "jumlah_tagihan",
+									"value": "100000",
+									"type": "default"
+								},
+								{
+									"key": "status_tagihan",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "tanggal_tagihan",
+									"value": "2022-04-11 10:44:27",
+									"type": "default"
+								},
+								{
+									"key": "no_rekening",
+									"value": "",
+									"type": "default"
+								},
+								{
+									"key": "kode_bank",
+									"value": "",
+									"type": "default"
+								},
+								{
+									"key": "deskripsi",
+									"value": "",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/tagihan/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"tagihan",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMmY2OWExYzc4MDQxMThjZjYyMDk1NGUyNThiMTAzMTc5YWNjZTIxMjY0MThiY2ViNjYzNzAzNmVjYWQ5ODNiZThlMjA1NTA1NzA4YTQyMWMiLCJpYXQiOjE2NDk2NTEyMDUuMTU1OTM3LCJuYmYiOjE2NDk2NTEyMDUuMTU1OTQ1LCJleHAiOjE2ODExODcyMDUuMDUzODM5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.gBdEHXIeA7GZNCW4OuRE43ydLQVSl15sbkcffPqNOFjgVifgaurnNInyaD8Y7A4lYd5MaNABZ6g550hUrAIQIRxK8OE9nWDsbvgVT4GpaDy3v8EyoAPWDZ_a4kqcku5ZSXZW4cynW7UIvGPm4ECNPenTFW3g5LNEks9FRTtg3QF-7ehkoIZ_cFTrWOUW9E3bh2VtmivHKv9gMtn7eTf4eB3iA0fo18eoMl5gUHfy9rR_hHBRpaADoN49InWDZ7ZlAWIbSWBT6MKrHcY-htIkmCoTiYjR_jYd8D93ZH9X_IJ2KWmwTa34BLhZ2inYigfp1kvH-cll0qsEhWsiRI2_xOS8cCydcmT_CLLgpxHWmr5LFehwGBrsIus_Z_7nIJO1bNUvDhqxh-4rtUE-gX0Z9M72aGccQlh0gfe7iGI654X6pL-FpxKnI1sklbDUap5QLxq4dh0qby9i92wP0dHC6q9H0jg5BptddaoJF3zb8ibQbfVglbkv0hxx38V_xyhxYbHxBAq9UJxI8LRqyTWFi85b9n8uaqkugfUlu7ibbLow6YGlMYSF-J7adi69MLMEgu6xiVHbbeaT0We97cdqF6CEgc5mALSzjzak2gMdOHYCYVVpUnz84ZUapQgfMvdXXzB_DCFExaCzZRS7uy8Ya1L5U1fnQeHl_b8KGyIbcWI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "didinnuryahya@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "didin nur yahya",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "didinnuryahya@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "index",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzY4NTMzOTIwNmE4NzQyMjU5OGNmYTZiNjQ4YzBmNjM2ZDM1ODdhNjdlOWU3YTcyMDRlNTRiNGZlMTkwNDdhYTJkNzFiZGViODUyMzgwZGEiLCJpYXQiOjE2NDkzMTE4NzUuMDQ4MjExLCJuYmYiOjE2NDkzMTE4NzUuMDQ4MjE0LCJleHAiOjE2ODA4NDc4NzUuMDQxNjIsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.HU4CwAAigS6TQ4jbEvxKZyj_rqaZDNt-9oKrMhibZWMlYC8-lrW5Vak9M4c4PsD95-JX5UNGa3CzRTPR3GBzV03E60VgJxf9Cq0F8u3Frv9JZvT8ZMLJI5A5xMHbS6qqrKhX_3abrRSziBFVk4FP7V6-8DzFFItx7RDSkbvazAcRnKGNbTtgLmeMYcVZnfysAGhhDlF4K_ATQ1ruZSRaU2agLwz0fTAe7DwMADotRU2lyNElP1X05Hk60YnuViEBf1c9giI9ltcs4ia3JnWbwPF8pL4pEN7yl0IsgoxRFbBxRAGQ5zLVLr73hqAgPxpz7dRnpIVohJdjMfJAJHWhuPh63z2x4oanSWDdgvniZkby8dADDnBfwe0g4p0G4Ntht1A2DgeQIKVfyKZl5oMaMJiKnNXZ0rPqPavZJQaH21ZtlRNu9IPpyjy4i7TvZX0lv3BJCOYg3pxagZSeLX-QaudxyytYkQ6t-Xb4OUoSOVNi9vmS0ZlakIoeK-g6I7rp7fWNf-p0m0UXkwJvMk3WNZ2dRjWf-mU1fAh-fjmAuz2A02XgK2RwVk2fHII0HZ00Xv-0BkizIoC0aQIcA9kdCmLI6IJ1jhrzYaySGTm__kooflryVLi3QLcjpZjXv2WCgFdknIkGP_WS0C960JP4NUTv05SWFSiwmLfw_QODrfc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/index",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"index"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "detail",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzY4NTMzOTIwNmE4NzQyMjU5OGNmYTZiNjQ4YzBmNjM2ZDM1ODdhNjdlOWU3YTcyMDRlNTRiNGZlMTkwNDdhYTJkNzFiZGViODUyMzgwZGEiLCJpYXQiOjE2NDkzMTE4NzUuMDQ4MjExLCJuYmYiOjE2NDkzMTE4NzUuMDQ4MjE0LCJleHAiOjE2ODA4NDc4NzUuMDQxNjIsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.HU4CwAAigS6TQ4jbEvxKZyj_rqaZDNt-9oKrMhibZWMlYC8-lrW5Vak9M4c4PsD95-JX5UNGa3CzRTPR3GBzV03E60VgJxf9Cq0F8u3Frv9JZvT8ZMLJI5A5xMHbS6qqrKhX_3abrRSziBFVk4FP7V6-8DzFFItx7RDSkbvazAcRnKGNbTtgLmeMYcVZnfysAGhhDlF4K_ATQ1ruZSRaU2agLwz0fTAe7DwMADotRU2lyNElP1X05Hk60YnuViEBf1c9giI9ltcs4ia3JnWbwPF8pL4pEN7yl0IsgoxRFbBxRAGQ5zLVLr73hqAgPxpz7dRnpIVohJdjMfJAJHWhuPh63z2x4oanSWDdgvniZkby8dADDnBfwe0g4p0G4Ntht1A2DgeQIKVfyKZl5oMaMJiKnNXZ0rPqPavZJQaH21ZtlRNu9IPpyjy4i7TvZX0lv3BJCOYg3pxagZSeLX-QaudxyytYkQ6t-Xb4OUoSOVNi9vmS0ZlakIoeK-g6I7rp7fWNf-p0m0UXkwJvMk3WNZ2dRjWf-mU1fAh-fjmAuz2A02XgK2RwVk2fHII0HZ00Xv-0BkizIoC0aQIcA9kdCmLI6IJ1jhrzYaySGTm__kooflryVLi3QLcjpZjXv2WCgFdknIkGP_WS0C960JP4NUTv05SWFSiwmLfw_QODrfc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/index",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"index"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search pemasukan",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

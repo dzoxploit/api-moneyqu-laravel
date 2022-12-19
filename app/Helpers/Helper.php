@@ -59,12 +59,22 @@ class Helper {
                                         ['status_simpanan','=',1]
                                     ])->sum('jumlah_simpanan');
                                     
-            $tujuankeuangan = TujuanKeuangan::Where(
+             $tujuankeuangan = TujuanKeuangan::Where(
                                     [
                                         ['is_delete', '=', 0],
                                         ['user_id', '=', Auth::id()],
-                                    ])->orWhere('simpanan_id','=',null)
-                                    ->orWhere('hutang_id','=',null)
+                                    ])->orWhere(
+                                    [
+                                        ['is_delete', '=', 0],
+                                        ['user_id', '=', Auth::id()],
+                                        ['simpanan_id','=',null]
+                                    ])
+                                    ->orWhere(
+                                    [
+                                        ['is_delete', '=', 0],
+                                        ['user_id', '=', Auth::id()],
+                                        ['hutang_id','=',null]
+                                    ])
                                     ->sum('nominal_goals');
 
             //piutang
